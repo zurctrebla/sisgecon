@@ -4,8 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateUser;
-use App\Models\Role;
-use App\Models\User;
+use App\Models\{
+    User,
+    Role,
+    Complement,
+    Phone,
+    Relative,
+    Vehicle
+};
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -54,7 +60,7 @@ class UserController extends Controller
         $data = $request->all();
         $data['password'] = bcrypt($data['password']);
 
-        $this->repository->create($data);       /** */
+        $this->repository->create($data);
 
         return redirect()->route('users.index')->with('message', 'Usuário criado com sucesso');
     }
@@ -104,13 +110,20 @@ class UserController extends Controller
             return redirect()->back();
         }
 
-        $data = $request->only(['name', 'email', 'role_id']);
+        //$data = $request->only(['name', 'email', 'role_id']);
+
+        $data = $request->all();
 
         if ($request->password) {
             $data['password'] = bcrypt($request->password);
         }
-
+        // dd($data);
         $user->update($data);
+
+
+        $user->phones()->create($request->all());                                       //  desta forma ok
+        //$user->vehicles()->create($request->only('type', 'plate', 'color'));                     //  desta forma ok
+        $user->complement()->create($request->all());         //  desta forma ok
 
         return redirect()->route('users.index')->with('message', 'Usuário editado com sucesso');
     }
@@ -123,13 +136,27 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        if (!$permission = $this->repository->find($id)) {
+        if (!$user = $this->repository->find($id)) {
             return redirect()->back();
         }
 
-        $permission->delete();
+        $user->delete();
 
-        return redirect()->route('permissions.index')->with('message', 'Usuário deletado com sucesso');
+        return redirect()->route('users.index')->with('message', 'Usuário deletado com sucesso');
+    }
+    /**
+     *
+     *
+     */
+    public function profile()
+    {
+        $id = auth()->user()->id;
+
+        if (!$user = $this->repository->find($id)) {
+            return redirect()->back();
+        }
+
+        return view('admin.pages.users.profile', compact('user'));
     }
 
     /**

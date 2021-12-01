@@ -260,13 +260,13 @@ return [
             'icon' => 'fas fa-user-tie',
             'can'  => 'guests',
         ],
-        /*
-        ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'url'  => 'admin/users/profile',
+            'icon' => 'fas fa-user',
+            'can'  => 'resident',
         ],
+        /*
         [
             'text' => 'change_password',
             'url'  => 'admin/settings',

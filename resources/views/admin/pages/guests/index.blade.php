@@ -23,7 +23,11 @@
             <div class="col-md-12">
                 <div class="card card-secondary">
                     <div class="card-header">
-                    <h3 class="card-title">Visitantes</h3>
+                        <form action="{{ route('guests.search') }}" method="POST" class="form form-inline">
+                            @csrf
+                            <input type="text" name="filter" placeholder="Filtro" class="form-control" value="{{ $filters['filter'] ?? '' }}">
+                            <button type="submit" class="btn btn-dark">Filtrar</button>
+                        </form>
                     </div>
                         <div class="card-body">
                             <table id="guests" class="table table-bordered table-striped">

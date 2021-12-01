@@ -63,8 +63,44 @@
                             <td>{{ $user->email }}</td>
                         </tr>
                         <tr>
-                            <th><?= __('Função') ?></th>
+                            <th><?= __('Telefone') ?></th>
+                            <td>{{ $user->phones->number }}</td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Nível de Acesso') ?></th>
                             <td>{{ $user->role->name }}</td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Nacionalidade') ?></th>
+                            <td>{{ $user->complement->nacionality }}</td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Estado') ?></th>
+                            <td>{{ $user->complement->state }}</td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Nascimento') ?></th>
+                            <td>{{ $user->complement->birth }}</td>
+                        </tr>
+                        <tr>
+                            <th><?= __('CPF') ?></th>
+                            <td>{{ $user->complement->cpf }}</td>
+                        </tr>
+                        <tr>
+                            <th><?= __('RG') ?></th>
+                            <td>{{ $user->complement->rg }}</td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Bloco') ?></th>
+                            <td>{{ $user->complement->block }}</td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Lote') ?></th>
+                            <td>{{ $user->complement->lot }}</td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Casa') ?></th>
+                            <td>{{ $user->complement->house }}</td>
                         </tr>
                     </table>
                 </div>

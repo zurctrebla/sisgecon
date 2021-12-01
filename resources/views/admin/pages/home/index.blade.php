@@ -45,8 +45,8 @@
                 </span>
 
               <div class="info-box-content">
-                <span class="info-box-text">#</span>
-                <span class="info-box-number">{{-- {{ $totalVehicles }} --}}</span>
+                <span class="info-box-text">Veículos</span>
+                <span class="info-box-number">{{ $totalVehicles }}</span>
               </div>
               <!-- /.info-box-content -->
             </div>

@@ -50,4 +50,34 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+    /**
+     * Get phones
+     */
+    public function phones()
+    {
+        return $this->hasOne(Phone::class);
+    }
+    /**
+     * Get vehicles
+     */
+    public function vehicles()
+    {
+        //return $this->hasOne(Models\Vehicle::class);
+        return $this->hasMany(Vehicle::class);   /** um para muitos */
+    }
+    /**
+     * Get complement
+     */
+    public function complement()
+    {
+        return $this->hasOne(Complement::class);
+    }
+    /**
+     * Get relatives
+     */
+    public function relatives()
+    {
+        // return $this->hasOne(Models\Relative::class);
+        return $this->hasMany(Relative::class);
+    }
 }

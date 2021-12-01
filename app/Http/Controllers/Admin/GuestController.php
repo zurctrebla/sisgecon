@@ -142,4 +142,28 @@ class GuestController extends Controller
         $guest->delete();
         return redirect()->route('guests.index')->with('message', 'Visitante deletado com sucesso');
     }
+
+    /**
+     * Search results
+     *
+     * @param  Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $filters = $request->only('filter');
+
+        $guests = $this->repository
+                            ->where(function($query) use ($request) {
+                                if ($request->filter) {
+                                    $query->orWhere('name', 'LIKE', "%{$request->filter}%");
+                                    $query->orWhere('document', $request->filter);
+                                }
+                            })
+                            ->latest()/*
+                            ->tenantUser() */
+                            ->paginate();
+
+        return view('admin.pages.guests.index', compact('guests', 'filters'));
+    }
 }
