@@ -264,7 +264,6 @@ return [
             'text' => 'profile',
             'url'  => 'admin/users/profile',
             'icon' => 'fas fa-user',
-            'can'  => 'resident',
         ],
         /*
         [
