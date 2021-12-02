@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Admin\ACL;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUpdateRole;
-use App\Models\Role;
+use App\Http\Requests\StoreUpdateDestiny;
+use App\Models\Destiny;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller
+class DestinyController extends Controller
 {
     protected $repository;
 
-    public function __construct(Role $role)
+    public function __construct(Destiny $destiny)
     {
-        $this->repository = $role;
+        $this->repository = $destiny;
 
-        // $this->middleware(['can:roles']);
+        // $this->middleware(['can:destinies']);
     }
 
     /**
@@ -25,9 +25,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = $this->repository->paginate();
+        $destinies = $this->repository->paginate();
 
-        return view('admin.pages.roles.index', compact('roles'));
+        return view('admin.pages.destinies.index', compact('destinies'));
     }
 
     /**
@@ -37,20 +37,20 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.roles.create');
+        return view('admin.pages.destinies.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreUpdateRole  $request
+     * @param  \App\Http\Requests\StoreUpdateDestiny  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdateRole $request)
+    public function store(StoreUpdateDestiny $request)
     {
         $this->repository->create($request->all());
 
-        return redirect()->route('roles.index')->with('message', 'Nivel de acesso cadastrado com sucesso');
+        return redirect()->route('destinies.index')->with('message', 'Setor cadastrado com sucesso');
     }
 
     /**
@@ -61,11 +61,11 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        if (!$role = $this->repository->find($id)) {
+        if (!$destiny = $this->repository->find($id)) {
             return redirect()->back();
         }
 
-        return view('admin.pages.roles.show', compact('role'));
+        return view('admin.pages.destinies.show', compact('destiny'));
     }
 
     /**
@@ -76,29 +76,29 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        if (!$role = $this->repository->find($id)) {
+        if (!$destiny = $this->repository->find($id)) {
             return redirect()->back();
         }
 
-        return view('admin.pages.roles.edit', compact('role'));
+        return view('admin.pages.destinies.edit', compact('destiny'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\StoreUpdateRole  $request
+     * @param  \App\Http\Requests\StoreUpdateDestiny  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateRole $request, $id)
+    public function update(StoreUpdateDestiny $request, $id)
     {
-        if (!$role = $this->repository->find($id)) {
+        if (!$destiny = $this->repository->find($id)) {
             return redirect()->back();
         }
 
-        $role->update($request->all());
+        $destiny->update($request->all());
 
-        return redirect()->route('roles.index')->with('message', 'Nivel de acesso atualizado com sucesso');
+        return redirect()->route('destinies.index')->with('message', 'Setor atualizado com sucesso');
     }
 
     /**
@@ -109,13 +109,13 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        if (!$role = $this->repository->find($id)) {
+        if (!$destiny = $this->repository->find($id)) {
             return redirect()->back();
         }
 
-        $role->delete();
+        $destiny->delete();
 
-        return redirect()->route('roles.index')->with('message', 'Nivel de acesso deletado com sucesso');
+        return redirect()->route('destinies.index')->with('message', 'Setor deletado com sucesso');
     }
 
     /**
@@ -128,7 +128,7 @@ class RoleController extends Controller
     {
         $filters = $request->only('filter');
 
-        $roles = $this->repository
+        $destinies = $this->repository
                             ->where(function($query) use ($request) {
                                 if ($request->filter) {
                                     $query->where('name', $request->filter);/*
@@ -137,6 +137,6 @@ class RoleController extends Controller
                             })
                             ->paginate();
 
-        return view('admin.pages.roles.index', compact('roles', 'filters'));
+        return view('admin.pages.destinies.index', compact('destinies', 'filters'));
     }
 }

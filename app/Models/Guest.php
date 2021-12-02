@@ -11,8 +11,8 @@ class Guest extends Model
 
     protected $fillable = ['user_id', 'name', 'document', 'photo', 'destiny', 'person', 'company', 'obs', 'start_at', 'expires_at'];
 
-    public function user()
+    public function users()
     {
-        return $this->hasOne(Guest::class);
+        return $this->hasMany(User::class);
     }
 }

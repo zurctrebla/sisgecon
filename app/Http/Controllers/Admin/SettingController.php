@@ -13,7 +13,7 @@ class SettingController extends Controller
     {
         // $this->repository = $user;
 
-        $this->middleware(['can:settings']);
+        // $this->middleware(['can:settings']);
     }
     /**
      * Display a listing of the resource.

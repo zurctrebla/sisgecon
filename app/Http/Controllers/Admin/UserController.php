@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         $this->repository = $user;
 
-        $this->middleware(['can:users', 'can:users-edit']);
+        // $this->middleware(['can:users', 'can:users-edit']);
     }
     /**
      * Display a listing of the resource.

@@ -64,7 +64,7 @@
                         </tr>
                         <tr>
                             <th><?= __('Telefone') ?></th>
-                            <td>{{ $user->phones->number }}</td>
+                            <td>{{ ($user->phones->number ?? '') }}</td>
                         </tr>
                         <tr>
                             <th><?= __('Nível de Acesso') ?></th>
@@ -72,35 +72,35 @@
                         </tr>
                         <tr>
                             <th><?= __('Nacionalidade') ?></th>
-                            <td>{{ $user->complement->nacionality }}</td>
+                            <td>{{ ($user->complement->nacionality) ?? ''}}</td>
                         </tr>
                         <tr>
                             <th><?= __('Estado') ?></th>
-                            <td>{{ $user->complement->state }}</td>
+                            <td>{{ ($user->complement->state) ?? ''}}</td>
                         </tr>
                         <tr>
                             <th><?= __('Nascimento') ?></th>
-                            <td>{{ $user->complement->birth }}</td>
+                            <td>{{ ($user->complement->birth) ?? ''/* date('d/m/Y', strtotime($user->complement->birth))  */}}</td>
                         </tr>
                         <tr>
                             <th><?= __('CPF') ?></th>
-                            <td>{{ $user->complement->cpf }}</td>
+                            <td>{{ ($user->complement->cpf ?? '') }}</td>
                         </tr>
                         <tr>
                             <th><?= __('RG') ?></th>
-                            <td>{{ $user->complement->rg }}</td>
+                            <td>{{ ($user->complement->rg) ?? ''}}</td>
                         </tr>
                         <tr>
                             <th><?= __('Bloco') ?></th>
-                            <td>{{ $user->complement->block }}</td>
+                            <td>{{ ($user->complement->block) ?? ''}}</td>
                         </tr>
                         <tr>
                             <th><?= __('Lote') ?></th>
-                            <td>{{ $user->complement->lot }}</td>
+                            <td>{{ ($user->complement->lot) ?? ''}}</td>
                         </tr>
                         <tr>
                             <th><?= __('Casa') ?></th>
-                            <td>{{ $user->complement->house }}</td>
+                            <td>{{ ($user->complement->house) ?? ''}}</td>
                         </tr>
                     </table>
                 </div>

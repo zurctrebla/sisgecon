@@ -38,11 +38,15 @@ jobs:
     steps:
       - name: Execute commands SSH
         uses: appleboy/ssh-action@master
+        env:
+          USER_PASS: "${{ secrets.SSH_PASS }}"
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
+          envs: SSH_PASS
           script: |
             cd projects/sisgecon/
             git pull origin master
+            echo $SSH_PASS | sudo -S docker-compose exec -T sisgecon php artisan migrate --force

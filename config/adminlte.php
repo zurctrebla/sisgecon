@@ -234,36 +234,42 @@ return [
             'text' => 'Configurações',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-cogs',
-            'can'  => 'settings',
+            /* 'can'  => 'settings', */
         ],
         [
             'text' => 'Usuários',
             'url'  => 'admin/users',
             'icon' => 'fas fa-fw fa-users',
-            'can'  => 'users',
+            /* 'can'  => 'users', */
         ],
         [
             'text' => 'Nível de Acesso',
             'url'  => 'admin/roles',
             'icon' => 'fas fa-key',
-            'can'  => 'roles',
+            /* 'can'  => 'roles', */
         ],
         [
             'text' => 'Permissões',
             'url'  => 'admin/permissions',
             'icon' => 'fas fa-lock',
-            'can'  => 'permissions',
+            /* 'can'  => 'permissions', */
         ],
         [
             'text' => 'Visitantes',
             'url'  => 'admin/guests',
             'icon' => 'fas fa-user-tie',
-            'can'  => 'guests',
+            /* 'can'  => 'guests', */
         ],
         [
-            'text' => 'profile',
+            'text' => 'Perfil',
             'url'  => 'admin/users/profile',
             'icon' => 'fas fa-user',
+        ],
+        [
+            'text' => 'Setores',
+            'url'  => 'admin/destinies',
+            'icon' => 'fas fa-map-signs',
+            /* 'can'  => 'destinies', */
         ],
         /*
         [

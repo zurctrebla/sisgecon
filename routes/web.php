@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ACL\{
 };
 use App\Http\Controllers\Admin\{
     DashboardController,
+    DestinyController,
     GuestController,
     SettingController,
     UserController
@@ -83,6 +84,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/guests/{id}', [GuestController::class, 'show'])->name('guests.show');
     Route::post('/admin/guests', [GuestController::class, 'store'])->name('guests.store');
     Route::get('/admin/guests', [GuestController::class, 'index'])->name('guests.index');
+
+    /**
+     * Destinies
+     */
+    Route::any('/admin/destinies/search', [DestinyController::class, 'search'])->name('destinies.search');
+    Route::get('/admin/destinies/create', [DestinyController::class, 'create'])->name('destinies.create');
+    Route::put('/admin/destinies/{id}', [DestinyController::class, 'update'])->name('destinies.update');
+    Route::get('/admin/destinies/edit/{id}', [DestinyController::class, 'edit'])->name('destinies.edit');
+    Route::delete('/admin/destinies/{id}', [DestinyController::class, 'destroy'])->name('destinies.destroy');
+    Route::get('/admin/destinies/{id}', [DestinyController::class, 'show'])->name('destinies.show');
+    Route::post('/admin/destinies', [DestinyController::class, 'store'])->name('destinies.store');
+    Route::get('/admin/destinies', [DestinyController::class, 'index'])->name('destinies.index');
 
 
 });

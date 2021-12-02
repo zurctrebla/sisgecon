@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Nível de Acesso')
+@section('title', 'Permissões')
 
 @section('content_header')
     <div class="container-fluid">
@@ -51,7 +51,7 @@
                                                         <form action="{{ route('permissions.destroy', $permission->id) }}" style="display:inline" method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Deseja apagar a permissão?')" >Apagar</button>
+                                                            <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Deseja apagar a permissão?')">Apagar</button>
                                                         </form>
                                                     @endcan
                                                 </span>

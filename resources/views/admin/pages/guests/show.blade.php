@@ -55,8 +55,41 @@
                 <div class="inputs view content">
                     <table>
                         <tr>
-                            <th><?= __('Nome') ?></th>
+                            <th><?= __('Nome: ') ?></th>
                             <td>{{ $guest->name }}</td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Cadastrado por: ') ?></th>
+                            <td>{{ $guest->name }}</td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Documento: ') ?></th>
+                            <td>{{ $guest->document }}</td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Setor: ') ?></th>
+                            <td>{{ $guest->destiny }}</td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Falar com quem: ') ?></th>
+                            <td>{{ $guest->person }}</td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Empresa: ') ?></th>
+                            <td>{{ ($guest->company ?? '') }}</td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Observação: ') ?></th>
+                            <td>{{ $guest->obs }}</td>
+                        </tr>
+
+                        <tr>
+                            <th><?= __('Data Inicial: ') ?></th>
+                            <td>{{ date('d/m/Y', strtotime($guest->start_at)) }}</td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Data Final: ') ?></th>
+                            <td>{{ date('d/m/Y', strtotime($guest->expires_at)) }}</td>
                         </tr>
                         <tr>
                             <th><?= __('Foto') ?></th>

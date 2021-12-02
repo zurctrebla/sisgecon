@@ -24,14 +24,9 @@
             <select name="destiny" id="destiny" class="form-control">
                 <option value="">Escolha</option>
                     <optgroup label="Selecione um setor">
-                        <option value="setor 01">setor 01</option>
-                        <option value="setor 02">setor 02</option>
-                        <option value="setor 03">setor 03</option>
-                        <option value="setor 04">setor 04</option>
-                        <option value="setor 05">setor 05</option>
-                        {{-- @foreach($destinies as $destiny)
+                        @foreach($destinies as $destiny)
                             <option value="{{ $destiny->name }}">{{ $destiny->name }}</option>
-                        @endforeach --}}
+                        @endforeach
                     </optgroup>
             </select>
         </div>

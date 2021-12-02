@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateGuest;
+use App\Models\Destiny;
 use App\Models\Guest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +17,7 @@ class GuestController extends Controller
     {
         $this->repository = $guest;
 
-        $this->middleware(['can:guests']);
+        // $this->middleware(['can:guests']);
 
         // $this->middleware('permission:guest-list|guest-create|guest-edit|guest-delete', ['only' => ['index','show']]);
         // $this->middleware('permission:guest-create', ['only' => ['create','store']]);
@@ -42,16 +44,19 @@ class GuestController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.guests.create');
+
+        $destinies = Destiny::all();
+
+        return view('admin.pages.guests.create', compact('destinies'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreUpdateGuest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUpdateGuest $request)
     {
         $data = $request->all();
 
@@ -99,11 +104,11 @@ class GuestController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreUpdateGuest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUpdateGuest $request, $id)
     {
         if(!$guest = $this->repository->find($id))
             return redirect()->back();

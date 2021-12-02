@@ -15,6 +15,7 @@ class CreateDestiniesTable extends Migration
     {
         Schema::create('destinies', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Nível de Acesso')
+@section('title', 'Setores')
 
 @section('content_header')
     <div class="container-fluid">
@@ -11,7 +11,7 @@
             </div>
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <a href="{{ route('roles.create') }}" class="btn btn-outline-success btn-sm">Cadastrar</a>
+                <a href="{{ route('destinies.create') }}" class="btn btn-outline-success btn-sm">Cadastrar</a>
             </ol>
             </div>
         </div>
@@ -23,14 +23,14 @@
             <div class="col-md-12">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <form action="{{ route('roles.search') }}" method="POST" class="form form-inline">
+                        <form action="{{ route('destinies.search') }}" method="POST" class="form form-inline">
                             @csrf
                             <input type="text" name="filter" placeholder="Filtro" class="form-control" value="{{ $filters['filter'] ?? '' }}">
                             <button type="submit" class="btn btn-dark">Filtrar</button>
                         </form>
                     </div>
                         <div class="card-body">
-                            <table id="roles" class="table table-bordered table-striped">
+                            <table id="destinies" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
@@ -38,37 +38,35 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($roles as $role)
+                                    @foreach ($destinies as $destiny)
                                         <tr>
-                                            <td>{{ $role->name }}</td>
+                                            <td>{{ $destiny->name }}</td>
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">
-                                                    <a href="{{ route('roles.show', $role->id) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
-                                                    @can('role-edit')
-                                                        <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
+                                                    <a href="{{ route('destinies.show', $destiny->id) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
+                                                    @can('destiny-edit')
+                                                        <a href="{{ route('destinies.edit', $destiny->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
                                                     @endcan
-                                                    @can('role-delete')
-                                                        <form action="{{ route('roles.destroy', $role->id) }}" style="display:inline" method="POST">
+                                                    @can('destiny-delete')
+                                                        <form action="{{ route('destinies.destroy', $destiny->id) }}" style="display:inline" method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Deseja apagar o nível de acesso?')" >Apagar</button>
+                                                            <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Deseja apagar o setor?')" >Apagar</button>
                                                         </form>
                                                     @endcan
-                                                    <a href="{{ route('roles.permissions', $role->id) }}" class="btn btn-warning"><i class="fas fa-lock"></i></a>
                                                 </span>
                                                 <div class="dropdown d-block d-md-none">
                                                     <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         Ações
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
-                                                        <a href="{{ route('roles.show', $role->id) }}" class="dropdown-item">Visualizar</a>
-                                                        @can('role-edit')
-                                                            <a href="{{ route('roles.edit', $role->id) }}" class="dropdown-item">Editar</a>
+                                                        <a href="{{ route('destinies.show', $destiny->id) }}" class="dropdown-item">Visualizar</a>
+                                                        @can('destiny-edit')
+                                                            <a href="{{ route('destinies.edit', $destiny->id) }}" class="dropdown-item">Editar</a>
                                                         @endcan
-                                                        @can('role-delete')
-                                                            <button class="dropdown-item" onclick="return confirm('Deseja apagar o nível de acesso?')">Apagar</button>
+                                                        @can('destiny-delete')
+                                                            <button class="dropdown-item" onclick="return confirm('Deseja apagar o setor?')">Apagar</button>
                                                         @endcan
-                                                        <a href="{{ route('roles.permissions', $role->id) }}" class="btn btn-warning"><i class="fas fa-lock"></i></a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -79,9 +77,9 @@
                         </div>
                         <div class="card-footer">
                             @if (isset($filters))
-                                {!! $roles->appends($filters)->links() !!}
+                                {!! $destinies->appends($filters)->links() !!}
                             @else
-                                {!! $roles->links() !!}
+                                {!! $destinies->links() !!}
                             @endif
                         </div>
                 </div>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\UserACLTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -43,6 +44,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
     /**
      * Get Role
      */
@@ -50,6 +52,7 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
     /**
      * Get phones
      */
@@ -57,6 +60,7 @@ class User extends Authenticatable
     {
         return $this->hasOne(Phone::class);
     }
+
     /**
      * Get vehicles
      */
@@ -65,6 +69,7 @@ class User extends Authenticatable
         //return $this->hasOne(Models\Vehicle::class);
         return $this->hasMany(Vehicle::class);   /** um para muitos */
     }
+
     /**
      * Get complement
      */
@@ -72,6 +77,7 @@ class User extends Authenticatable
     {
         return $this->hasOne(Complement::class);
     }
+
     /**
      * Get relatives
      */
@@ -79,5 +85,14 @@ class User extends Authenticatable
     {
         // return $this->hasOne(Models\Relative::class);
         return $this->hasMany(Relative::class);
+    }
+
+    /**
+     * Get guests
+     */
+    public function guest()
+    {
+        // return $this->hasOne(Models\Relative::class);
+        return $this->belongsTo(Relative::class);
     }
 }

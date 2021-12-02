@@ -13,7 +13,7 @@ class StoreUpdateGuest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,24 @@ class StoreUpdateGuest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
+        // $id = $this->segment(3);
+
+        $rules = [
+            'name' => ['required', 'string', 'min:3', 'max:255'],
+            'document' => ['required', 'string', 'min:3', 'max:255'],
+            'photo' => ['nullable', 'image'],
+            'destiny' => ['required', 'string', 'min:3', 'max:255'],
+            'person' => ['required', 'string', 'min:3', 'max:255'],
+            'company' => ['nullable', 'string', 'min:3', 'max:255'],
+            'obs' => ['nullable', 'string', 'min:3', 'max:255'],
+            'start_at' => ['required', 'string', 'min:3', 'max:255'],
+            'expires_at' => ['required', 'string', 'min:3', 'max:255'],
         ];
+
+        // if ($this->method() == 'PUT') {
+        //     $rules['password'] = ['nullable', 'string', 'min:6', 'max:16'];
+        // }
+
+        return $rules;
     }
 }

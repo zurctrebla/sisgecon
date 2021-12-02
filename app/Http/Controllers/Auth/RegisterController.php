@@ -70,5 +70,16 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        // $role = Role::where('name', 'Admin');
+
+        // return $role->users()->create([
+        //     'name' => 'Albert Cruz',
+        //     'email' => 'albertcruz@terra.com.br',
+        //     'password' => bcrypt('123456'),
+        // ]);
+
+
+
     }
 }
