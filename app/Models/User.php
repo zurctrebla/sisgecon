@@ -93,6 +93,6 @@ class User extends Authenticatable
     public function guest()
     {
         // return $this->hasOne(Models\Relative::class);
-        return $this->belongsTo(Relative::class);
+        return $this->belongsTo(Guest::class);
     }
 }

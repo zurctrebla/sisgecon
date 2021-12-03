@@ -6,16 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateGuest;
 use App\Models\Destiny;
 use App\Models\Guest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class GuestController extends Controller
 {
     protected $repository;
+    protected $user;
 
-    public function __construct(Guest $guest)
+    public function __construct(Guest $guest, User $user)
     {
         $this->repository = $guest;
+        $this->user = $user;
 
         // $this->middleware(['can:guests']);
 
@@ -53,7 +57,7 @@ class GuestController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreUpdateGuest  $request
+     * @param  \App\Http\Requests\StoreUpdateGuest $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreUpdateGuest $request)
@@ -83,6 +87,9 @@ class GuestController extends Controller
         if(!$guest = $this->repository->find($id)){
             return redirect()->back();
         }
+        // $users = $this->user->with('guest')->where('id', $guest['user_id'])->first();
+        // $users = $users->name;
+        // return view('admin.pages.guests.show', compact('guest', 'users'));
 
         return view('admin.pages.guests.show', compact('guest'));
     }
@@ -104,7 +111,7 @@ class GuestController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\StoreUpdateGuest  $request
+     * @param  \App\Http\Requests\StoreUpdateGuest $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */

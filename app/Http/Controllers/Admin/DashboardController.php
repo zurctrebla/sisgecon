@@ -17,12 +17,12 @@ class DashboardController extends Controller
         $totalUsers = User::/* where('tenant_id', $tenant->id)-> */count();
 
         $totalGuests = Guest::count();
-        $totalVehicles = Vehicle::count();
+        // $totalVehicles = Vehicle::count();
 
         return view('admin.pages.home.index', compact(
             'totalUsers',
-            'totalGuests',
-            'totalVehicles'
+            'totalGuests'/* ,
+            'totalVehicles' */
         ));
     }
 }
