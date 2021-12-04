@@ -90,9 +90,9 @@ class User extends Authenticatable
     /**
      * Get guests
      */
-    public function guest()
+    public function guests()
     {
         // return $this->hasOne(Models\Relative::class);
-        return $this->belongsTo(Guest::class);
+        return $this->hasMany(Guest::class);
     }
 }

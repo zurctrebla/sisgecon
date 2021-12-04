@@ -87,9 +87,6 @@ class GuestController extends Controller
         if(!$guest = $this->repository->find($id)){
             return redirect()->back();
         }
-        // $users = $this->user->with('guest')->where('id', $guest['user_id'])->first();
-        // $users = $users->name;
-        // return view('admin.pages.guests.show', compact('guest', 'users'));
 
         return view('admin.pages.guests.show', compact('guest'));
     }

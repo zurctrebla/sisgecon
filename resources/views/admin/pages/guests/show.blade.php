@@ -55,11 +55,11 @@
                 <div class="inputs view content">
                     <table>
                         <tr>
-                            <th><?= __('Nome: ') ?></th>
-                            <td>{{ $guest->name }}</td>
+                            <th><?= __('Cadastrado por: ') ?></th>
+                            <td>{{ $guest->user->name }}</td>
                         </tr>
                         <tr>
-                            <th><?= __('Cadastrado por: ') ?></th>
+                            <th><?= __('Nome: ') ?></th>
                             <td>{{ $guest->name }}</td>
                         </tr>
                         <tr>
