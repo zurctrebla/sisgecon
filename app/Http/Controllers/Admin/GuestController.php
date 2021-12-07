@@ -48,7 +48,6 @@ class GuestController extends Controller
      */
     public function create()
     {
-
         $destinies = Destiny::all();
 
         return view('admin.pages.guests.create', compact('destinies'));
@@ -69,6 +68,8 @@ class GuestController extends Controller
         if ($request->hasFile('photo') && $request->photo->isValid()) {
             $data['photo'] = $request->photo->store('guests/photos');
         }
+
+        // dd($data);
 
         $this->repository->create($data);
 
@@ -102,7 +103,9 @@ class GuestController extends Controller
         if(!$guest = $this->repository->find($id))
             return redirect()->back();
 
-        return view('admin.pages.guests.edit', compact('guest'));
+        $destinies = Destiny::all();
+
+        return view('admin.pages.guests.edit', compact('guest', 'destinies'));
     }
 
     /**
@@ -119,14 +122,18 @@ class GuestController extends Controller
 
         $data = $request->all();
 
-        if ($request->photo->isValid()) {
-
-            if (Storage::exists($guest->photo)) {
-                Storage::delete($guest->photo);
-            }
-
+        if ($request->hasFile('photo') && $request->photo->isValid()) {
             $data['photo'] = $request->photo->store('guests/photos');
         }
+
+        // if ($request->photo->isValid()) {
+
+        //     if (Storage::exists($guest->photo)) {
+        //         Storage::delete($guest->photo);
+        //     }
+
+        //     $data['photo'] = $request->photo->store('guests/photos');
+        // }
 
         $guest->update($data);
 

@@ -8,11 +8,17 @@
         <input type="text" name="name" class="form-control" placeholder="Nome:" value="{{ $guest->name ?? old('name') }}">
       </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-3">
       <div class="form-group">
-        <label>* Documento:</label>
-        <input type="text" name="document" class="form-control" placeholder="Documento oficial:" value="{{ $guest->document ?? old('document') }}">
+        <label>* Documento 1:</label>
+        <input type="text" name="document1" class="form-control" placeholder="Documento 1:" value="{{ $guest->document1 ?? old('document1') }}">
       </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+          <label>* Documento 2:</label>
+          <input type="text" name="document2" class="form-control" placeholder="Documento 2:" value="{{ $guest->document2 ?? old('document2') }}">
+        </div>
     </div>
 </div>
 
@@ -25,7 +31,7 @@
                 <option value="">Escolha</option>
                     <optgroup label="Selecione um setor">
                         @foreach($destinies as $destiny)
-                            <option value="{{ $destiny->name }}">{{ $destiny->name }}</option>
+                            <option value="{{ $destiny->name }}" @if(isset($destiny->name)/*  && $destiny->name== $userRole */) selected @endif>{{ $destiny->name }}</option>
                         @endforeach
                     </optgroup>
             </select>
@@ -62,13 +68,13 @@
     <div class="col-sm-6">
       <div class="form-group">
        <label>Data Inicial *</label>
-       <input type="date" name="start_at" id="start_at" class="form-control">
+       <input type="date" name="start_at" id="start_at" class="form-control" min="<?php now(); ?>" value="{{ $guest->start_at ?? old('start_at') }}">
       </div>
     </div>
     <div class="col-sm-6">
       <div class="form-group">
        <label>Data Final *</label>
-       <input type="date" name="expires_at" id="expires_at" class="form-control">
+       <input type="date" name="expires_at" id="expires_at" class="form-control" value="{{ $guest->expires_at ?? old('expires_at') }}">
       </div>
     </div>
 </div>

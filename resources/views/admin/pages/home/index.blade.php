@@ -15,7 +15,7 @@
                 </span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Usuários</span>
+                <span class="info-box-text"><a href="{{ route('users.index') }}">Usuários</a></span>
                 <span class="info-box-number">{{ $totalUsers }}</span>
               </div>
               <!-- /.info-box-content -->
@@ -30,7 +30,7 @@
                 </span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Visitantes</span>
+                <span class="info-box-text"><a href="{{ route('guests.index') }}">Visitantes</a></span>
                 <span class="info-box-number">{{ $totalGuests }}</span>
               </div>
               <!-- /.info-box-content -->

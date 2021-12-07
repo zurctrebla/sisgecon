@@ -34,11 +34,11 @@
                                 <thead>
                                     <tr>
                                         <th>Visitante</th>
+                                        <th>Cadastrado por: </th>
                                         <th>Documento</th>
                                         <th>Imagem</th>
                                         <th>Setor</th>
-                                        <th>Data de Entrada</th>
-                                        <th>Data de Saída</th>
+                                        <th>Acesso</th>
                                         <th class="text-center">Ações</th>
                                     </tr>
                                 </thead>
@@ -46,11 +46,18 @@
                                     @foreach ($guests as $guest)
                                         <tr>
                                             <td>{{ $guest->name }}</td>
-                                            <td>{{ $guest->document }}</td>
+                                            <td>{{ $guest->user->name }}</td>
+                                            <td>{{ $guest->document1 }}</td>
                                             <td><img src="{{url("storage/{$guest->photo}")}}" alt="{{$guest->name}}" style="max-width: 80px;"></td>
                                             <td>{{ $guest->destiny }}</td>
-                                            <td>{{ date('d/m/Y', strtotime($guest->start_at) )}}</td>
-                                            <td>{{ date('d/m/Y', strtotime($guest->expires_at) )}}</td>
+                                            <td> Entrada: {{ date('d/m/Y', strtotime($guest->start_at) )}} </br>
+                                                 Saída: {{ date('d/m/Y', strtotime($guest->expires_at) )}} </br>
+                                                 Status:
+
+                                                    <?php if (floor(strtotime($guest->expires_at) - strtotime($guest->start_at)) >= 0) {$v = "success"; $u = "Liberado"; } else { $v = "danger"; $u = "Expirado"; } ?>
+
+                                                 <span class="badge badge-pill badge-<?= $v; ?>"><?= $u; ?></span>
+                                            </td>
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">
                                                     <a href="{{ route('guests.show', $guest->id) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>

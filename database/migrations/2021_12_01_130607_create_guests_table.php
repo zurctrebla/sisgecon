@@ -17,7 +17,8 @@ class CreateGuestsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('name');
-            $table->string('document');
+            $table->string('document1');
+            $table->string('document2')->nullable();
             $table->string('photo')->nullable();
             $table->string('destiny');
             // $table->integer('destiny_id');
