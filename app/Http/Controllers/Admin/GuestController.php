@@ -65,6 +65,8 @@ class GuestController extends Controller
 
         $data['user_id'] = auth()->user()->id;
 
+        $data['status'] = 'Pendente';
+
         if ($request->hasFile('photo') && $request->photo->isValid()) {
             $data['photo'] = $request->photo->store('guests/photos');
         }
@@ -115,7 +117,7 @@ class GuestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateGuest $request, $id)
+    public function update(Request $request, $id)
     {
         if(!$guest = $this->repository->find($id))
             return redirect()->back();
@@ -124,6 +126,12 @@ class GuestController extends Controller
 
         if ($request->hasFile('photo') && $request->photo->isValid()) {
             $data['photo'] = $request->photo->store('guests/photos');
+        }
+
+        if ($request->status) {
+
+            $data['authorized_at'] = auth()->user()->name;
+
         }
 
         // if ($request->photo->isValid()) {

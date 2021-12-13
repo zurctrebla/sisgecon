@@ -31,6 +31,8 @@ class StoreUpdateGuest extends FormRequest
             'document2' => ['nullable', 'string', 'min:3', 'max:255'],
             'photo' => ['nullable', 'image'],
             'destiny' => ['required', 'string', 'min:3', 'max:255'],
+            'status' => ['nullable', 'string', 'min:3', 'max:255'],
+            'authorized_At' => ['nullable', 'string', 'min:3', 'max:255'],
             'person' => ['required', 'string', 'min:3', 'max:255'],
             'company' => ['nullable', 'string', 'min:3', 'max:255'],
             'obs' => ['nullable', 'string', 'min:3', 'max:255'],
@@ -38,9 +40,9 @@ class StoreUpdateGuest extends FormRequest
             'expires_at' => ['required', 'string', 'min:3', 'max:255'],
         ];
 
-        // if ($this->method() == 'PUT') {
-        //     $rules['password'] = ['nullable', 'string', 'min:6', 'max:16'];
-        // }
+        if ($this->method() == 'PUT') {
+            $rules['password'] = ['nullable', 'string', 'min:6', 'max:16'];
+        }
 
         return $rules;
     }

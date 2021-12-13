@@ -78,6 +78,18 @@
       </div>
     </div>
 </div>
+{{--
+<div class="contentarea">
+    <div class="camera">
+        <video id="video">Video stream not available.</video>
+        <button id="startbutton">Capturar</button>
+    </div>
+    <canvas id="canvas">
+    </canvas>
+    <div class="output">
+        <img id="photo" alt="The screen capture will appear in this box.">
+    </div>
+</div> --}}
 
 <div class="row">
     <div class="col-sm-12">
