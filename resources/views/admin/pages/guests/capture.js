@@ -1,108 +1,30 @@
-@extends('adminlte::page')
-
-@section('title', 'Cadastrar Visitante')
-
-@section('content_header')
-    <h1>Cadastrar Visitante</h1>
-    <style>
-        #video {
-    border: 1px solid black;
-    box-shadow: 2px 2px 3px black;
-    width:320px;
-    height:240px;
-  }
-
-  #photo {
-    border: 1px solid black;
-    box-shadow: 2px 2px 3px black;
-    width:320px;
-    height:240px;
-  }
-
-  #canvas {
-    display:none;
-  }
-
-  .camera {
-    width: 340px;
-    display:inline-block;
-  }
-
-  .output {
-    width: 340px;
-    display:inline-block;
-  }
-
-  #startbutton {
-    display:block;
-    position:relative;
-    margin-left:auto;
-    margin-right:auto;
-    bottom:32px;
-    background-color: rgba(0, 150, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    box-shadow: 0px 0px 1px 2px rgba(0, 0, 0, 0.2);
-    font-size: 14px;
-    font-family: "Lucida Grande", "Arial", sans-serif;
-    color: rgba(255, 255, 255, 1.0);
-  }
-
-  .contentarea {
-    font-size: 16px;
-    font-family: "Lucida Grande", "Arial", sans-serif;
-    width: 760px;
-  }
-    </style>
-    <link rel="stylesheet" href="main.css" type="text/css" media="all">
-	<script src="capture.js">
-	</script>
-@stop
-
-@section('content')
-    <div class="container-fluid">
-        <div class="row">
-        <div class="col-md-12">
-            <div class="card card-secondary">
-            <div class="card-header">
-                <h3 class="card-title">Novo Visitante</h3>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('guests.store') }}" class="form" method="POST" enctype="multipart/form-data">
-                    @include('admin.pages.guests._partials.form')
-                </form>
-            </div>
-            </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        (function() {
+(function() {
     // The width and height of the captured photo. We will set the
     // width to the value defined here, but the height will be
     // calculated based on the aspect ratio of the input stream.
-
+  
     var width = 320;    // We will scale the photo width to this
     var height = 0;     // This will be computed based on the input stream
-
+  
     // |streaming| indicates whether or not we're currently streaming
     // video from the camera. Obviously, we start at false.
-
+  
     var streaming = false;
-
+  
     // The various HTML elements we need to configure or control. These
     // will be set by the startup() function.
-
+  
     var video = null;
     var canvas = null;
     var photo = null;
     var startbutton = null;
-
+  
     function startup() {
       video = document.getElementById('video');
       canvas = document.getElementById('canvas');
       photo = document.getElementById('photo');
       startbutton = document.getElementById('startbutton');
-
+  
       navigator.mediaDevices.getUserMedia({video: true, audio: false})
       .then(function(stream) {
         video.srcObject = stream;
@@ -111,18 +33,18 @@
       .catch(function(err) {
         console.log("An error occurred: " + err);
       });
-
+  
       video.addEventListener('canplay', function(ev){
         if (!streaming) {
           height = video.videoHeight / (video.videoWidth/width);
-
+        
           // Firefox currently has a bug where the height can't be read from
           // the video, so we will make assumptions if this happens.
-
+        
           if (isNaN(height)) {
             height = width / (4/3);
           }
-
+        
           video.setAttribute('width', width);
           video.setAttribute('height', height);
           canvas.setAttribute('width', width);
@@ -130,50 +52,48 @@
           streaming = true;
         }
       }, false);
-
+  
       startbutton.addEventListener('click', function(ev){
         takepicture();
         ev.preventDefault();
       }, false);
-
+      
       clearphoto();
     }
-
+  
     // Fill the photo with an indication that none has been
     // captured.
-
+  
     function clearphoto() {
       var context = canvas.getContext('2d');
       context.fillStyle = "#AAA";
       context.fillRect(0, 0, canvas.width, canvas.height);
-
+  
       var data = canvas.toDataURL('image/png');
       photo.setAttribute('src', data);
     }
-
+    
     // Capture a photo by fetching the current contents of the video
     // and drawing it into a canvas, then converting that to a PNG
     // format data URL. By drawing it on an offscreen canvas and then
     // drawing that to the screen, we can change its size and/or apply
     // other changes before drawing it.
-
+  
     function takepicture() {
       var context = canvas.getContext('2d');
       if (width && height) {
         canvas.width = width;
         canvas.height = height;
         context.drawImage(video, 0, 0, width, height);
-
+      
         var data = canvas.toDataURL('image/png');
         photo.setAttribute('src', data);
       } else {
         clearphoto();
       }
     }
-
+  
     // Set up our event listener to run the startup process
     // once loading is complete.
     window.addEventListener('load', startup, false);
   })();
-    </script>
-@endsection
