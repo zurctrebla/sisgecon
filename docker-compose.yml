@@ -30,7 +30,7 @@ services:
             # Admin Web Port
             - 81:81 #
         environment:
-            DB_SQLITE_FILE "/data/database.sqlite"
+            DB_SQLITE_FILE: "/data/database.sqlite"
         volumes:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
