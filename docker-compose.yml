@@ -25,9 +25,14 @@ services:
         restart: unless-stopped
         ports:
             - 80:80
+            - 443:443
+            # Admin Web Port
+            - 81:81
         volumes:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
+            - ./data:/data
+            - ./letsencrypt:/etc/letsencrypt
         networks:
             - rede
 
