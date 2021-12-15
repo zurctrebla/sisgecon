@@ -21,18 +21,21 @@ services:
 
     # nginx
     nginx:
-        image: nginx:alpine
+        #image: nginx:alpine
+        image: 'jc21/nginx-proxy-manager:latest'
         restart: unless-stopped
         ports:
             - 80:80
             - 443:443
             # Admin Web Port
-            - 81:81
+            - 81:81 #
+        environment:
+          DB_SQLITE_FILE "/data/database.sqlite"
         volumes:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
-            - ./data:/data
-            - ./letsencrypt:/etc/letsencrypt
+            - ./data:/data #
+            - ./letsencrypt:/etc/letsencrypt #
         networks:
             - rede
 
