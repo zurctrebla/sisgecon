@@ -33,7 +33,7 @@ services:
         #    DB_SQLITE_FILE: "/data/database.sqlite"
         volumes:
             - ./:/var/www
-            #- ./docker/nginx/:/etc/nginx/conf.d/
+            - ./docker/nginx/:/etc/nginx/conf.d/
             #- /path/ssl/certs:/etc/nginx/certs
             #- ./data:/data #
             #- ./letsencrypt:/etc/letsencrypt #
