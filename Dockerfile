@@ -15,12 +15,12 @@ RUN apt-get update && apt-get install -y \
     unzip \
     # fim
     # inicio do certbot
-    snap install core \
-    snap refresh core \
-    snap install --classic certbot \
-    ln -s /snap/bin/certbot /usr/bin/certbot \
-    certbot --nginx \
-    certbot certonly --nginx
+    #snap install core \
+    #snap refresh core \
+    #snap install --classic certbot \
+    #ln -s /snap/bin/certbot /usr/bin/certbot \
+    #certbot --nginx \
+    #certbot certonly --nginx
     # final do certbot
 
 # Clear cache
