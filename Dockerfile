@@ -12,7 +12,16 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip
+    unzip \
+    # fim
+    # inicio do certbot
+    snap install core \
+    snap refresh core \
+    snap install --classic certbot \
+    ln -s /snap/bin/certbot /usr/bin/certbot \
+    certbot --nginx \
+    certbot certonly --nginx
+    # final do certbot
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
