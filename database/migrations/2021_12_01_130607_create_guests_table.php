@@ -21,6 +21,8 @@ class CreateGuestsTable extends Migration
             $table->string('document2')->nullable();
             $table->string('photo')->nullable();
             $table->string('destiny');
+            $table->enum('status', ['Pendente', 'Autorizado']);     //  acrescentada
+            $table->string('authorized_at')->nullable();            //  acrescentada
             // $table->integer('destiny_id');
             $table->string('person');
             $table->string('company')->nullable();

@@ -50,13 +50,15 @@
                                             <td>{{ $guest->document1 }}</td>
                                             <td><img src="{{url("storage/{$guest->photo}")}}" alt="{{$guest->name}}" style="max-width: 80px;"></td>
                                             <td>{{ $guest->destiny }}</td>
-                                            <td> Entrada: {{ date('d/m/Y', strtotime($guest->start_at) )}} </br>
-                                                 Saída: {{ date('d/m/Y', strtotime($guest->expires_at) )}} </br>
-                                                 Status:
+                                            <td>
+                                                Entrada: {{ date('d/m/Y', strtotime($guest->start_at) )}} </br>
+                                                Saída: {{ date('d/m/Y', strtotime($guest->expires_at) )}} </br>
+                                                Status:
 
-                                                    <?php if (floor(strtotime($guest->expires_at) - strtotime($guest->start_at)) >= 0) {$v = "success"; $u = "Liberado"; } else { $v = "danger"; $u = "Expirado"; } ?>
+                                                <?php if ($guest->status == "Pendente") {$v = "warning"; $u = "Pendente"; } else { $v = "success"; $u = "Liberado por {$guest->authorized_at}"; } ?>
 
-                                                 <span class="badge badge-pill badge-<?= $v; ?>"><?= $u; ?></span>
+                                                <a href="#" class="badge badge-<?= $v; ?>" data-toggle="modal" data-target="#exampleModalCenter"><?= $u; ?></a>
+
                                             </td>
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">
@@ -88,6 +90,36 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        {{-- modal --}}
+                                        <!-- Modal -->
+                                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalCenterTitle">Visitante</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="{{ route('guests.update', $guest->id) }}" style="display:inline" method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <select name="status" id="status" class="form-control">
+                                                                <option value="">Escolha...</option>
+                                                                <option value="Autorizado">Autorizar Acesso</option>
+                                                            </select>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                        <button type="submit" class="btn btn-primary">Salvar</button>
+                                                    </div>
+                                                        </form>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        {{-- modal --}}
                                     @endforeach
                                 </tbody>
                             </table>
