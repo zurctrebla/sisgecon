@@ -29,7 +29,8 @@ services:
         volumes:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
-            - /etc/letsencrypt/live/viverderifa.tk:/etc/nginx/certs
+            #- /path/ssl/certs:/etc/nginx/certs
+            - /etc/letsencrypt/:/etc/letsencrypt/
         networks:
             - rede
 
