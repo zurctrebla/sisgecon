@@ -30,7 +30,7 @@ services:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
             #- /path/ssl/certs:/etc/nginx/certs
-            - /etc/letsencrypt/:/etc/letsencrypt/
+            #- /etc/letsencrypt/:/etc/letsencrypt/
         networks:
             - rede
 
