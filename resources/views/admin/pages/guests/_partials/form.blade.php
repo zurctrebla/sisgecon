@@ -87,7 +87,7 @@
     <canvas id="canvas">
     </canvas>
     <div class="output">
-        <img id="photo" alt="The screen capture will appear in this box.">
+        <img id="photo" name="photo" alt="The screen capture will appear in this box.">
     </div>
 </div>
 
