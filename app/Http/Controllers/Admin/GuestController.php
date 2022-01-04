@@ -67,7 +67,7 @@ class GuestController extends Controller
 
         $data['status'] = 'Pendente';
 
-        //dd($data);
+        //sdd($data);
 
         if ($request->hasFile('photo') && $request->photo->isValid()) {
             $data['photo'] = $request->photo->store('guests/photos');
