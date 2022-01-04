@@ -59,13 +59,15 @@ class GuestController extends Controller
      * @param  \App\Http\Requests\StoreUpdateGuest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdateGuest $request)
+    public function store(/* StoreUpdateGuest */Request $request)
     {
         $data = $request->all();
 
         $data['user_id'] = auth()->user()->id;
 
         $data['status'] = 'Pendente';
+
+        dd($data);
 
         if ($request->hasFile('photo') && $request->photo->isValid()) {
             $data['photo'] = $request->photo->store('guests/photos');
