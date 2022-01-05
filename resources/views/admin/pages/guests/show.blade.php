@@ -59,12 +59,16 @@
                             <td>{{ $guest->user->name }}</td>
                         </tr>
                         <tr>
-                            <th><?= __('Nome: ') ?></th>
+                            <th><?= __('Nome do visitante: ') ?></th>
                             <td>{{ $guest->name }}</td>
                         </tr>
                         <tr>
+                            <th><?= __('Autorização') ?></th>
+                            <td>{{ $guest->authorization }}</td>
+                        </tr>
+                        <tr>
                             <th><?= __('Documento: ') ?></th>
-                            <td>{{ $guest->document }}</td>
+                            <td>{{ $guest->document1 }}</td>
                         </tr>
                         <tr>
                             <th><?= __('Setor: ') ?></th>

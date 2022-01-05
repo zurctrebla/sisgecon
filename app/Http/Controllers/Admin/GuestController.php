@@ -59,13 +59,15 @@ class GuestController extends Controller
      * @param  \App\Http\Requests\StoreUpdateGuest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(/* StoreUpdateGuest */Request $request)
+    public function store(StoreUpdateGuest $request)
     {
         $data = $request->all();
 
         $data['user_id'] = auth()->user()->id;
 
         $data['status'] = 'Pendente';
+
+        $data['authorization'] = uniqid();
 
         //sdd($data);
 
@@ -183,7 +185,9 @@ class GuestController extends Controller
                             ->where(function($query) use ($request) {
                                 if ($request->filter) {
                                     $query->orWhere('name', 'LIKE', "%{$request->filter}%");
-                                    $query->orWhere('document', $request->filter);
+                                    $query->orWhere('document1', $request->filter);
+                                    $query->orWhere('document2', $request->filter);
+                                    $query->orWhere('authorization', $request->filter);
                                 }
                             })
                             ->latest()/*

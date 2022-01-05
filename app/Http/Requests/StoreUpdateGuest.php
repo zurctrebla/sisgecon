@@ -24,11 +24,17 @@ class StoreUpdateGuest extends FormRequest
     public function rules()
     {
         // $id = $this->segment(3);
+        $id = $this->segment(3);
+
+        // return [
+        //     'name' => "required|min:3|max:255|unique:roles,name,{$id},id",
+        // ];
 
         $rules = [
             'name' => ['required', 'string', 'min:3', 'max:255'],
-            'document1' => ['required', 'string', 'min:3', 'max:255'],
+            'document1' => ['required', 'string', 'min:3', 'max:255', "unique:guests,document1,{$id},id"],
             'document2' => ['nullable', 'string', 'min:3', 'max:255'],
+            'authorization' => ['unique', 'string', 'min:3', 'max:255'],
             'photo' => ['nullable', 'image'],
             'destiny' => ['required', 'string', 'min:3', 'max:255'],
             'status' => ['nullable', 'string', 'min:3', 'max:255'],
@@ -45,5 +51,14 @@ class StoreUpdateGuest extends FormRequest
         }
 
         return $rules;
+    }
+
+    public function messages()
+    {
+        return [
+            'min' => 'Campo deve ter no mínimo 3 caracteres',
+            'max' => 'Campo deve ter no máximo 255 caracteres',
+            'unique' => 'O número do documento já está cadastrado',
+        ];
     }
 }

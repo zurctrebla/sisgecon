@@ -17,11 +17,12 @@ class CreateGuestsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('name');
-            $table->string('document1');
+            $table->string('document1')->unique();
             $table->string('document2')->nullable();
+            $table->string('authorization')->unique();
             $table->string('photo')->nullable();
             $table->string('destiny');
-            $table->enum('status', ['Pendente', 'Autorizado']);     //  acrescentada
+            $table->enum('status', ['Pendente', 'Autorizado', 'Expirado', 'Bloqueado']);     //  acrescentada
             $table->string('authorized_at')->nullable();            //  acrescentada
             // $table->integer('destiny_id');
             $table->string('person');

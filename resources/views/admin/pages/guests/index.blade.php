@@ -36,6 +36,7 @@
                                         <th>Visitante</th>
                                         <th>Cadastrado por: </th>
                                         <th>Documento</th>
+                                        <th>Autorização</th>
                                         <th>Imagem</th>
                                         <th>Setor</th>
                                         <th>Acesso</th>
@@ -48,6 +49,7 @@
                                             <td>{{ $guest->name }}</td>
                                             <td>{{ $guest->user->name }}</td>
                                             <td>{{ $guest->document1 }}</td>
+                                            <td>{{ $guest->authorization }}</td>
                                             <td><img src="{{url("storage/{$guest->photo}")}}" alt="{{$guest->name}}" style="max-width: 80px;"></td>
                                             <td>{{ $guest->destiny }}</td>
                                             <td>
@@ -55,7 +57,13 @@
                                                 Saída: {{ date('d/m/Y', strtotime($guest->expires_at) )}} </br>
                                                 Status:
 
-                                                <?php if ($guest->status == "Pendente") {$v = "warning"; $u = "Pendente"; } else { $v = "success"; $u = "Liberado por {$guest->authorized_at}"; } ?>
+                                                <?php if ($guest->status == "Pendente") {
+                                                            $v = "warning"; $u = "Pendente";
+                                                        } elseif ($guest->status == "Bloqueado") {
+                                                            $v = "danger"; $u = "Bloqueado";
+                                                        } else {
+                                                            $v = "success"; $u = "Liberado por {$guest->authorized_at}";
+                                                        } ?>
 
                                                 <a href="#" class="badge badge-<?= $v; ?>" data-toggle="modal" data-target="#exampleModalCenter"><?= $u; ?></a>
 
@@ -108,6 +116,7 @@
                                                             <select name="status" id="status" class="form-control">
                                                                 <option value="">Escolha...</option>
                                                                 <option value="Autorizado">Autorizar Acesso</option>
+                                                                <option value="Bloqueado">Bloquear Acesso</option>
                                                             </select>
 
                                                     </div>
