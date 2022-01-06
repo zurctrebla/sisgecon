@@ -10,9 +10,6 @@
             <h3>Listar</h3>
             </div>
             <div class="col-sm-6">
-            <ol hidden class="breadcrumb float-sm-right">
-                <a href="{{ route('guests.history') }}" class="btn btn-outline-light btn-sm">Historico</a>
-            </ol>
             <ol class="breadcrumb float-sm-right">
                 <a href="{{ route('guests.create') }}" class="btn btn-outline-success btn-sm">Cadastrar</a>
             </ol>

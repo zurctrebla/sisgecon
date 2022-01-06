@@ -271,6 +271,12 @@ return [
             'icon' => 'fas fa-map-signs',
             /* 'can'  => 'destinies', */
         ],
+        [
+            'text' => 'Funcionários',
+            'url'  => 'admin/users/employees',
+            'icon' => 'fas fa-chalkboard-teacher',
+            /* 'can'  => 'destinies', */
+        ],
         /*
         [
             'text' => 'change_password',

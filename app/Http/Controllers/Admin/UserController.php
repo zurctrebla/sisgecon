@@ -35,7 +35,27 @@ class UserController extends Controller
 
         return view('admin.pages.users.index', compact('users'));
     }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function employee()
+    {
+        $users = $this->repository->where('role_id', '2')->paginate();
 
+        return view('admin.pages.users.employees', compact('users'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createEmployee()
+    {
+        return view('admin.pages.users.createEmployee');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -65,6 +85,26 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('message', 'Usuário criado com sucesso');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\StoreUpdateUser $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeEmployee(Request $request)
+    {
+        // $this->repository->create($request->all());
+
+        $data = $request->all();
+
+        $data['password'] = bcrypt($data['password']);
+
+        $data['role_id'] = 2;
+
+        $this->repository->create($data);
+
+        return redirect()->route('employees')->with('message', 'Funcionário criado com sucesso');
+    }
     /**
      * Display the specified resource.
      *

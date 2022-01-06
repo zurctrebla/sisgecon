@@ -23,6 +23,14 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Users
      */
+
+    Route::get('/admin/users/employees', [UserController::class, 'employee'])->name('users.employee');
+
+    Route::get('/admin/users/createEmployee', [UserController::class, 'createEmployee'])->name('users.createEmployee');
+
+    Route::post('/admin/users/storeEmployee', [UserController::class, 'storeEmployee'])->name('users.storeEmployee');
+
+
     Route::any('/admin/users/profile', [UserController::class, 'profile'])->name('users.profile');
 
     Route::any('/admin/users/search', [UserController::class, 'search'])->name('users.search');
@@ -34,6 +42,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/users/{id}', [UserController::class, 'show'])->name('users.show');
     Route::post('/admin/users', [UserController::class, 'store'])->name('users.store');
     Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
+
+
+
+
 
     /**
      * Permissions
@@ -84,6 +96,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/guests/{id}', [GuestController::class, 'show'])->name('guests.show');
     Route::post('/admin/guests', [GuestController::class, 'store'])->name('guests.store');
     Route::get('/admin/guests', [GuestController::class, 'index'])->name('guests.index');
+    Route::get('/admin/guests/history', [GuestController::class, 'history'])->name('guests.history');
 
     /**
      * Destinies

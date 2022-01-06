@@ -27,13 +27,17 @@ class CheckGuests
     public function handle(CheckGuest $event)
     {
 
-        if ($event->guest->expired_at < date('d/m/Y', strtotime(now()) )) {
+        if (    $event->guest->expires_at    <   date('Y-m-d')   ) {
 
             $event->guest->status = "Expirado";
 
-            $event->guest->save();
+        } else {
+
+            $event->guest->status = "Pendente";
 
         }
+
+        $event->guest->save();
 
     }
 }

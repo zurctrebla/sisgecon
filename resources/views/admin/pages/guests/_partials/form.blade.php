@@ -47,20 +47,17 @@
 </div>
 
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-6">
       <div class="form-group">
         <label>* Empresa:</label>
         <input type="text" name="company" class="form-control" placeholder="Preencha apenas se for prestador de serviço:" value="{{ $guest->company ?? old('company') }}">
       </div>
     </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-12">
-      <div class="form-group">
-        <label>* Observação:</label>
-        <input type="textarea" name="obs" class="form-control" placeholder="Alguma observação:" value="{{ $guest->obs ?? old('obs') }}">
-      </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+          <label>* Observação:</label>
+          <input type="textarea" name="obs" class="form-control" placeholder="Alguma observação:" value="{{ $guest->obs ?? old('obs') }}">
+        </div>
     </div>
 </div>
 
@@ -79,7 +76,25 @@
     </div>
 </div>
 
-<div class="contentarea">
+<h3>Cadastro do Veículo</h3>
+<hr>
+
+<div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>* Modelo:</label>
+        <input type="text" name="company" class="form-control" placeholder="Preencha com o modelo do veículo: " value="{{ $guest->company ?? old('company') }}">
+      </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+          <label>* Placa:</label>
+          <input type="textarea" name="obs" class="form-control" placeholder="Placa do veículo:" value="{{ $guest->obs ?? old('obs') }}">
+        </div>
+    </div>
+</div>
+
+<div hidden class="contentarea">
     <div class="camera">
         <video id="video">Video stream not available.</video>
         <button id="startbutton">Capturar</button>
@@ -91,7 +106,7 @@
     </div>
 </div>
 
-<div class="row">
+<div hidden class="row">
     <div class="col-sm-12">
       <div class="form-group">
         <label>* Foto:</label>

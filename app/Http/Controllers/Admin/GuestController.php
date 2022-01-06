@@ -37,7 +37,9 @@ class GuestController extends Controller
      */
     public function index()
     {
-        $guests = $this->repository->paginate();
+        $guests = $this->repository->where('status', '<>', 'Expirado')->paginate();
+
+        //dd($guests);
 
         foreach ($guests as $guest) {
 
@@ -46,6 +48,18 @@ class GuestController extends Controller
         }
 
         return view('admin.pages.guests.index', compact('guests'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function history()
+    {
+        $guests = $this->repository->where('status', 'Expirado')->paginate();
+
+        return view('admin.pages.guests.history', compact('guests'));
     }
 
     /**
