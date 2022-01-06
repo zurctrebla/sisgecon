@@ -56,11 +56,12 @@
                                                 Entrada: {{ date('d/m/Y', strtotime($guest->start_at) )}} </br>
                                                 Saída: {{ date('d/m/Y', strtotime($guest->expires_at) )}} </br>
                                                 Status:
-
                                                 <?php if ($guest->status == "Pendente") {
                                                             $v = "warning"; $u = "Pendente";
                                                         } elseif ($guest->status == "Bloqueado") {
                                                             $v = "danger"; $u = "Bloqueado";
+                                                        } elseif ($guest->status == "Expirado") {
+                                                            $v = "danger"; $u = "Expirado";
                                                         } else {
                                                             $v = "success"; $u = "Liberado por {$guest->authorized_at}";
                                                         } ?>

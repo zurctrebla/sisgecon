@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\CheckGuest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateGuest;
 use App\Models\Destiny;
@@ -38,6 +39,12 @@ class GuestController extends Controller
     {
         $guests = $this->repository->paginate();
 
+        foreach ($guests as $guest) {
+
+            CheckGuest::dispatch($guest);
+
+        }
+
         return view('admin.pages.guests.index', compact('guests'));
     }
 
@@ -62,23 +69,15 @@ class GuestController extends Controller
     public function store(StoreUpdateGuest $request)
     {
         $data = $request->all();
-
         $data['user_id'] = auth()->user()->id;
-
         $data['status'] = 'Pendente';
-
         $data['authorization'] = uniqid();
-
-        //sdd($data);
 
         if ($request->hasFile('photo') && $request->photo->isValid()) {
             $data['photo'] = $request->photo->store('guests/photos');
         }
 
-        // dd($data);
-
         $this->repository->create($data);
-
         return redirect()->route('guests.index')->with('message', 'Visitante cadastrado com sucesso');
 
     }
