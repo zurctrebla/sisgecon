@@ -54,7 +54,7 @@
                                                 <span class="d-none d-md-block">
                                                     <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-info btn-sm">Registrar Ponto</a>
                                                     @can('user-edit')
-                                                        <a hidden href="{{-- {{ route('users.history', $user->id) }} --}}" class="btn btn-outline-primary btn-sm">Ver Histórico</a>
+                                                        <a href="{{ route('users.history', $user->id) }}" class="btn btn-outline-primary btn-sm">Ver Histórico</a>
                                                     @endcan
                                                 </span>
                                                 <div class="dropdown d-block d-md-none">

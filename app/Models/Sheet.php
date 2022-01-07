@@ -11,6 +11,13 @@ class Sheet extends Model
 
     protected $fillable = ['in', 'rest_out', 'rest_in', 'out'];
 
+    // protected $dates = ['in'];
+
+    // public function getInAttribute($value)
+    // {
+    //     return date('d/m/Y H:m:s', strtotime($value));
+    // }
+
     public function user()
     {
         return $this->belongsTo(User::class);

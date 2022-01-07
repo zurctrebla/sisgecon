@@ -138,6 +138,9 @@ class UserController extends Controller
             return redirect()->back();
         }
 
+        // registra o acesso do funcionário
+
+
         $data = $request->all();
 
         $date = now();
@@ -173,7 +176,7 @@ class UserController extends Controller
             return redirect()->back();
         }
 
-        return view('admin.pages.users.history', compact('user'));
+        return view('admin.pages.users.historySheet', compact('user'));
     }
 
     /**

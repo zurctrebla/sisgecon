@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/users/register/{id}', [UserController::class, 'register'])->name('users.register');
 
-    Route::get('/admin/users/{id}', [UserController::class, 'history'])->name('users.history');
+    Route::get('/admin/users/historySheet/{id}', [UserController::class, 'history'])->name('users.history');
 
 
     Route::any('/admin/users/profile', [UserController::class, 'profile'])->name('users.profile');

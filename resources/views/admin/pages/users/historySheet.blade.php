@@ -11,30 +11,16 @@
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <span class="d-none d-md-block">
-                <a href="{{ route('users.index') }}" class="btn btn-outline-info btn-sm">Listar</a>
-                @can('user-edit')
-                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
-                @endcan
-                @can('user-delete')
-                    <form action="{{ route('users.destroy', $user->id) }}" style="display:inline" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Deseja apagar o usuário ?')" >Apagar</button>
-                    </form>
-                @endcan
+                <a href="{{ route('users.employee') }}" class="btn btn-outline-info btn-sm">Voltar</a>
+                
             </span>
             <div class="dropdown d-block d-md-none">
                 <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Ações
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
-                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-outline-info btn-sm">Listar</a>
-                    @can('user-edit')
-                        <a href="{{ route('users.edit', $user->id) }}" class="dropdown-item">Editar</a>
-                    @endcan
-                    @can('user-delete')
-                        <button class="dropdown-item" onclick="return confirm('Deseja apagar o usuário ?')">Apagar</button>
-                    @endcan
+                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-outline-info btn-sm">Voltar</a>
+                    
                 </div>
             </div>
         </ol>
@@ -48,28 +34,33 @@
       <div class="col-md-12">
         <div class="card card-secondary">
           <div class="card-header">
-            <h3 class="card-title">Visualizar Histórico de Ponto</h3>
+            <h3 class="card-title">Histórico de Ponto</h3>
           </div>
           <div class="card-body">
             <div class="column-responsive column-80">
                 <div class="inputs view content">
-                    <table>
-                        <tr>
-                            <th><?= __('Nome') ?></th>
-                            <td>{{ $user->name }}</td>
-                        </tr>
-
-                        <tr>
-                            <th><?= __('Telefone') ?></th>
-                            <td>
-                                @foreach ($user->sheets as $sheet)
-                                    {{ $sheet->in }} <br>
-                                @endforeach
-                            </td>
-                        </tr>
-
-
-                    </table>
+                    <table class="table table-bordered">
+                        <thead>
+                          <tr>
+                            <th scope="col">data</th>
+                            <th scope="col">entrada</th>
+                            <th scope="col">saida para intervalo</th>
+                            <th scope="col">volta do intervalo</th>
+                            <th scope="col">saida</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            @foreach ($user->sheets as $sheet)
+                                <th scope="row">{{ date('d/m/Y', strtotime($sheet->in)) }}</th>
+                                <td>{{ date('H:m:s', strtotime($sheet->in)) }}</td>
+                                <td>{{ date('H:m:s', strtotime($sheet->rest_out)) }}</td>                                
+                                <td>{{ date('H:m:s', strtotime($sheet->rest_in)) }}</td>
+                                <td>{{ date('H:m:s', strtotime($sheet->out)) }}</td>
+                          </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
                 </div>
             </div>
           </div>
