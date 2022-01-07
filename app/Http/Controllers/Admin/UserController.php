@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\EventRegisterEmployee;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateUser;
 use App\Models\{
@@ -10,6 +11,7 @@ use App\Models\{
     Complement,
     Phone,
     Relative,
+    Sheet,
     Vehicle
 };
 use Illuminate\Http\Request;
@@ -18,9 +20,11 @@ class UserController extends Controller
 {
     protected $repository;
 
-    public function __construct(User $user)
+    public function __construct(User $user, Sheet $sheet)
     {
         $this->repository = $user;
+
+        // $this->repository = $sheet;
 
         // $this->middleware(['can:users', 'can:users-edit']);
     }
@@ -31,7 +35,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->repository->paginate();
+        $users = $this->repository->where('role_id', '<>', '2')->paginate();
 
         return view('admin.pages.users.index', compact('users'));
     }
@@ -43,6 +47,16 @@ class UserController extends Controller
     public function employee()
     {
         $users = $this->repository->where('role_id', '2')->paginate();
+
+        // $sheets = $this->repository->paginate();
+
+        // listener
+
+        // foreach ($sheets as $sheet) {
+
+        //     EventRegisterEmployee::dispatch($sheet);
+
+        // }
 
         return view('admin.pages.users.employees', compact('users'));
     }
@@ -101,10 +115,67 @@ class UserController extends Controller
 
         $data['role_id'] = 2;
 
-        $this->repository->create($data);
 
-        return redirect()->route('employees')->with('message', 'Funcionário criado com sucesso');
+        $user = $this->repository->create($data);
+
+
+        $user->employee()->create($data);
+
+
+        return redirect()->route('users.employee')->with('message', 'Funcionário criado com sucesso');
     }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\StoreUpdateUser $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request, $id)
+    {
+        if (!$user = $this->repository->find($id)) {
+            return redirect()->back();
+        }
+
+        $data = $request->all();
+
+        $date = now();
+
+        //dd($date);
+
+        $data['in'] = $date;
+        $data['rest_out'] = $date;
+        $data['rest_in'] = $date;
+        $data['out'] = $date;
+
+        $data['user_id'] = $id;
+
+        //dd($date);
+
+        //$user->update($data);
+
+
+        $user->sheets()->create($data);
+
+        return redirect()->route('users.employee')->with('message', 'Ponto Registrado com sucesso');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function history($id)
+    {
+        if (!$user = $this->repository->find($id)) {
+            return redirect()->back();
+        }
+
+        return view('admin.pages.users.history', compact('user'));
+    }
+
     /**
      * Display the specified resource.
      *

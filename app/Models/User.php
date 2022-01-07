@@ -95,4 +95,21 @@ class User extends Authenticatable
         // return $this->hasOne(Models\Relative::class);
         return $this->hasMany(Guest::class);
     }
+
+    /**
+     * Get employee
+     */
+    public function employee()
+    {
+        return $this->hasOne(Employee::class);
+    }
+
+    /**
+     * Get sheets
+     */
+    public function sheets()
+    {
+        //return $this->hasOne(Models\Vehicle::class);
+        return $this->hasMany(Sheet::class);   /** um para muitos */
+    }
 }

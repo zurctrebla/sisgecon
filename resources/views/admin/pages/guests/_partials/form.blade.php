@@ -76,24 +76,6 @@
     </div>
 </div>
 
-<h3>Cadastro do Veículo</h3>
-<hr>
-
-<div class="row">
-    <div class="col-sm-6">
-      <div class="form-group">
-        <label>* Modelo:</label>
-        <input type="text" name="company" class="form-control" placeholder="Preencha com o modelo do veículo: " value="{{ $guest->company ?? old('company') }}">
-      </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="form-group">
-          <label>* Placa:</label>
-          <input type="textarea" name="obs" class="form-control" placeholder="Placa do veículo:" value="{{ $guest->obs ?? old('obs') }}">
-        </div>
-    </div>
-</div>
-
 <div hidden class="contentarea">
     <div class="camera">
         <video id="video">Video stream not available.</video>
@@ -112,6 +94,24 @@
         <label>* Foto:</label>
         <input type="file" name="photo" class="form-control" >
       </div>
+    </div>
+</div>
+
+<h3>Cadastro do Veículo</h3>
+<hr>
+
+<div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>* Modelo:</label>
+        <input type="text" name="model" class="form-control" placeholder="Preencha com o modelo do veículo:" value="{{ $guest->model ?? old('model') }}">
+      </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+          <label>* Placa:</label>
+          <input type="text" name="plate" class="form-control" placeholder="Placa do veículo:" value="{{ $guest->plate ?? old('plate') }}">
+        </div>
     </div>
 </div>
 

@@ -63,6 +63,14 @@
                             <td>{{ $guest->name }}</td>
                         </tr>
                         <tr>
+                            <th><?= __('Veículo: ') ?></th>
+                            <td>{{ $guest->model }}</td>
+                        </tr>
+                        <tr>
+                            <th><?= __('Placa do veíclo: ') ?></th>
+                            <td>{{ $guest->plate }}</td>
+                        </tr>
+                        <tr>
                             <th><?= __('Autorização') ?></th>
                             <td>{{ $guest->authorization }}</td>
                         </tr>

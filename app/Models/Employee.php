@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Guest extends Model
+class Employee extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'name', 'document1', 'document2', 'authorization', 'photo', 'destiny', 'status', 'authorized_at', 'person', 'company', 'obs', 'model', 'plate', 'start_at', 'expires_at'];
+    protected $fillable = ['user_id', 'birth', 'phone', 'function', 'sector', 'rg', 'emission', 'emission_for', 'uf'];
 
     public function user()
     {

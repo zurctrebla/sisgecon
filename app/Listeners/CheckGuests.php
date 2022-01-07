@@ -31,11 +31,11 @@ class CheckGuests
 
             $event->guest->status = "Expirado";
 
-        } else {
+        } /* else {
 
             $event->guest->status = "Pendente";
 
-        }
+        } */
 
         $event->guest->save();
 

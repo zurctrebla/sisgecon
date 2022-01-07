@@ -151,6 +151,8 @@ class GuestController extends Controller
 
         }
 
+        //dd($data);
+
         // if ($request->photo->isValid()) {
 
         //     if (Storage::exists($guest->photo)) {

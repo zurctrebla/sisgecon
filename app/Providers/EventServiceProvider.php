@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\CheckGuest;
+use App\Events\EventRegisterEmployee;
 use App\Listeners\CheckGuests;
+use App\Listeners\RegisterEmployee;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,7 +24,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         CheckGuest::class => [
             CheckGuests::class,
-        ]
+        ],
+        EventRegisterEmployee::class => [
+            RegisterEmployee::class,
+        ],
     ];
 
     /**

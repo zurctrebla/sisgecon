@@ -45,21 +45,16 @@
                                         <tr>
                                             <td>{{ $user->name }}</td>
                                             <td>
-                                                {{ $user->role->name }}
+                                                {{ $user->employee->function }}
                                             </td>
-                                            <td>{{ $user->email }}</td>
+                                            <td>
+                                                {{ $user->employee->sector }}
+                                            </td>
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">
-                                                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
+                                                    <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-info btn-sm">Registrar Ponto</a>
                                                     @can('user-edit')
-                                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
-                                                    @endcan
-                                                    @can('user-delete')
-                                                        <form action="{{ route('users.destroy', $user->id) }}" style="display:inline" method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Deseja apagar o usuário ?')" >Apagar</button>
-                                                        </form>
+                                                        <a hidden href="{{-- {{ route('users.history', $user->id) }} --}}" class="btn btn-outline-primary btn-sm">Ver Histórico</a>
                                                     @endcan
                                                 </span>
                                                 <div class="dropdown d-block d-md-none">
