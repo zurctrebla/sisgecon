@@ -26,6 +26,22 @@ class RegisterEmployee
      */
     public function handle(EventRegisterEmployee $event)
     {
-        dd($event->sheet->in);
+        // dd($event->user->sheets->last());
+        if ($event->user->sheets->last()) {
+
+            // dd('dentro do if');
+        }
+
+        $data['in'] = now();
+
+        $event->user->sheets()->create($data);
+
+        dd($event->user->sheets->last());
+
+        // $data['in'] = $date;
+        // $data['rest_out'] = $date;
+        // $data['rest_in'] = $date;
+        // $data['out'] = $date;
+
     }
 }

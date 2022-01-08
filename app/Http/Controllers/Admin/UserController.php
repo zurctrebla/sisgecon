@@ -11,7 +11,6 @@ use App\Models\{
     Complement,
     Phone,
     Relative,
-    Sheet,
     Vehicle
 };
 use Illuminate\Http\Request;
@@ -20,12 +19,9 @@ class UserController extends Controller
 {
     protected $repository;
 
-    public function __construct(User $user, Sheet $sheet)
+    public function __construct(User $user)
     {
         $this->repository = $user;
-
-        // $this->repository = $sheet;
-
         // $this->middleware(['can:users', 'can:users-edit']);
     }
     /**
@@ -48,15 +44,12 @@ class UserController extends Controller
     {
         $users = $this->repository->where('role_id', '2')->paginate();
 
-        // $sheets = $this->repository->paginate();
-
         // listener
+        foreach ($users as $user) {
 
-        // foreach ($sheets as $sheet) {
+            EventRegisterEmployee::dispatch($user);
 
-        //     EventRegisterEmployee::dispatch($sheet);
-
-        // }
+        }
 
         return view('admin.pages.users.employees', compact('users'));
     }
@@ -115,12 +108,9 @@ class UserController extends Controller
 
         $data['role_id'] = 2;
 
-
         $user = $this->repository->create($data);
 
-
         $user->employee()->create($data);
-
 
         return redirect()->route('users.employee')->with('message', 'Funcionário criado com sucesso');
     }
@@ -139,10 +129,7 @@ class UserController extends Controller
         }
 
         // registra o acesso do funcionário
-
-
         $data = $request->all();
-
         $date = now();
 
         //dd($date);
@@ -155,9 +142,7 @@ class UserController extends Controller
         $data['user_id'] = $id;
 
         //dd($date);
-
         //$user->update($data);
-
 
         $user->sheets()->create($data);
 
