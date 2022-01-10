@@ -9,7 +9,7 @@ class Sheet extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['in', 'rest_out', 'rest_in', 'out'];
+    protected $fillable = ['in', 'rest_out', 'rest_in', 'out', 'status'];
 
     // protected $dates = ['in'];
 

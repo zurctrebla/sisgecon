@@ -26,19 +26,49 @@ class RegisterEmployee
      */
     public function handle(EventRegisterEmployee $event)
     {
-        dd($event->user->sheets->last());
-        if ($event->user->sheets->last()) {
+
+        if ($event->user->sheets->last()) {                 // verifica se já existe algum registro.
 
             // dd('dentro do if');
+            foreach ($event->user->sheets as $sheet) {
+
+                if (!$sheet['rest_out']) {
+
+                    $sheet['rest_out'] = date('Y-m-d H:m:s');
+
+                } else if (!$sheet['rest_in']) {
+
+                    $sheet['rest_in'] = date('Y-m-d H:m:s');
+
+                } else if (!$sheet['out']) {
+
+                    $sheet['out'] = date('Y-m-d H:m:s');
+
+                }
+
+            }
 
         } else {
 
-            // $data['in'] = now();
+            foreach ($event->user->sheets as $sheet) {
+
+                $sheet['in'] = date('Y-m-d H:m:s');
+                dd('ultimo if');
+
+
+            }
+
             // $event->user->sheets()->create($data);
             // dd($event->user->sheets->last());
             // dd('dentro do else');
 
         }
+
+        $event->user->sheets->save();
+
+        // $event->guest->save();
+
+        //$user->sheets()->create($data);
 
         // $data['in'] = $date;
         // $data['rest_out'] = $date;

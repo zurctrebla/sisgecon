@@ -12,7 +12,7 @@
         <ol class="breadcrumb float-sm-right">
             <span class="d-none d-md-block">
                 <a href="{{ route('users.employee') }}" class="btn btn-outline-info btn-sm">Voltar</a>
-                
+
             </span>
             <div class="dropdown d-block d-md-none">
                 <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -20,7 +20,7 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
                     <a href="{{ route('users.show', $user->id) }}" class="btn btn-outline-info btn-sm">Voltar</a>
-                    
+
                 </div>
             </div>
         </ol>
@@ -53,10 +53,10 @@
                           <tr>
                             @foreach ($user->sheets as $sheet)
                                 <th scope="row">{{ date('d/m/Y', strtotime($sheet->in)) }}</th>
-                                <td>{{ date('H:m:s', strtotime($sheet->in)) }}</td>
-                                <td>{{ date('H:m:s', strtotime($sheet->rest_out)) }}</td>                                
-                                <td>{{ date('H:m:s', strtotime($sheet->rest_in)) }}</td>
-                                <td>{{ date('H:m:s', strtotime($sheet->out)) }}</td>
+                                <td>{{ date('H:i:s', strtotime($sheet->in)) }}</td>
+                                <td>{{ date('H:i:s', strtotime($sheet->rest_out)) }}</td>
+                                <td>{{ date('H:i:s', strtotime($sheet->rest_in)) }}</td>
+                                <td>{{ date('H:i:s', strtotime($sheet->out)) }}</td>
                           </tr>
                           @endforeach
                         </tbody>

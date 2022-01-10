@@ -20,6 +20,7 @@ class CreateSheetsTable extends Migration
             $table->dateTime('rest_out')->nullable();
             $table->dateTime('rest_in')->nullable();
             $table->dateTime('out')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

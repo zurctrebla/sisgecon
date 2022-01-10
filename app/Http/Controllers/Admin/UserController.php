@@ -45,11 +45,11 @@ class UserController extends Controller
         $users = $this->repository->where('role_id', '2')->paginate();
 
         // listener
-        foreach ($users as $user) {
+        // foreach ($users as $user) {
 
-            EventRegisterEmployee::dispatch($user);
+        //     EventRegisterEmployee::dispatch($user);
 
-        }
+        // }
 
         return view('admin.pages.users.employees', compact('users'));
     }
@@ -124,27 +124,68 @@ class UserController extends Controller
      */
     public function register(Request $request, $id)
     {
-        if (!$user = $this->repository->find($id)) {
+        if ($user = $this->repository->find($id)) {
             return redirect()->back();
         }
 
+        // Listener
+        //EventRegisterEmployee::dispatch($user);
         // registra o acesso do funcionário
-        $data = $request->all();
-        $date = now();
+        // $data = $request->all();
+        // $data['in'] = $date;
+        // $data['rest_out'] = $date;
+        // $data['rest_in'] = $date;
+        // $data['out'] = $date;
+        // dd(in_array($user->sheets->last(), $data));
+        // dd($user->sheets->last());
+        // $status = $user->sheets->status;
 
-        //dd($date);
-
-        $data['in'] = $date;
-        $data['rest_out'] = $date;
-        $data['rest_in'] = $date;
-        $data['out'] = $date;
-
+        $date = date('Y-m-d H:i:s');
         $data['user_id'] = $id;
 
-        //dd($date);
-        //$user->update($data);
 
-        $user->sheets()->create($data);
+        if (!$user->sheets->last()) {
+
+            $data['in'] = $date;                // registra entrada do funcionário.
+            $data['status'] = "1";
+            $user->sheets()->create($data);
+
+        } else {
+
+
+            $sheets = $user->sheets->last();
+
+            foreach ($sheets as $sheet) {
+
+                if ($sheet['status'] == "1") {
+                    dd('1 if');
+                    $data['rest_out'] = $date;
+                    $data['status'] = "2";
+                    $user->sheets()->update($data);
+
+                } else if ($sheet['status'] == "2") {
+                    dd('2 if');
+                    $data['rest_in'] = $date;
+                    $data['status'] = "3";
+                    $user->sheets()->update($data);
+
+                } else if ($sheet['status'] == "3") {
+                    dd('3 if');
+                    $data['out'] = $date;
+                    $data['status'] = "4";
+                    $user->sheets()->update($data);
+
+                } else if ($sheet['status'] == "4") {
+                    dd('4 if');
+                    $data['in'] = $date;                // registra entrada do funcionário.
+                    $data['status'] = "1";
+                    $user->sheets()->create($data);
+
+                }
+
+            }
+
+        }
 
         return redirect()->route('users.employee')->with('message', 'Ponto Registrado com sucesso');
     }
