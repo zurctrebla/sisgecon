@@ -38,7 +38,7 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                              <label>Contato Telefônico *</label>
-                             <input type="text" name="number" class="form-control" placeholder="..." value="{{ $user->phones->number ?? old('number') }}" required>
+                             <input type="text" name="number" class="form-control" placeholder="..." value="{{ $user->phones->number ?? old('number') }}">
                             </div>
                         </div>
                     </div>
@@ -47,13 +47,13 @@
                         <div class="col-sm-6">
                           <div class="form-group">
                            <label>Nacionalidade *</label>
-                           <input type="text" name="nacionality" class="form-control" placeholder="..." value="{{ $user->complement->nacionality ?? old('nacionality') }}" required>
+                           <input type="text" name="nacionality" class="form-control" placeholder="..." value="{{ $user->complement->nacionality ?? old('nacionality') }}">
                           </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                              <label>Estado *</label>
-                             <input type="text" name="state" class="form-control" placeholder="..." value="{{ $user->complement->state ?? old('state') }}" required>
+                             <input type="text" name="state" class="form-control" placeholder="..." value="{{ $user->complement->state ?? old('state') }}">
                             </div>
                         </div>
                     </div>
@@ -62,19 +62,19 @@
                         <div class="col-sm-4">
                           <div class="form-group">
                            <label>Data de nascimento *</label>
-                           <input type="date" name="birth" class="form-control" placeholder="..." value="{{ $user->complement->birth ?? old('birth') }}" required>
+                           <input type="date" name="birth" class="form-control" placeholder="..." value="{{ $user->complement->birth ?? old('birth') }}">
                           </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                              <label>CPF *</label>
-                             <input type="text" name="cpf" class="form-control" placeholder="..." value="{{ $user->complement->cpf ?? old('cpf') }}" required>
+                             <input type="text" name="cpf" class="form-control" placeholder="..." value="{{ $user->complement->cpf ?? old('cpf') }}">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                              <label>RG *</label>
-                             <input type="text" name="rg" class="form-control" placeholder="..." value="{{ $user->complement->rg ?? old('rg') }}" required>
+                             <input type="text" name="rg" class="form-control" placeholder="..." value="{{ $user->complement->rg ?? old('rg') }}">
                             </div>
                         </div>
                     </div>
@@ -83,19 +83,19 @@
                         <div class="col-sm-4">
                           <div class="form-group">
                            <label>Quadra *</label>
-                           <input type="text" name="block" class="form-control" placeholder="..." value="{{ $user->complement->block ?? old('block') }}" required>
+                           <input type="text" name="block" class="form-control" placeholder="..." value="{{ $user->complement->block ?? old('block') }}">
                           </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                              <label>Lote *</label>
-                             <input type="text" name="lot" class="form-control" placeholder="..." value="{{ $user->complement->lot ?? old('lot') }}" required>
+                             <input type="text" name="lot" class="form-control" placeholder="..." value="{{ $user->complement->lot ?? old('lot') }}">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                              <label>Casa *</label>
-                             <input type="text" name="house" class="form-control" placeholder="..." value="{{ $user->complement->house ?? old('house') }}" required>
+                             <input type="text" name="house" class="form-control" placeholder="..." value="{{ $user->complement->house ?? old('house') }}">
                             </div>
                         </div>
                     </div>

@@ -259,13 +259,13 @@ return [
             'url'  => 'admin/guests',
             'icon' => 'fas fa-user-tie',
             /* 'can'  => 'guests', */
-        ],/*
+        ],
         [
             'text' => 'Perfil',
             'url'  => 'admin/users/profile',
             'icon' => 'fas fa-user',
-        ], */
-        [
+        ],
+        [/*
             'text' => 'Setores',
             'url'  => 'admin/destinies',
             'icon' => 'fas fa-map-signs',

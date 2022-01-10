@@ -220,9 +220,9 @@ class UserController extends Controller
         $user->update($data);
 
 
-        $user->phones()->create($request->all());                                       //  desta forma ok
-        //$user->vehicles()->create($request->only('type', 'plate', 'color'));                     //  desta forma ok
-        $user->complement()->create($request->all());         //  desta forma ok
+        // $user->phones()->create($request->all());                            //  desta forma ok
+        // $user->vehicles()->create($request->only('type', 'plate', 'color')); //  desta forma ok
+        // $user->complement()->create($request->all());                        //  desta forma ok
 
         return redirect()->route('users.index')->with('message', 'Usuário editado com sucesso');
     }
@@ -243,6 +243,7 @@ class UserController extends Controller
 
         return redirect()->route('users.index')->with('message', 'Usuário deletado com sucesso');
     }
+
     /**
      *
      *
@@ -258,6 +259,28 @@ class UserController extends Controller
         return view('admin.pages.users.profile', compact('user'));
     }
 
+    /**
+     *
+     *
+     */
+    public function updateProfile(Request $request)
+    {
+        $id = auth()->user()->id;
+
+        if (!$user = $this->repository->find($id)) {
+            return redirect()->back();
+        }
+
+        $data = $request->all();
+
+        if ($request->password) {
+            $data['password'] = bcrypt($request->password);
+        }
+
+        $user->update($data);
+
+        return redirect()->route('admin.index')->with('message', 'Perfil editado com sucesso');
+    }
     /**
      * Search results
      *

@@ -36,9 +36,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/users/historySheet/{id}', [UserController::class, 'history'])->name('users.history');
 
 
-    Route::any('/admin/users/profile', [UserController::class, 'profile'])->name('users.profile');
+    // Route::any('/admin/users/profile', [UserController::class, 'profile'])->name('users.profile');
 
     Route::any('/admin/users/search', [UserController::class, 'search'])->name('users.search');
+
+    Route::any('/admin/users/profile', [UserController::class, 'profile'])->name('users.profile');
 
     Route::get('/admin/users/create', [UserController::class, 'create'])->name('users.create');
     Route::put('/admin/users/{id}', [UserController::class, 'update'])->name('users.update');
