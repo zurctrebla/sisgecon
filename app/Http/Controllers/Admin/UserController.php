@@ -14,6 +14,7 @@ use App\Models\{
     Vehicle
 };
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -42,7 +43,9 @@ class UserController extends Controller
      */
     public function employee()
     {
-        $users = $this->repository->where('role_id', '2')->paginate();
+        $users = $this->repository/* ->sheets() */->where('users.role_id', '2')->paginate();
+
+
 
         // listener
         // foreach ($users as $user) {
@@ -50,6 +53,21 @@ class UserController extends Controller
         //     EventRegisterEmployee::dispatch($user);
 
         // }
+
+        // $filters = $request->only('filter');
+
+        // $users = $this->repository
+        //                     ->where(function($query) use ($request) {
+        //                         if ($request->filter) {
+        //                             $query->orWhere('name', 'LIKE', "%{$request->filter}%");
+        //                             $query->orWhere('email', $request->filter);
+        //                         }
+        //                     })
+        //                     ->latest()/*
+        //                     ->tenantUser() */
+        //                     ->paginate();
+
+
 
         return view('admin.pages.users.employees', compact('users'));
     }
@@ -124,12 +142,12 @@ class UserController extends Controller
      */
     public function register(Request $request, $id)
     {
-        if ($user = $this->repository->find($id)) {
+        if (!$user = $this->repository->find($id)) {
             return redirect()->back();
         }
 
         // Listener
-        //EventRegisterEmployee::dispatch($user);
+        // EventRegisterEmployee::dispatch($user);
         // registra o acesso do funcionário
         // $data = $request->all();
         // $data['in'] = $date;
@@ -143,8 +161,15 @@ class UserController extends Controller
         $date = date('Y-m-d H:i:s');
         $data['user_id'] = $id;
 
+        // $sheets = $user->sheets->orderBy('id', 'DESC')->first();
 
-        if (!$user->sheets->last()) {
+        // $sheet = DB::table('sheets')->where('user_id', $id)->orderBy('id', 'DESC')->first();
+        $sheet = $user->sheets()->orderBy('id', 'DESC')->first();
+
+        // dd($sheet);
+
+
+        if (!$sheet) {
 
             $data['in'] = $date;                // registra entrada do funcionário.
             $data['status'] = "1";
@@ -153,37 +178,39 @@ class UserController extends Controller
         } else {
 
 
-            $sheets = $user->sheets->last();
+            // $sheets = $user->sheets->last();
 
-            foreach ($sheets as $sheet) {
+            // $sheets = $user->sheets()->orderBy('id', 'DESC')->first();
 
-                if ($sheet['status'] == "1") {
-                    dd('1 if');
+            /* foreach ($sheets as $sheet) { */
+
+                if ($sheet->status == "1") {
+                    // dd('1 if');
                     $data['rest_out'] = $date;
                     $data['status'] = "2";
                     $user->sheets()->update($data);
 
-                } else if ($sheet['status'] == "2") {
-                    dd('2 if');
+                } else if ($sheet->status == "2") {
+                    // dd('2 if');
                     $data['rest_in'] = $date;
                     $data['status'] = "3";
                     $user->sheets()->update($data);
 
-                } else if ($sheet['status'] == "3") {
-                    dd('3 if');
+                } else if ($sheet->status== "3") {
+                    // dd('3 if');
                     $data['out'] = $date;
                     $data['status'] = "4";
                     $user->sheets()->update($data);
 
-                } else if ($sheet['status'] == "4") {
-                    dd('4 if');
+                } else if ($sheet->status == "4") {
+                    // dd('4 if');
                     $data['in'] = $date;                // registra entrada do funcionário.
                     $data['status'] = "1";
                     $user->sheets()->create($data);
 
                 }
 
-            }
+            /* } */
 
         }
 

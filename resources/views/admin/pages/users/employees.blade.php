@@ -52,8 +52,31 @@
                                             </td>
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">
-                                                        <?php //dd(); ?>
-                                                    <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-info btn-sm">Registrar Ponto</a>
+                                                        <?php
+
+                                                            $t = "primary"; $u = "Entrada";
+
+                                                            // dd($sheet);
+                                                            foreach ($user->sheets as $sheet) {
+
+                                                                if ($sheet->status == "3") {
+
+                                                                $t = "dark"; $u = "Saída";
+
+                                                                } else if ($sheet->status == "2") {
+
+                                                                $t = "info"; $u = "Fim do descanso";
+
+                                                                } else if ($sheet->status == "1") {
+
+                                                                $t = "secondary"; $u = "Início do descanso";
+
+                                                                }
+
+                                                            }
+
+                                                        ?>
+                                                    <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-<?= $t ; ?> btn-sm">Registrar <?= $u ; ?></a>
                                                     @can('user-edit')
                                                         <a href="{{ route('users.history', $user->id) }}" class="btn btn-outline-primary btn-sm">Ver Histórico</a>
                                                     @endcan

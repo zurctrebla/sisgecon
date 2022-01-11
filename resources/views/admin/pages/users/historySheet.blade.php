@@ -54,9 +54,9 @@
                             @foreach ($user->sheets as $sheet)
                                 <th scope="row">{{ date('d/m/Y', strtotime($sheet->in)) }}</th>
                                 <td>{{ date('H:i:s', strtotime($sheet->in)) }}</td>
-                                <td>{{ date('H:i:s', strtotime($sheet->rest_out)) }}</td>
-                                <td>{{ date('H:i:s', strtotime($sheet->rest_in)) }}</td>
-                                <td>{{ date('H:i:s', strtotime($sheet->out)) }}</td>
+                                <td>{{ ($sheet->rest_out) ? date('H:i:s', strtotime($sheet->rest_out)) : '' }}</td>
+                                <td>{{ ($sheet->rest_in) ?  date('H:i:s', strtotime($sheet->rest_in)) : '' }}</td>
+                                <td>{{ ($sheet->out) ?  date('H:i:s', strtotime($sheet->out)) : '' }}</td>
                           </tr>
                           @endforeach
                         </tbody>
