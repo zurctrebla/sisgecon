@@ -66,7 +66,7 @@
                                                         } elseif ($guest->status == "Expirado") {
                                                             $v = "danger"; $u = "Expirado"; $t = "";
                                                         } else {
-                                                            $v = "success"; $u = "Liberado por {$guest->authorized_at}"; $t = "";
+                                                            $v = "success"; $u = "Liberado por {$guest->authorized_at}"; $t = "#exampleModalCenter";
                                                         } ?>
 
                                                 <a href="#" class="badge badge-<?= $v; ?>" data-toggle="modal" data-target="<?= $t;?>"><?= $u; ?></a>
