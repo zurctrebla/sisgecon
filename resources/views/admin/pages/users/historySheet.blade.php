@@ -43,10 +43,10 @@
                         <thead>
                           <tr>
                             <th scope="col">data</th>
-                            <th scope="col">entrada</th>
-                            <th scope="col">saida para intervalo</th>
-                            <th scope="col">volta do intervalo</th>
-                            <th scope="col">saida</th>
+                            <th scope="col">Entrada</th>
+                            <th scope="col">Saida</th>
+                            <th scope="col">Entrada</th>
+                            <th scope="col">Saida</th>
                           </tr>
                         </thead>
                         <tbody>

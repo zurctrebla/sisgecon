@@ -9,6 +9,7 @@ use App\Models\{
     User,
     Role,
     Complement,
+    Destiny,
     Phone,
     Relative,
     Vehicle
@@ -79,7 +80,9 @@ class UserController extends Controller
      */
     public function createEmployee()
     {
-        return view('admin.pages.users.createEmployee');
+        $destinies = Destiny::all();
+
+        return view('admin.pages.users.createEmployee', compact('destinies'));
     }
     /**
      * Show the form for creating a new resource.

@@ -59,17 +59,13 @@
                                                             // dd($sheet);
                                                             foreach ($user->sheets as $sheet) {
 
-                                                                if ($sheet->status == "3") {
+                                                                if (($sheet->status == "3") OR $sheet->status == "1" ) {
 
                                                                 $t = "dark"; $u = "Saída";
 
                                                                 } else if ($sheet->status == "2") {
 
-                                                                $t = "info"; $u = "Fim do descanso";
-
-                                                                } else if ($sheet->status == "1") {
-
-                                                                $t = "secondary"; $u = "Início do descanso";
+                                                                $t = "info"; $u = "Entrada";
 
                                                                 }
 

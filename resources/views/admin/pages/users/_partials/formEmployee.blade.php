@@ -43,7 +43,14 @@
     <div class="col-sm-6">
         <div class="form-group">
          <label>Setor *</label>
-         <input type="text" name="sector" class="form-control" placeholder="Setor" value="{{ $user->name ?? old('name') }}" >
+         <select name="destiny" id="destiny" class="form-control">
+            <option value="">Escolha</option>
+                <optgroup label="Selecione um setor">
+                    @foreach($destinies as $destiny)
+                        <option value="{{ $destiny->name }}" @if(isset($destiny->name)/*  && $destiny->name== $userRole */) selected @endif>{{ $destiny->name }}</option>
+                    @endforeach
+                </optgroup>
+        </select>
         </div>
     </div>
 </div>

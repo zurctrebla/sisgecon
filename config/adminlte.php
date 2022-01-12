@@ -265,7 +265,7 @@ return [
             'url'  => 'admin/users/profile',
             'icon' => 'fas fa-user',
         ],
-        [/*
+        [
             'text' => 'Setores',
             'url'  => 'admin/destinies',
             'icon' => 'fas fa-map-signs',
