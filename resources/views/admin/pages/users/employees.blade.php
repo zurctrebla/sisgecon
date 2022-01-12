@@ -54,9 +54,6 @@
                                                 <span class="d-none d-md-block">
                                                         <?php
 
-                                                            $t = "primary"; $u = "Entrada";
-
-                                                            // dd($sheet);
                                                             foreach ($user->sheets as $sheet) {
 
                                                                 if (($sheet->status == "3") OR $sheet->status == "1" ) {
@@ -76,6 +73,11 @@
                                                     @can('user-edit')
                                                         <a href="{{ route('users.history', $user->id) }}" class="btn btn-outline-primary btn-sm">Ver Histórico</a>
                                                     @endcan
+
+                                                    @can('user-edit')
+                                                        <a hidden href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
+                                                    @endcan
+
                                                 </span>
                                                 <div class="dropdown d-block d-md-none">
                                                     <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

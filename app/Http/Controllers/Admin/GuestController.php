@@ -37,7 +37,7 @@ class GuestController extends Controller
      */
     public function index()
     {
-        $guests = $this->repository->where('status', '<>', 'Expirado')->paginate();
+        $guests = $this->repository/* ->where('status', '<>', 'Expirado') */->paginate();
 
         //dd($guests);
 
