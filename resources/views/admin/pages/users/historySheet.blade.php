@@ -34,7 +34,7 @@
       <div class="col-md-12">
         <div class="card card-secondary">
           <div class="card-header">
-            <h3 class="card-title">Histórico de Ponto</h3>
+            <h3 class="card-title">Histórico de Ponto <strong>{{$user->name}}</strong></h3>
           </div>
           <div class="card-body">
             <div class="column-responsive column-80">
@@ -47,6 +47,7 @@
                             <th scope="col">Saida</th>
                             <th scope="col">Entrada</th>
                             <th scope="col">Saida</th>
+                            <th scope="col">Horas</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -57,6 +58,7 @@
                                 <td>{{ ($sheet->rest_out) ? date('H:i:s', strtotime($sheet->rest_out)) : '' }}</td>
                                 <td>{{ ($sheet->rest_in) ?  date('H:i:s', strtotime($sheet->rest_in)) : '' }}</td>
                                 <td>{{ ($sheet->out) ?  date('H:i:s', strtotime($sheet->out)) : '' }}</td>
+                                <td></td>
                           </tr>
                           @endforeach
                         </tbody>

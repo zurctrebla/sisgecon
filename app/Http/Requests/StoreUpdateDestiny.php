@@ -26,7 +26,7 @@ class StoreUpdateDestiny extends FormRequest
         $id = $this->segment(3);
 
         return [
-            'name' => "required|min:3|max:255|unique:destinies,name,{$id},id",
+            'name' => "required|min:2|max:255|unique:destinies,name,{$id},id",
         ];
     }
 }

@@ -19,11 +19,15 @@ class DashboardController extends Controller
         $totalUsers = User::where('role_id', '<>', '2')->count();
 
         $totalGuests = Guest::where('status', '<>', 'Expirado')->count();
+
+        $totalEmployees = User::where('role_id', '2')->count();
+
         // $totalVehicles = Vehicle::count();
 
         return view('admin.pages.home.index', compact(
             'totalUsers',
-            'totalGuests'/* ,
+            'totalGuests',
+            'totalEmployees',/* ,
             'totalVehicles' */
         ));
     }
