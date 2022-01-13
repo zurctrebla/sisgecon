@@ -24,7 +24,7 @@ class UserController extends Controller
     public function __construct(User $user)
     {
         $this->repository = $user;
-        $this->middleware(['can:users', 'can:users-edit', 'can:users-employee']);
+        $this->middleware(['can:users', 'can:users-edit', 'can:users-employee', 'can:users-profile']);
     }
     /**
      * Display a listing of the resource.
@@ -323,6 +323,8 @@ class UserController extends Controller
      */
     public function profile()
     {
+        $this->middleware(['can:users-profile']);
+
         $id = auth()->user()->id;
 
         if (!$user = $this->repository->find($id)) {

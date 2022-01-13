@@ -45,7 +45,9 @@
                                             <td>{{ $destiny->name }}</td>
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">
-                                                    <a href="{{ route('destinies.show', $destiny->id) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
+                                                    @can('destiny-list')
+                                                        <a href="{{ route('destinies.show', $destiny->id) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
+                                                    @endcan
                                                     @can('destiny-edit')
                                                         <a href="{{ route('destinies.edit', $destiny->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
                                                     @endcan
