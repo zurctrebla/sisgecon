@@ -54,6 +54,8 @@
                                                 <span class="d-none d-md-block">
                                                         <?php
 
+                                                            $t = "info"; $u = "Entrada";
+
                                                             foreach ($user->sheets as $sheet) {
 
                                                                 if (($sheet->status == "3") OR $sheet->status == "1" ) {
