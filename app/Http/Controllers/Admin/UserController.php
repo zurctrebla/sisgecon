@@ -349,6 +349,8 @@ class UserController extends Controller
     {
         $id = auth()->user()->id;
 
+        $this->middleware(['can:users-profile']);   //  update-profile
+
         if (!$user = $this->repository->find($id)) {
             return redirect()->back();
         }
