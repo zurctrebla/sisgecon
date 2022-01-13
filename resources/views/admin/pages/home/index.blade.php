@@ -8,20 +8,22 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-aqua">
-                  <i class="fas fa-users"></i>
-                </span>
+        @can('users')
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                <span class="info-box-icon bg-aqua">
+                    <i class="fas fa-users"></i>
+                    </span>
 
-              <div class="info-box-content">
-                <span class="info-box-text"><a href="{{ route('users.index') }}">Usuários</a></span>
-                <span class="info-box-number">{{ $totalUsers }}</span>
-              </div>
-              <!-- /.info-box-content -->
+                <div class="info-box-content">
+                    <span class="info-box-text"><a href="{{ route('users.index') }}">Usuários</a></span>
+                    <span class="info-box-number">{{ $totalUsers }}</span>
+                </div>
+                <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
             </div>
-            <!-- /.info-box -->
-        </div>
+        @endcan
 
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
