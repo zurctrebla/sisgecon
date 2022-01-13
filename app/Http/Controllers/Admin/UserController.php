@@ -51,7 +51,7 @@ class UserController extends Controller
      */
     public function employee()
     {
-        $this->middleware(['can:users-employee']);
+        // $this->middleware(['can:users-employee']);
 
         $users = $this->repository/* ->sheets() */->where('users.role_id', '2')->paginate();
 
