@@ -11,7 +11,9 @@
             </div>
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <a href="{{ route('users.createEmployee') }}" class="btn btn-outline-success btn-sm">Cadastrar</a>
+                @can('users')
+                    <a href="{{ route('users.createEmployee') }}" class="btn btn-outline-success btn-sm">Cadastrar</a>
+                @endcan
             </ol>
             </div>
         </div>
@@ -72,7 +74,7 @@
 
                                                         ?>
                                                     <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-<?= $t ; ?> btn-sm">Registrar <?= $u ; ?></a>
-                                                    @can('user-edit')
+                                                    @can('user-historic')
                                                         <a href="{{ route('users.history', $user->id) }}" class="btn btn-outline-primary btn-sm">Ver Histórico</a>
                                                     @endcan
 

@@ -12,7 +12,6 @@
         <ol class="breadcrumb float-sm-right">
             <span class="d-none d-md-block">
                 <a href="{{ route('users.employee') }}" class="btn btn-outline-info btn-sm">Voltar</a>
-
             </span>
             <div class="dropdown d-block d-md-none">
                 <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -58,7 +57,8 @@
                                 <td>{{ ($sheet->rest_out) ? date('H:i:s', strtotime($sheet->rest_out)) : '' }}</td>
                                 <td>{{ ($sheet->rest_in) ?  date('H:i:s', strtotime($sheet->rest_in)) : '' }}</td>
                                 <td>{{ ($sheet->out) ?  date('H:i:s', strtotime($sheet->out)) : '' }}</td>
-                                <td></td>
+
+                                {{-- <td>{{ $diff->format('%a Day and %h hours'); }}</td> --}}
                           </tr>
                           @endforeach
                         </tbody>
