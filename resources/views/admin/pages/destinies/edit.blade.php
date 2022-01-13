@@ -15,7 +15,7 @@
                 <h3 class="card-title">Editar Setor</h3>
             </div>
             <div class="card-body">
-                <form action="{{ route('destinies.update', $role->id) }}" class="form" method="POST">
+                <form action="{{ route('destinies.update', $destiny->id) }}" class="form" method="POST">
                     @csrf
                     @method('PUT')
                     @include('admin.pages.destinies._partials.form')
