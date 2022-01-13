@@ -55,30 +55,6 @@ class UserController extends Controller
 
         $users = $this->repository/* ->sheets() */->where('users.role_id', '2')->paginate();
 
-
-
-        // listener
-        // foreach ($users as $user) {
-
-        //     EventRegisterEmployee::dispatch($user);
-
-        // }
-
-        // $filters = $request->only('filter');
-
-        // $users = $this->repository
-        //                     ->where(function($query) use ($request) {
-        //                         if ($request->filter) {
-        //                             $query->orWhere('name', 'LIKE', "%{$request->filter}%");
-        //                             $query->orWhere('email', $request->filter);
-        //                         }
-        //                     })
-        //                     ->latest()/*
-        //                     ->tenantUser() */
-        //                     ->paginate();
-
-
-
         return view('admin.pages.users.employees', compact('users'));
     }
 
@@ -330,7 +306,7 @@ class UserController extends Controller
      */
     public function profile()
     {
-        $this->middleware(['can:users-profile']);
+        // $this->middleware(['can:users-profile']);
 
         $id = auth()->user()->id;
 
@@ -349,7 +325,7 @@ class UserController extends Controller
     {
         $id = auth()->user()->id;
 
-        $this->middleware(['can:users-profile']);   //  update-profile
+        // $this->middleware(['can:users-profile']);   //  update-profile
 
         if (!$user = $this->repository->find($id)) {
             return redirect()->back();
