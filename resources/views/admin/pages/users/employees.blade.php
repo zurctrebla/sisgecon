@@ -37,21 +37,40 @@
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
-                                        <th>Função</th>
-                                        <th>Setor</th>
+                                        <th>Entrada</th>
+                                        <th>Saída</th>
+                                        <th>Entrada</th>
+                                        <th>Saída</th>
                                         <th class="text-center">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($users as $user)
                                         <tr>
-                                            <td>{{ $user->name }}</td>
                                             <td>
-                                                {{ $user->employee->function }}
+                                                Nome: {{ $user->name }}</br>
+                                                Função: {{ $user->employee->function }}</br>
+                                                Setor: {{ $user->employee->sector }}</br>
                                             </td>
                                             <td>
-                                                {{ $user->employee->sector }}
+                                                @foreach ($user->sheets as $sheet)
+
+                                                    @if ($sheet->in >= date('Y-m-d'))
+
+                                                        {{ ($sheet->in) ? "Entrada: " . date('H:i:s', strtotime($sheet->in)) : '' }}</br>
+                                                        {{ ($sheet->rest_out) ? "Saída: " . date('H:i:s', strtotime($sheet->rest_out)) : '' }}</br>
+                                                        {{ ($sheet->rest_in) ? "Entrada: " . date('H:i:s', strtotime($sheet->rest_in)) : '' }}</br>
+                                                        {{ ($sheet->out) ? "Saída: " . date('H:i:s', strtotime($sheet->out)) : '' }}</br>
+
+                                                    @endif
+
+                                                @endforeach
                                             </td>
+
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">
                                                         <?php
@@ -74,7 +93,7 @@
 
                                                         ?>
                                                     <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-<?= $t ; ?> btn-sm">Registrar <?= $u ; ?></a>
-                                                    @can('user-historic')
+                                                    @can('user-list')
                                                         <a href="{{ route('users.history', $user->id) }}" class="btn btn-outline-primary btn-sm">Ver Histórico</a>
                                                     @endcan
 
