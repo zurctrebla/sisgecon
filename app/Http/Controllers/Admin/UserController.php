@@ -24,7 +24,7 @@ class UserController extends Controller
     public function __construct(User $user)
     {
         $this->repository = $user;
-        // $this->middleware(['can:users', 'can:users-edit']);
+        $this->middleware(['can:users', 'can:users-edit']);
     }
     /**
      * Display a listing of the resource.
@@ -44,6 +44,8 @@ class UserController extends Controller
      */
     public function employee()
     {
+        $this->middleware(['can:users-employee']);
+
         $users = $this->repository/* ->sheets() */->where('users.role_id', '2')->paginate();
 
 

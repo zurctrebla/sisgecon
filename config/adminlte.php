@@ -275,7 +275,7 @@ return [
             'text' => 'Funcionários',
             'url'  => 'admin/users/employees',
             'icon' => 'fas fa-chalkboard-teacher',
-            'can'  => 'destinies',
+            'can'  => 'users-employee',
         ],
         /*
         [
