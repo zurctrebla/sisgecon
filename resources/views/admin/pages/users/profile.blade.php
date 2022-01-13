@@ -79,29 +79,6 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm-4">
-                          <div class="form-group">
-                           <label>Quadra *</label>
-                           <input type="text" name="block" class="form-control" placeholder="..." value="{{ $user->complement->block ?? old('block') }}">
-                          </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                             <label>Lote *</label>
-                             <input type="text" name="lot" class="form-control" placeholder="..." value="{{ $user->complement->lot ?? old('lot') }}">
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                             <label>Casa *</label>
-                             <input type="text" name="house" class="form-control" placeholder="..." value="{{ $user->complement->house ?? old('house') }}">
-                            </div>
-                        </div>
-                    </div>
-
-
-
                         <div class="class-form-group">
                             <button type="submit" class="btn btn-dark">Enviar</button>
                         </div>

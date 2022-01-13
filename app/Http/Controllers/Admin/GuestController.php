@@ -22,7 +22,7 @@ class GuestController extends Controller
         $this->repository = $guest;
         $this->user = $user;
 
-        // $this->middleware(['can:guests']);
+        $this->middleware(['can:guests']);
 
         // $this->middleware('permission:guest-list|guest-create|guest-edit|guest-delete', ['only' => ['index','show']]);
         // $this->middleware('permission:guest-create', ['only' => ['create','store']]);

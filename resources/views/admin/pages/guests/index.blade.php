@@ -14,7 +14,9 @@
                 <a href="{{ route('guests.history') }}" class="btn btn-outline-light btn-sm">Historico</a>
             </ol>
             <ol class="breadcrumb float-sm-right">
-                <a href="{{ route('guests.create') }}" class="btn btn-outline-success btn-sm">Cadastrar</a>
+                @can('guest-create')
+                    <a href="{{ route('guests.create') }}" class="btn btn-outline-success btn-sm">Cadastrar</a>
+                @endcan
             </ol>
             </div>
         </div>
