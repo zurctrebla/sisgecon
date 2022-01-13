@@ -11,7 +11,9 @@
             </div>
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <a href="{{ route('destinies.create') }}" class="btn btn-outline-success btn-sm">Cadastrar</a>
+                @can('destinies-create')
+                    <a href="{{ route('destinies.create') }}" class="btn btn-outline-success btn-sm">Cadastrar</a>
+                @endcan
             </ol>
             </div>
         </div>

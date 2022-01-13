@@ -25,35 +25,39 @@
             </div>
         @endcan
 
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-aqua">
-                  <i class="fas fa-user-tie"></i>
-                </span>
+        @can('guests')
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                <span class="info-box-icon bg-aqua">
+                    <i class="fas fa-user-tie"></i>
+                    </span>
 
-              <div class="info-box-content">
-                <span class="info-box-text"><a href="{{ route('guests.index') }}">Visitantes</a></span>
-                <span class="info-box-number">{{ $totalGuests }}</span>
-              </div>
-              <!-- /.info-box-content -->
+                <div class="info-box-content">
+                    <span class="info-box-text"><a href="{{ route('guests.index') }}">Visitantes</a></span>
+                    <span class="info-box-number">{{ $totalGuests }}</span>
+                </div>
+                <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
             </div>
-            <!-- /.info-box -->
-        </div>
+        @endcan
 
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-              <span class="info-box-icon bg-aqua">
-                <i class="fas fa-user-tie"></i>
-                </span>
+        @can('users-employee')
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="info-box">
+                <span class="info-box-icon bg-aqua">
+                    <i class="fas fa-user-tie"></i>
+                    </span>
 
-              <div class="info-box-content">
-                <span class="info-box-text"><a href="{{ route('users.employee') }}">Funcionários</a></span>
-                <span class="info-box-number">{{ $totalEmployees }}</span>
-              </div>
-              <!-- /.info-box-content -->
+                <div class="info-box-content">
+                    <span class="info-box-text"><a href="{{ route('users.employee') }}">Funcionários</a></span>
+                    <span class="info-box-number">{{ $totalEmployees }}</span>
+                </div>
+                <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
             </div>
-            <!-- /.info-box -->
-        </div>
+        @endcan
 
         <div hidden class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
