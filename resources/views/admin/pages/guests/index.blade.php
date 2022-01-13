@@ -38,6 +38,7 @@
                             <table id="guests" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th>ID</th>
                                         <th>Visitante</th>
                                         <th>Cadastrado por: </th>
                                         <th>Documento</th>
@@ -50,7 +51,9 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($guests as $guest)
+                                    {{-- {{ dd($guest) }} --}}
                                         <tr>
+                                            <td>{{ $guest->id }}</td>
                                             <td>{{ $guest->name }}</td>
                                             <td>{{ $guest->user->name }}</td>
                                             <td>{{ $guest->document1 }}</td>
@@ -71,7 +74,7 @@
                                                             $v = "success"; $u = "Liberado por {$guest->authorized_at}"; $t = "#exampleModalCenter";
                                                         } ?>
 
-                                                <a href="#" class="badge badge-<?= $v; ?>" data-toggle="modal" data-target="<?= $t;?>"><?= $u; ?></a>
+                                                <a href="#" class="badge badge-<?= $v; ?>" data-toggle="modal" data-target="#exampleModalCenter<?= $guest->id;?>"><?= $u; ?></a>
 
                                             </td>
                                             <td class="text-center">
@@ -106,7 +109,7 @@
                                         </tr>
                                         {{-- modal --}}
                                         <!-- Modal -->
-                                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal fade" id="exampleModalCenter<?= $guest->id;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -119,7 +122,7 @@
                                                         <form action="{{ route('guests.update', $guest->id) }}" style="display:inline" method="POST">
                                                             @csrf
                                                             @method('PUT')
-                                                            <select name="status" id="status" class="form-control">
+                                                            <select name="status" class="form-control">
                                                                 <option value="">Escolha...</option>
                                                                 <option value="Autorizado">Autorizar Acesso</option>
                                                                 <option value="Bloqueado">Bloquear Acesso</option>
@@ -127,7 +130,7 @@
 
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar <?= $guest->id; ?></button>
                                                         <button type="submit" class="btn btn-primary">Salvar</button>
                                                     </div>
                                                         </form>
@@ -136,6 +139,7 @@
                                             </div>
                                         {{-- modal --}}
                                     @endforeach
+
                                 </tbody>
                             </table>
                         </div>
