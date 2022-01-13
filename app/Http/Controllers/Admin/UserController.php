@@ -24,7 +24,7 @@ class UserController extends Controller
     public function __construct(User $user)
     {
         $this->repository = $user;
-        $this->middleware(['can:users', 'can:users-edit']);
+        $this->middleware(['can:users', 'can:users-edit', 'can:users-employee']);
     }
     /**
      * Display a listing of the resource.
