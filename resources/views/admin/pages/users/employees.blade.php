@@ -48,11 +48,16 @@
                                     @foreach ($users as $user)
                                         <tr>
                                             <td>
-                                                Nome: {{ $user->name }}</br>
-                                                Função: {{ $user->employee->function }}</br>
-                                                Setor: {{ $user->employee->sector }}</br>
+                                                {{ $user->name }}
                                             </td>
-                                            <td>
+                                            @if ($user->sheets->last())
+
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+
+                                            @else
                                                 @foreach ($user->sheets as $sheet)
 
                                                     @if ($sheet->in >= date('Y-m-d'))
@@ -65,11 +70,7 @@
                                                     @endif
 
                                                 @endforeach
-                                            </td>
-
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            @endif
 
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">
