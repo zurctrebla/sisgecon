@@ -57,6 +57,66 @@
                                 <td>{{ ($sheet->rest_out) ? date('H:i:s', strtotime($sheet->rest_out)) : '' }}</td>
                                 <td>{{ ($sheet->rest_in) ?  date('H:i:s', strtotime($sheet->rest_in)) : '' }}</td>
                                 <td>{{ ($sheet->out) ?  date('H:i:s', strtotime($sheet->out)) : '' }}</td>
+                                <td>
+                                    <?php
+
+                                        // $datetime1 = new DateTime($sheet->in);
+                                        // $datetime2 = new DateTime($sheet->rest_out);
+
+                                        // $datetime3 = new DateTime($sheet->rest_in);
+                                        // $datetime4 = new DateTime($sheet->out);
+
+                                        // $interval2 = $datetime3->diff($datetime4);
+
+                                        // $interval = $datetime1->diff($datetime2);
+
+                                        // $interval3 = ;
+
+                                        // echo $interval->format("%H:%I:%S");
+                                        // echo "<br>";
+                                        // echo $interval2->format("%H:%I:%S");
+
+
+                                        if (($sheet->in) && ($sheet->rest_out)) {
+
+                                            $datetime1 = new DateTime($sheet->in);
+                                            $datetime2 = new DateTime($sheet->rest_out);
+
+                                            $interval1 = $datetime1->diff($datetime2);
+
+
+                                            echo $interval1->format("%H:%I:%S");
+
+                                            if (($sheet->rest_in) && ($sheet->out)) {
+
+                                                $datetime3 = new DateTime($sheet->rest_in);
+                                                $datetime4 = new DateTime($sheet->out);
+
+                                                $interval = $datetime3->diff($datetime4);
+
+
+                                                echo "<br>" . $interval->format("%H:%I:%S");
+
+                                                $intervalt = $datetime1->diff($datetime4);
+
+                                                echo "<br> total: " . $intervalt->format("%H:%I:%S");
+
+                                                //
+
+
+                                                // $date = new DateTime('2000-01-01');
+
+                                                // $date->add(new DateInterval('P10D'));
+
+                                                // echo "<br>" . $date->format("%H:%I:%S");
+
+
+                                            }
+
+                                        }
+
+                                    ?>
+                                </td>
 
                                 {{-- <td>{{ $diff->format('%a Day and %h hours'); }}</td> --}}
                           </tr>
