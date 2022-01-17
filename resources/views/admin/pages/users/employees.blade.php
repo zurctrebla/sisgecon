@@ -50,7 +50,7 @@
                                             <td>
                                                 {{ $user->name }}
                                             </td>
-                                            @if ($user->sheets->last())
+                                            @if (!$user->sheets->last())
 
                                                 <td></td>
                                                 <td></td>
@@ -62,10 +62,10 @@
 
                                                     @if ($sheet->in >= date('Y-m-d'))
 
-                                                        {{ ($sheet->in) ? "Entrada: " . date('H:i:s', strtotime($sheet->in)) : '' }}</br>
-                                                        {{ ($sheet->rest_out) ? "Saída: " . date('H:i:s', strtotime($sheet->rest_out)) : '' }}</br>
-                                                        {{ ($sheet->rest_in) ? "Entrada: " . date('H:i:s', strtotime($sheet->rest_in)) : '' }}</br>
-                                                        {{ ($sheet->out) ? "Saída: " . date('H:i:s', strtotime($sheet->out)) : '' }}</br>
+                                                        <td><strong><p style="color:green">{{ ($sheet->in) ? date('H:i:s', strtotime($sheet->in)) : '' }}</p></strong></td>
+                                                        <td><strong><p style="color:red">{{ ($sheet->rest_out) ? date('H:i:s', strtotime($sheet->rest_out)) : '' }}</p></strong></td>
+                                                        <td><strong><p style="color:orange">{{ ($sheet->rest_in) ? date('H:i:s', strtotime($sheet->rest_in)) : '' }}</p></strong></td>
+                                                        <td><strong><p style="color:blue">{{ ($sheet->out) ? date('H:i:s', strtotime($sheet->out)) : '' }}</p></strong></td>
 
                                                     @endif
 
