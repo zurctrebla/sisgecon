@@ -92,24 +92,26 @@
                                                 $datetime3 = new DateTime($sheet->rest_in);
                                                 $datetime4 = new DateTime($sheet->out);
 
-                                                $interval = $datetime3->diff($datetime4);
+                                                $interval2 = $datetime3->diff($datetime4);
 
+                                                echo "<br>";
 
-                                                echo "<br>" . $interval->format("%H:%I:%S");
+                                                echo $interval2->format("%H:%I:%S");
 
-                                                $intervalt = $datetime1->diff($datetime4);
-
-                                                echo "<br> total: " . $intervalt->format("%H:%I:%S");
-
+                                                //echo "<br> soma: " . date('H:i:s', (strtotime($interval2) + strtotime($interval1)));
+                                                // $descanso = $datetime2->diff($datetime3);
+                                                // echo "<br> descanso: " . $descanso->format("%H:%I:%S");
+                                                // $hrstrabalhadas = $datetime1->diff($datetime4);
+                                                // echo "<br> hrs trab: " . $hrstrabalhadas->format("%H:%I:%S");
+                                                // $total = $hrstrabalhadas->diff($descanso);
+                                                // echo "<br> hrs trab: " . $total->format("%H:%I:%S");
+                                                // echo "<br>" . $interval->format("%H:%I:%S");
+                                                // $intervalt = $datetime1->diff($datetime4);
+                                                // echo "<br> total: " . $intervalt->format("%H:%I:%S");
                                                 //
-
-
                                                 // $date = new DateTime('2000-01-01');
-
                                                 // $date->add(new DateInterval('P10D'));
-
                                                 // echo "<br>" . $date->format("%H:%I:%S");
-
 
                                             }
 

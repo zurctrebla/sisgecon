@@ -67,6 +67,13 @@
                                                         <td><strong><p style="color:orange">{{ ($sheet->rest_in) ? date('H:i:s', strtotime($sheet->rest_in)) : '' }}</p></strong></td>
                                                         <td><strong><p style="color:blue">{{ ($sheet->out) ? date('H:i:s', strtotime($sheet->out)) : '' }}</p></strong></td>
 
+                                                   {{--  @else
+
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td> --}}
+
                                                     @endif
 
                                                 @endforeach
@@ -74,26 +81,44 @@
 
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">
-                                                        <?php
 
-                                                            $t = "info"; $u = "Entrada";
 
-                                                            foreach ($user->sheets as $sheet) {
+                                                    @if (!$user->sheets->last())
 
-                                                                if (($sheet->status == "3") OR $sheet->status == "1" ) {
+                                                        <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-info btn-sm">Registrar Entrada</a>
 
-                                                                $t = "dark"; $u = "Saída";
+                                                    @else
+                                                        @foreach ($user->sheets as $sheet)
 
-                                                                } else if ($sheet->status == "2") {
+                                                            @if ($sheet->in >= date('Y-m-d'))
 
-                                                                $t = "info"; $u = "Entrada";
+                                                                <?php if (($sheet->status == "1") OR ($sheet->status == "3")): ?>
 
-                                                                }
+                                                                    <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-dark btn-sm">Registrar Saída</a>
 
-                                                            }
+                                                                <?php elseif (($sheet->status == "2")): ?>
 
-                                                        ?>
-                                                    <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-<?= $t ; ?> btn-sm">Registrar <?= $u ; ?></a>
+                                                                    <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-info btn-sm">Registrar Entrada</a>
+
+                                                                <?php elseif (($sheet->status == "4")): ?>
+
+                                                                    <a href="#" onclick="myFunction()" class="btn btn-outline-danger btn-sm">Registros completos</a>
+
+                                                                <?php else: ?>
+
+                                                                    <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-info btn-sm">Registrar Entrada</a>
+
+                                                                <?php endif?>
+
+                                                            {{-- @else
+
+                                                                <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-info btn-sm">Registrar Entrada</a> --}}
+
+                                                            @endif
+
+                                                        @endforeach
+                                                    @endif
+
                                                     @can('user-list')
                                                         <a href="{{ route('users.history', $user->id) }}" class="btn btn-outline-primary btn-sm">Ver Histórico</a>
                                                     @endcan
@@ -134,4 +159,9 @@
             </div>
         </div>
     </div>
+    <script>
+        function myFunction() {
+          alert("Precisa de autorização!");
+        }
+        </script>
 @stop
