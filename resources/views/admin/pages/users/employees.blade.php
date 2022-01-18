@@ -50,6 +50,7 @@
                                             <td>
                                                 {{ $user->name }}
                                             </td>
+
                                             @if (!$user->sheets->last())
 
                                                 <td></td>
@@ -83,7 +84,7 @@
                                                 <span class="d-none d-md-block">
 
 
-                                                    @if (!$user->sheets->last())
+                                                    {{-- @if (!$user->sheets->last())
 
                                                         <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-info btn-sm">Registrar Entrada</a>
 
@@ -117,7 +118,7 @@
                                                             @endif
 
                                                         @endforeach
-                                                    @endif
+                                                    @endif --}}
 
                                                     @can('user-list')
                                                         <a href="{{ route('users.history', $user->id) }}" class="btn btn-outline-primary btn-sm">Ver Histórico</a>
