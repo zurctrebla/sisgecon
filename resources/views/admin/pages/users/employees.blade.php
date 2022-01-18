@@ -65,8 +65,8 @@
 
                                                         <td><strong><p style="color:green">{{ ($sheet->in) ? date('H:i:s', strtotime($sheet->in)) : '' }}</p></strong></td>
                                                         <td><strong><p style="color:red">{{ ($sheet->rest_out) ? date('H:i:s', strtotime($sheet->rest_out)) : '' }}</p></strong></td>
-                                                        <td><strong><p style="color:orange">{{ ($sheet->rest_in) ? date('H:i:s', strtotime($sheet->rest_in)) : '' }}</p></strong></td>
-                                                        <td><strong><p style="color:blue">{{ ($sheet->out) ? date('H:i:s', strtotime($sheet->out)) : '' }}</p></strong></td>
+                                                        <td><strong><p style="color:green">{{ ($sheet->rest_in) ? date('H:i:s', strtotime($sheet->rest_in)) : '' }}</p></strong></td>
+                                                        <td><strong><p style="color:red">{{ ($sheet->out) ? date('H:i:s', strtotime($sheet->out)) : '' }}</p></strong></td>
 
                                                     @elseif ( !$sheet->in >= date('Y-m-d') )
 
