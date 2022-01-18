@@ -68,12 +68,12 @@
                                                         <td><strong><p style="color:orange">{{ ($sheet->rest_in) ? date('H:i:s', strtotime($sheet->rest_in)) : '' }}</p></strong></td>
                                                         <td><strong><p style="color:blue">{{ ($sheet->out) ? date('H:i:s', strtotime($sheet->out)) : '' }}</p></strong></td>
 
-                                                    @else
+                                                    {{-- @else
 
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
-                                                        <td></td>
+                                                        <td></td> --}}
 
                                                     @endif
 
