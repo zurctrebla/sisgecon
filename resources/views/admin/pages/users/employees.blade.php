@@ -68,12 +68,12 @@
                                                         <td><strong><p style="color:orange">{{ ($sheet->rest_in) ? date('H:i:s', strtotime($sheet->rest_in)) : '' }}</p></strong></td>
                                                         <td><strong><p style="color:blue">{{ ($sheet->out) ? date('H:i:s', strtotime($sheet->out)) : '' }}</p></strong></td>
 
-                                                    {{-- @else
+                                                    @elseif ($sheet->in != date('Y-m-d'))
 
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
-                                                        <td></td> --}}
+                                                        <td></td>
 
                                                     @endif
 
@@ -84,7 +84,7 @@
                                                 <span class="d-none d-md-block">
 
 
-                                                    {{-- @if (!$user->sheets->last())
+                                                    @if (!$user->sheets->last())
 
                                                         <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-info btn-sm">Registrar Entrada</a>
 
@@ -111,14 +111,14 @@
 
                                                                 <?php endif?>
 
-                                                            @else
+                                                            @elseif ($sheet->in != date('Y-m-d'))
 
                                                                 <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-info btn-sm">Registrar Entrada</a>
 
                                                             @endif
 
                                                         @endforeach
-                                                    @endif --}}
+                                                    @endif
 
                                                     @can('user-list')
                                                         <a href="{{ route('users.history', $user->id) }}" class="btn btn-outline-primary btn-sm">Ver Histórico</a>
