@@ -40,7 +40,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->repository->where('role_id', '<>', '2')->paginate();
+        $users = $this->repository->with('sheets')->where('role_id', '<>', '2')->paginate();
+
+        // dd($users);
 
         return view('admin.pages.users.index', compact('users'));
     }
@@ -53,7 +55,9 @@ class UserController extends Controller
     {
         // $this->middleware(['can:users-employee']);
 
-        $users = $this->repository/* ->sheets() */->where('users.role_id', '2')->paginate();
+        $users = $this->repository/* ->with('sheets') *//* ->sheets() */->where('users.role_id', '2')->paginate();
+
+        // dd($users);
 
         return view('admin.pages.users.employees', compact('users'));
     }

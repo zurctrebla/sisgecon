@@ -50,6 +50,10 @@
                                             <td>
                                                 {{ $user->name }}
                                             </td>
+                                            <?php   $today = date_create(date('Y-m-d'));
+                                                    $yesterday = date_sub($today, date_interval_create_from_date_string("1 days"));
+                                                    //var_dump($yesterday);
+                                            ?>
 
                                             @if (!$user->sheets->last())
 
@@ -61,6 +65,14 @@
                                             @else
                                                 @foreach ($user->sheets as $sheet)
 
+                                                    <?php
+                                                        $database = date_create(date($sheet->out));
+                                                        $datadehoje = date_create();
+                                                        $resultado = date_diff($database, $datadehoje);
+                                                        echo date_interval_format($resultado, '%a');
+
+                                                    ?>
+
                                                     @if ($sheet->in >= date('Y-m-d'))
 
                                                         <td><strong><p style="color:green">{{ ($sheet->in) ? date('H:i:s', strtotime($sheet->in)) : '' }}</p></strong></td>
@@ -68,9 +80,9 @@
                                                         <td><strong><p style="color:green">{{ ($sheet->rest_in) ? date('H:i:s', strtotime($sheet->rest_in)) : '' }}</p></strong></td>
                                                         <td><strong><p style="color:red">{{ ($sheet->out) ? date('H:i:s', strtotime($sheet->out)) : '' }}</p></strong></td>
 
-                                                    @else{{-- if ( $sheet->in == date('yesterday') ) --}}
+                                                    @elseif ( ((date_interval_format($resultado, '%a') >= 1) OR (date_interval_format($resultado, '%a') <= 3)) AND (date_interval_format($resultado, '%a') != 0) )
 
-                                                        <td></td>
+                                                        <td>1</td>
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
@@ -79,7 +91,19 @@
 
                                                 @endforeach
                                             @endif
+<?php
+        // $today = date_create(date('Y-m-d'));
+        // $yesterday = date_sub($today, date_interval_create_from_date_string("1 days"));
 
+        // echo var_dump($today);
+        // echo var_dump($yesterday);
+        // $database = date_create('2022-01-18');
+        // $datadehoje = date_create();
+        // $resultado = date_diff($database, $datadehoje);
+        // echo date_interval_format($resultado, '%a');
+
+
+?>
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">
 
@@ -111,7 +135,7 @@
 
                                                                 <?php endif?>
 
-                                                            @else{{-- if ( !$sheet->in >= date('Y-m-d') ) --}}
+                                                            @elseif ( (date_interval_format($resultado, '%a') >= 1) OR (date_interval_format($resultado, '%a') <= 3)  )
 
                                                                 <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-info btn-sm">Registrar Entrada</a>
 
