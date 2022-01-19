@@ -68,7 +68,7 @@
                                                         <td><strong><p style="color:green">{{ ($sheet->rest_in) ? date('H:i:s', strtotime($sheet->rest_in)) : '' }}</p></strong></td>
                                                         <td><strong><p style="color:red">{{ ($sheet->out) ? date('H:i:s', strtotime($sheet->out)) : '' }}</p></strong></td>
 
-                                                    @elseif ( !$sheet->in >= date('Y-m-d') )
+                                                    @else{{-- if ( $sheet->in == date('yesterday') ) --}}
 
                                                         <td></td>
                                                         <td></td>
@@ -111,7 +111,7 @@
 
                                                                 <?php endif?>
 
-                                                            @elseif ( !$sheet->in >= date('Y-m-d') )
+                                                            @else{{-- if ( !$sheet->in >= date('Y-m-d') ) --}}
 
                                                                 <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-info btn-sm">Registrar Entrada</a>
 
