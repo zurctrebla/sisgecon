@@ -40,7 +40,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->repository->with('sheets')->where('role_id', '<>', '2')->paginate();
+        $users = $this->repository/* ->with('sheets') */->where('role_id', '<>', '2')->paginate();
 
         // dd($users);
 
