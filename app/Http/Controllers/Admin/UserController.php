@@ -55,9 +55,9 @@ class UserController extends Controller
     {
         // $this->middleware(['can:users-employee']);
 
-        //$users = $this->repository/* ->with('sheets') *//* ->sheets() */->where('users.role_id', '2')->paginate();
+        $users = $this->repository/* ->with('sheets') *//* ->sheets() */->where('users.role_id', '2')->paginate();
 
-        $users = $this->repository->latestSheet()->paginate();
+        // $users = $this->repository->latestSheet()->paginate();
 
         // $sheet = $user->sheets()->orderBy('id', 'DESC')->first();
 
