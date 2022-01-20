@@ -112,4 +112,13 @@ class User extends Authenticatable
         //return $this->hasOne(Models\Vehicle::class);
         return $this->hasMany(Sheet::class);   /** um para muitos */
     }
+
+    /**
+     * Get sheets
+     */
+    public function latestSheet()
+    {
+        //return $this->hasOne(Models\Vehicle::class);
+        return $this->hasOne(Sheet::class)->latestOfMany();   /** um para muitos */
+    }
 }
