@@ -55,15 +55,37 @@ class UserController extends Controller
     {
         // $this->middleware(['can:users-employee']);
 
-        $users = $this->repository/* ->with('sheets') *//* ->sheets() */->where('users.role_id', '2')->paginate();
+        // $users = $this->repository/* ->with('sheets') *//* ->sheets() */->where('users.role_id', '2')->paginate();
 
         // $users = $this->repository->latestSheet()->paginate();
-
         // $sheet = $user->sheets()->orderBy('id', 'DESC')->first();
-
-
-
         // dd($users);
+
+
+        // $users = User::with('sheets')->where('sheets.user_id', '2')->get();
+
+        /* $users = $user->where('name', 'LIKE', "%{$filter}%")
+                    ->orWhere(function ($query) use ($filter) {
+                        $query->where('name', '<>', 'Carlos');
+                        $query->where('name', '=', $filter);
+                    })
+                    ->toSql(); */
+
+
+        $users = $this->repository->where('role_id', '2')->paginate();
+
+        // $user = $this->repository->first();
+
+        // $user->points()->create([
+        //     'register' => date('y-m-d H:i:s'),
+        // ]);
+
+        // dd($user->points);
+
+
+
+
+
 
         return view('admin.pages.users.employees', compact('users'));
     }
@@ -144,6 +166,10 @@ class UserController extends Controller
             return redirect()->back();
         }
 
+        $user->points()->create([
+            'register' => date('Y-m-d H:i:s'),
+        ]);
+
         // Listener
         // EventRegisterEmployee::dispatch($user);
         // registra o acesso do funcionário
@@ -155,62 +181,9 @@ class UserController extends Controller
         // dd(in_array($user->sheets->last(), $data));
         // dd($user->sheets->last());
         // $status = $user->sheets->status;
-
-        $date = date('Y-m-d H:i:s');
-        $data['user_id'] = $id;
-
         // $sheets = $user->sheets->orderBy('id', 'DESC')->first();
-
         // $sheet = DB::table('sheets')->where('user_id', $id)->orderBy('id', 'DESC')->first();
-        $sheet = $user->sheets()->orderBy('id', 'DESC')->first();
-
-        // dd($sheet);
-
-
-        if (!$sheet) {
-
-            $data['in'] = $date;                // registra entrada do funcionário.
-            $data['status'] = "1";
-            $user->sheets()->create($data);
-
-        } else {
-
-
-            // $sheets = $user->sheets->last();
-
-            // $sheets = $user->sheets()->orderBy('id', 'DESC')->first();
-
-            /* foreach ($sheets as $sheet) { */
-
-                if ($sheet->status == "1") {
-                    // dd('1 if');
-                    $data['rest_out'] = $date;
-                    $data['status'] = "2";
-                    $user->sheets()->update($data);
-
-                } else if ($sheet->status == "2") {
-                    // dd('2 if');
-                    $data['rest_in'] = $date;
-                    $data['status'] = "3";
-                    $user->sheets()->update($data);
-
-                } else if ($sheet->status== "3") {
-                    // dd('3 if');
-                    $data['out'] = $date;
-                    $data['status'] = "4";
-                    $user->sheets()->update($data);
-
-                } else if ($sheet->status == "4") {
-                    // dd('4 if');
-                    $data['in'] = $date;                // registra entrada do funcionário.
-                    $data['status'] = "1";
-                    $user->sheets()->create($data);
-
-                }
-
-            /* } */
-
-        }
+        // $sheet = $user->sheets()->orderBy('id', 'DESC')->first();
 
         return redirect()->route('users.employee')->with('message', 'Ponto Registrado com sucesso');
     }

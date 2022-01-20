@@ -121,4 +121,9 @@ class User extends Authenticatable
         //return $this->hasOne(Models\Vehicle::class);
         return $this->hasOne(Sheet::class)->latestOfMany();   /** um para muitos */
     }
+
+    public function points()
+    {
+        return $this->morphMany(Point::class, 'pointable');
+    }
 }

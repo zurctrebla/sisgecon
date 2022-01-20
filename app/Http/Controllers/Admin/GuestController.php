@@ -40,12 +40,19 @@ class GuestController extends Controller
         $guests = $this->repository/* ->where('status', '<>', 'Expirado') */->paginate();
 
         //dd($guests);
+        // $guest = $this->repository->first();
 
-        foreach ($guests as $guest) {
+        // $guest->points()->create([
+        //     'register' => date('y-m-d H:i:s'),
+        // ]);
 
-            CheckGuest::dispatch($guest);
+        // dd($guest->points);
 
-        }
+        // foreach ($guests as $guest) {
+
+        //     CheckGuest::dispatch($guest);
+
+        // }
 
         return view('admin.pages.guests.index', compact('guests'));
     }

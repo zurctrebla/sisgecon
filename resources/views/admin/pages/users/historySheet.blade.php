@@ -50,84 +50,42 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            @foreach ($user->sheets as $sheet)
-                                <th scope="row">{{ date('d/m/Y', strtotime($sheet->in)) }}</th>
-                                <td>{{ date('H:i:s', strtotime($sheet->in)) }}</td>
-                                <td>{{ ($sheet->rest_out) ? date('H:i:s', strtotime($sheet->rest_out)) : '' }}</td>
-                                <td>{{ ($sheet->rest_in) ?  date('H:i:s', strtotime($sheet->rest_in)) : '' }}</td>
-                                <td>{{ ($sheet->out) ?  date('H:i:s', strtotime($sheet->out)) : '' }}</td>
-                                <td>
-                                    <?php
+                            @foreach ($user->points->chunk(4) as $chunk)
+                                <tr>
+                                    <td>data</td>
 
-                                        // $datetime1 = new DateTime($sheet->in);
-                                        // $datetime2 = new DateTime($sheet->rest_out);
+                                        @foreach ($chunk as $point)
 
-                                        // $datetime3 = new DateTime($sheet->rest_in);
-                                        // $datetime4 = new DateTime($sheet->out);
+                                            <td>{{ date('H:i:s', strtotime($point->register)) }}</td>
 
-                                        // $interval2 = $datetime3->diff($datetime4);
+                                        @endforeach
 
-                                        // $interval = $datetime1->diff($datetime2);
+                                        @if ($user->points->count() == 3 )
 
-                                        // $interval3 = ;
+                                            <td></td>
 
-                                        // echo $interval->format("%H:%I:%S");
-                                        // echo "<br>";
-                                        // echo $interval2->format("%H:%I:%S");
+                                        @elseif ($user->points->count() == 2 )
 
+                                            <td></td>
+                                            <td></td>
 
-                                        if (($sheet->in) && ($sheet->rest_out)) {
+                                        @elseif ($user->points->count() == 1 )
 
-                                            $datetime1 = new DateTime($sheet->in);
-                                            $datetime2 = new DateTime($sheet->rest_out);
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
 
-                                            $interval1 = $datetime1->diff($datetime2);
+                                        @endif
 
-
-                                            echo $interval1->format("%H:%I:%S");
-
-                                            if (($sheet->rest_in) && ($sheet->out)) {
-
-                                                $datetime3 = new DateTime($sheet->rest_in);
-                                                $datetime4 = new DateTime($sheet->out);
-
-                                                $interval2 = $datetime3->diff($datetime4);
-
-                                                echo "<br>";
-
-                                                echo $interval2->format("%H:%I:%S");
-
-                                                //echo "<br> soma: " . date('H:i:s', (strtotime($interval2) + strtotime($interval1)));
-                                                // $descanso = $datetime2->diff($datetime3);
-                                                // echo "<br> descanso: " . $descanso->format("%H:%I:%S");
-                                                // $hrstrabalhadas = $datetime1->diff($datetime4);
-                                                // echo "<br> hrs trab: " . $hrstrabalhadas->format("%H:%I:%S");
-                                                // $total = $hrstrabalhadas->diff($descanso);
-                                                // echo "<br> hrs trab: " . $total->format("%H:%I:%S");
-                                                // echo "<br>" . $interval->format("%H:%I:%S");
-                                                // $intervalt = $datetime1->diff($datetime4);
-                                                // echo "<br> total: " . $intervalt->format("%H:%I:%S");
-                                                //
-                                                // $date = new DateTime('2000-01-01');
-                                                // $date->add(new DateInterval('P10D'));
-                                                // echo "<br>" . $date->format("%H:%I:%S");
-
-                                            }
-
-                                        }
-
-                                    ?>
-                                </td>
-
-                                {{-- <td>{{ $diff->format('%a Day and %h hours'); }}</td> --}}
-                          </tr>
-                          @endforeach
+                                    <td>horas</td>
+                                </tr>
+                            @endforeach
                         </tbody>
-                      </table>
+                    </table>
                 </div>
             </div>
           </div>
         </div>
     </div>
 @endsection
+

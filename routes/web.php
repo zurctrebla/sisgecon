@@ -122,11 +122,11 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('test-acl', function () {
     // dd(auth()->user()->permissions());
-        // $today = date_create(date('Y-m-d'));
-        // $yesterday = date_sub($today, date_interval_create_from_date_string("1 days"));
+        $today = date_create(date('Y-m-d'));
+        $yesterday = date_sub($today, date_interval_create_from_date_string("1 days"));
 
-        // echo var_dump($today);
-        // echo var_dump($yesterday);
+        echo var_dump($today);
+        echo var_dump($yesterday);
 });
 
 Route::get('/', function () {

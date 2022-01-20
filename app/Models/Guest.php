@@ -15,4 +15,9 @@ class Guest extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function points()
+    {
+        return $this->morphMany(Point::class, 'pointable');
+    }
 }

@@ -48,14 +48,11 @@
                                     @foreach ($users as $user)
                                         <tr>
                                             <td>
-                                                {{ $user->name }}
+                                                {{ $user->name }} {{ $user->points->count(); }}
                                             </td>
-                                            <?php   $today = date_create(date('Y-m-d'));
-                                                    $yesterday = date_sub($today, date_interval_create_from_date_string("1 days"));
-                                                    //var_dump($yesterday);
-                                            ?>
 
-                                            @if (!$user->sheets->last())
+
+                                            @if (!$user->points->last())
 
                                                 <td></td>
                                                 <td></td>
@@ -63,86 +60,85 @@
                                                 <td></td>
 
                                             @else
-                                                @foreach ($user->sheets as $sheet)
 
-                                                    <?php
-                                                        $database = date_create(date($sheet->out));
-                                                        $datadehoje = date_create();
-                                                        $resultado = date_diff($database, $datadehoje);
-                                                        echo date_interval_format($resultado, '%a');
+                                                @foreach ($user->points->chunk(4) as $chunk)
 
-                                                    ?>
+                                                    @foreach ($chunk as $key => $point)
 
-                                                    @if ($sheet->in >= date('Y-m-d'))
+                                                        {{-- <td>
+                                                            {{ date('H:i:s', strtotime($point->register)) }}
+                                                        </td> --}}
 
-                                                        <td><strong><p style="color:green">{{ ($sheet->in) ? date('H:i:s', strtotime($sheet->in)) : '' }}</p></strong></td>
-                                                        <td><strong><p style="color:red">{{ ($sheet->rest_out) ? date('H:i:s', strtotime($sheet->rest_out)) : '' }}</p></strong></td>
-                                                        <td><strong><p style="color:green">{{ ($sheet->rest_in) ? date('H:i:s', strtotime($sheet->rest_in)) : '' }}</p></strong></td>
-                                                        <td><strong><p style="color:red">{{ ($sheet->out) ? date('H:i:s', strtotime($sheet->out)) : '' }}</p></strong></td>
+                                                        <td>
+                                                            <strong>
+                                                                <p style="color:<?php if ($key == 0 OR $key == 2){echo "green";}else{echo "red";} ?>">{{ ($point->register) ? date('H:i:s', strtotime($point->register)) : '' }}</p>
+                                                            </strong>
+                                                        </td>
 
-                                                    @elseif ( ((date_interval_format($resultado, '%a') >= 1) OR (date_interval_format($resultado, '%a') <= 3)) AND (date_interval_format($resultado, '%a') != 0) )
+                                                    @endforeach
 
-                                                        <td>1</td>
+                                                    @if ($user->points->count() == 3 )
+
+                                                        <td></td>
+
+                                                    @elseif ($user->points->count() == 2 )
+
+                                                        <td></td>
+                                                        <td></td>
+
+                                                    @elseif ($user->points->count() == 1 )
+
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
+
+                                                    @endif
+                                                @endforeach
+
+                                                {{-- @foreach ($user->points as $key => $point)
+
+                                                    @if ($point->register >= date('Y-m-d'))
+
+                                                        <td>
+                                                            <strong>
+                                                                <p style="color:<?php // if ($key == 0 OR $key == 2){echo "green";}else{echo "red";} ?>">{{ ($point->register) ? date('H:i:s', strtotime($point->register)) : '' }}</p>
+                                                            </strong>
+                                                        </td>
 
                                                     @endif
 
                                                 @endforeach
+
+                                                @if ($key == 0)
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                @endif
+
+                                                @if ($key == 1)
+                                                    <td></td>
+                                                    <td></td>
+                                                @endif
+
+                                                @if ($key == 2)
+                                                    <td></td>
+                                                @endif
+
+                                                @if ($key == 3)
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                @endif --}}
+
                                             @endif
-<?php
-        // $today = date_create(date('Y-m-d'));
-        // $yesterday = date_sub($today, date_interval_create_from_date_string("1 days"));
 
-        // echo var_dump($today);
-        // echo var_dump($yesterday);
-        // $database = date_create('2022-01-18');
-        // $datadehoje = date_create();
-        // $resultado = date_diff($database, $datadehoje);
-        // echo date_interval_format($resultado, '%a');
-
-
-?>
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">
 
-
-                                                    @if (!$user->sheets->last())
-
-                                                        <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-info btn-sm">Registrar Entrada</a>
-
-                                                    @else
-                                                        @foreach ($user->sheets as $sheet)
-
-                                                            @if ($sheet->in >= date('Y-m-d'))
-
-                                                                <?php if (($sheet->status == "1") OR ($sheet->status == "3")): ?>
-
-                                                                    <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-dark btn-sm">Registrar Saída</a>
-
-                                                                <?php elseif (($sheet->status == "2")): ?>
-
-                                                                    <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-info btn-sm">Registrar Entrada</a>
-
-                                                                <?php elseif (($sheet->status == "4")): ?>
-
-                                                                    <a href="#" onclick="myFunction()" class="btn btn-outline-danger btn-sm">Registros completos</a>
-
-                                                                <?php else: ?>
-
-                                                                    <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-info btn-sm">Registrar Entrada</a>
-
-                                                                <?php endif?>
-
-                                                            @elseif ( (date_interval_format($resultado, '%a') >= 1) OR (date_interval_format($resultado, '%a') <= 3)  )
-
-                                                                <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-info btn-sm">Registrar Entrada</a>
-
-                                                            @endif
-
-                                                        @endforeach
-                                                    @endif
+                                                    @can('user-list')
+                                                        <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-dark btn-sm">Registrar {{ $key ?? '' }}</a>
+                                                    @endcan
 
                                                     @can('user-list')
                                                         <a href="{{ route('users.history', $user->id) }}" class="btn btn-outline-primary btn-sm">Ver Histórico</a>
@@ -174,11 +170,11 @@
                             </table>
                         </div>
                         <div class="card-footer">
-                            @if (isset($filters))
+                            {{-- @if (isset($filters))
                                 {!! $users->appends($filters)->links() !!}
                             @else
                                 {!! $users->links() !!}
-                            @endif
+                            @endif --}}
                         </div>
                 </div>
             </div>
