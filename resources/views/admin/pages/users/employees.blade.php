@@ -89,7 +89,6 @@
 
                                                 @endforeach
 
-
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">
 
