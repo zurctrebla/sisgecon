@@ -48,96 +48,53 @@
                                     @foreach ($users as $user)
                                         <tr>
                                             <td>
-                                                {{ $user->name }} {{ $user->points->count(); }}
+                                                {{ $user->name }}
                                             </td>
-
-
+                                            {{-- se não existe registros, monta as colunas --}}
                                             @if (!$user->points->last())
 
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <?php $key = 0; ?>
 
-                                            @else
+                                                @for ($i = 4; $i > $key; $i--)
+
+                                                    <td></td>
+
+                                                @endfor
+
+                                            @endif
 
                                                 @foreach ($user->points->chunk(4) as $chunk)
 
                                                     @foreach ($chunk as $key => $point)
 
-                                                        {{-- <td>
-                                                            {{ date('H:i:s', strtotime($point->register)) }}
-                                                        </td> --}}
+                                                        @if ($point->register > date('Y-m-d'))
 
-                                                        <td>
-                                                            <strong>
-                                                                <p style="color:<?php if ($key == 0 OR $key == 2){echo "green";}else{echo "red";} ?>">{{ ($point->register) ? date('H:i:s', strtotime($point->register)) : '' }}</p>
-                                                            </strong>
-                                                        </td>
+                                                            <td>
+                                                                <strong>
+                                                                    <p style="color:<?php if ($key % 2 == 0){ echo "green"; }else{ echo "red"; } ?>">{{-- aqui inserir operador ternário --}}
+                                                                        {{ ($point->register) ? date('H:i:s', strtotime($point->register)) : '' }}
+                                                                    </p>
+                                                                </strong>
+                                                            </td>
+
+                                                        @endif
 
                                                     @endforeach
 
-                                                    @if ($user->points->count() == 3 )
+                                                    @for ($i = 3; $i > $key; $i--)
 
                                                         <td></td>
 
-                                                    @elseif ($user->points->count() == 2 )
-
-                                                        <td></td>
-                                                        <td></td>
-
-                                                    @elseif ($user->points->count() == 1 )
-
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-
-                                                    @endif
-                                                @endforeach
-
-                                                {{-- @foreach ($user->points as $key => $point)
-
-                                                    @if ($point->register >= date('Y-m-d'))
-
-                                                        <td>
-                                                            <strong>
-                                                                <p style="color:<?php // if ($key == 0 OR $key == 2){echo "green";}else{echo "red";} ?>">{{ ($point->register) ? date('H:i:s', strtotime($point->register)) : '' }}</p>
-                                                            </strong>
-                                                        </td>
-
-                                                    @endif
+                                                    @endfor
 
                                                 @endforeach
 
-                                                @if ($key == 0)
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                @endif
-
-                                                @if ($key == 1)
-                                                    <td></td>
-                                                    <td></td>
-                                                @endif
-
-                                                @if ($key == 2)
-                                                    <td></td>
-                                                @endif
-
-                                                @if ($key == 3)
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                @endif --}}
-
-                                            @endif
 
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">
 
                                                     @can('user-list')
-                                                        <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-dark btn-sm">Registrar {{ $key ?? '' }}</a>
+                                                        <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-<?php if ($key % 2 == 0){ echo "dark"; }else{ echo "danger"; } ?> btn-sm">Registrar {{$key ?? ''}}</a>
                                                     @endcan
 
                                                     @can('user-list')

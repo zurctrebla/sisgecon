@@ -54,14 +54,9 @@ class UserController extends Controller
     public function employee()
     {
         // $this->middleware(['can:users-employee']);
-
-        // $users = $this->repository/* ->with('sheets') *//* ->sheets() */->where('users.role_id', '2')->paginate();
-
+        $users = $this->repository/* ->with('sheets') *//* ->sheets() */->where('users.role_id', '2')->paginate();
         // $users = $this->repository->latestSheet()->paginate();
         // $sheet = $user->sheets()->orderBy('id', 'DESC')->first();
-        // dd($users);
-
-
         // $users = User::with('sheets')->where('sheets.user_id', '2')->get();
 
         /* $users = $user->where('name', 'LIKE', "%{$filter}%")
@@ -71,9 +66,6 @@ class UserController extends Controller
                     })
                     ->toSql(); */
 
-
-        $users = $this->repository->where('role_id', '2')->paginate();
-
         // $user = $this->repository->first();
 
         // $user->points()->create([
@@ -82,10 +74,41 @@ class UserController extends Controller
 
         // dd($user->points);
 
+        /* $filter = 2;
 
+        $users = $this->repository
+                    ->with(['sheets' => function ($query) use ($filter) {
+                        $query->where('user_id', $filter);
+                    }])
+                    ->toSql(); */
 
+        /* $filters = $request->only('filter');
 
+        $users = $this->repository
+                            ->where(function($query) use ($request) {
+                                if ($request->filter) {
+                                    $query->orWhere('name', 'LIKE', "%{$request->filter}%");
+                                    $query->orWhere('email', $request->filter);
+                                }
+                            })
+                            ->latest()
+                            ->tenantUser()
+                            ->paginate(); */
 
+        // $filter = date('Y-m-d');
+
+        // $users = $this->repository
+        //         ->with(['points' => function ($query) use ($filter) {
+        //             $query->where('register', '<', $filter);
+        //         })/*
+        //         ->where('role_id', 2) */
+        //         ->toSql();
+
+        // $users = User::with(['sheets' => function ($query) {
+        //     $query->where('status', 2);
+        // }])->toSql();
+
+        // dd($users);
 
         return view('admin.pages.users.employees', compact('users'));
     }
