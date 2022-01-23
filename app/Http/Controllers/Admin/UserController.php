@@ -26,13 +26,13 @@ class UserController extends Controller
         $this->repository = $user;
 
         // $this->middleware(['can:users', 'can:users-edit', 'can:users-employee', 'can:users-profile']);
-
         // $this->middleware('permission:users-list|users-create|users-edit|users-delete', ['only' => ['index','show']]);
         // $this->middleware('permission:users-create', ['only' => ['create','store']]);
         // $this->middleware('permission:users-edit', ['only' => ['edit','update']]);
         // $this->middleware('permission:users-delete', ['only' => ['destroy']]);
 
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -42,10 +42,9 @@ class UserController extends Controller
     {
         $users = $this->repository/* ->with('sheets') */->where('role_id', '<>', '2')->paginate();
 
-        // dd($users);
-
         return view('admin.pages.users.index', compact('users'));
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -54,61 +53,16 @@ class UserController extends Controller
     public function employee()
     {
         // $this->middleware(['can:users-employee']);
-        $users = $this->repository/* ->with('sheets') *//* ->sheets() */->where('users.role_id', '2')->paginate();
-        // $users = $this->repository->latestSheet()->paginate();
-        // $sheet = $user->sheets()->orderBy('id', 'DESC')->first();
-        // $users = User::with('sheets')->where('sheets.user_id', '2')->get();
 
-        /* $users = $user->where('name', 'LIKE', "%{$filter}%")
-                    ->orWhere(function ($query) use ($filter) {
-                        $query->where('name', '<>', 'Carlos');
-                        $query->where('name', '=', $filter);
-                    })
-                    ->toSql(); */
-
-        // $user = $this->repository->first();
-
-        // $user->points()->create([
-        //     'register' => date('y-m-d H:i:s'),
-        // ]);
-
-        // dd($user->points);
-
-        /* $filter = 2;
+        $filter = date('Y-m-d');
 
         $users = $this->repository
-                    ->with(['sheets' => function ($query) use ($filter) {
-                        $query->where('user_id', $filter);
-                    }])
-                    ->toSql(); */
+                    ->with(['points' => function ($query) use ($filter) {
 
-        /* $filters = $request->only('filter');
+                        $query->where('register', 'LIKE', "{$filter}%");  /* filtra points */
 
-        $users = $this->repository
-                            ->where(function($query) use ($request) {
-                                if ($request->filter) {
-                                    $query->orWhere('name', 'LIKE', "%{$request->filter}%");
-                                    $query->orWhere('email', $request->filter);
-                                }
-                            })
-                            ->latest()
-                            ->tenantUser()
-                            ->paginate(); */
-
-        // $filter = date('Y-m-d');
-
-        // $users = $this->repository
-        //         ->with(['points' => function ($query) use ($filter) {
-        //             $query->where('register', '<', $filter);
-        //         })/*
-        //         ->where('role_id', 2) */
-        //         ->toSql();
-
-        // $users = User::with(['sheets' => function ($query) {
-        //     $query->where('status', 2);
-        // }])->toSql();
-
-        // dd($users);
+                    }])->where('role_id', '2')              /* filtra os usuários com função funcionário */
+                    ->paginate();
 
         return view('admin.pages.users.employees', compact('users'));
     }
@@ -120,10 +74,10 @@ class UserController extends Controller
      */
     public function createEmployee()
     {
-        $destinies = Destiny::all();
-
-        return view('admin.pages.users.createEmployee', compact('destinies'));
+        $sectors = Destiny::all();
+        return view('admin.pages.users.createEmployee', compact('sectors'));
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -166,9 +120,7 @@ class UserController extends Controller
         $data = $request->all();
 
         $data['password'] = bcrypt($data['password']);
-
         $data['role_id'] = 2;
-
         $user = $this->repository->create($data);
 
         $user->employee()->create($data);
@@ -193,21 +145,6 @@ class UserController extends Controller
             'register' => date('Y-m-d H:i:s'),
         ]);
 
-        // Listener
-        // EventRegisterEmployee::dispatch($user);
-        // registra o acesso do funcionário
-        // $data = $request->all();
-        // $data['in'] = $date;
-        // $data['rest_out'] = $date;
-        // $data['rest_in'] = $date;
-        // $data['out'] = $date;
-        // dd(in_array($user->sheets->last(), $data));
-        // dd($user->sheets->last());
-        // $status = $user->sheets->status;
-        // $sheets = $user->sheets->orderBy('id', 'DESC')->first();
-        // $sheet = DB::table('sheets')->where('user_id', $id)->orderBy('id', 'DESC')->first();
-        // $sheet = $user->sheets()->orderBy('id', 'DESC')->first();
-
         return redirect()->route('users.employee')->with('message', 'Ponto Registrado com sucesso');
     }
 
@@ -222,6 +159,8 @@ class UserController extends Controller
         if (!$user = $this->repository->find($id)) {
             return redirect()->back();
         }
+
+        /* aqui possivelmente seja implementado uma função para agrupar os registros, dividindo-os em dia, mes e ano */
 
         return view('admin.pages.users.historySheet', compact('user'));
     }
@@ -271,16 +210,13 @@ class UserController extends Controller
             return redirect()->back();
         }
 
-        //$data = $request->only(['name', 'email', 'role_id']);
-
         $data = $request->all();
 
         if ($request->password) {
             $data['password'] = bcrypt($request->password);
         }
-        // dd($data);
-        $user->update($data);
 
+        $user->update($data);
 
         // $user->phones()->create($request->all());                            //  desta forma ok
         // $user->vehicles()->create($request->only('type', 'plate', 'color')); //  desta forma ok
@@ -364,8 +300,7 @@ class UserController extends Controller
                                     $query->orWhere('email', $request->filter);
                                 }
                             })
-                            ->latest()/*
-                            ->tenantUser() */
+                            ->latest()
                             ->paginate();
 
         return view('admin.pages.users.index', compact('users', 'filters'));

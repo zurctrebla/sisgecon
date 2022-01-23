@@ -119,7 +119,7 @@ class User extends Authenticatable
     public function latestSheet()
     {
         //return $this->hasOne(Models\Vehicle::class);
-        return $this->hasOne(Sheet::class)->latestOfMany();   /** um para muitos */
+        return $this->hasOne(Sheet::class)->latestOfMany();   /** um para um */
     }
 
     public function points()

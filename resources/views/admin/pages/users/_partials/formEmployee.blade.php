@@ -43,11 +43,11 @@
     <div class="col-sm-6">
         <div class="form-group">
          <label>Setor *</label>
-         <select name="destiny" id="destiny" class="form-control">
+         <select name="sector" id="sector" class="form-control">
             <option value="">Escolha</option>
                 <optgroup label="Selecione um setor">
-                    @foreach($destinies as $destiny)
-                        <option value="{{ $destiny->name }}" @if(isset($destiny->name)/*  && $destiny->name== $userRole */) selected @endif>{{ $destiny->name }}</option>
+                    @foreach($sectors as $sector)
+                        <option value="{{ $sector->name }}" @if(isset($sector->name)/*  && $sector->name== $userRole */) selected @endif>{{ $sector->name }}</option>
                     @endforeach
                 </optgroup>
         </select>
