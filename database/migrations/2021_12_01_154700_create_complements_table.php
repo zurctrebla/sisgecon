@@ -20,7 +20,7 @@ class CreateComplementsTable extends Migration
             $table->string('state');
             $table->date('birth');
             $table->string('cpf')->unique;
-            $table->string('rg')->unique;
+            // $table->string('rg')->unique;
             $table->string('block');
             $table->string('lot');
             $table->string('house');

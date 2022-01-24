@@ -20,10 +20,10 @@ class CreateEmployeesTable extends Migration
             // $table->string('phone');
             $table->string('function');
             $table->string('sector');
-            $table->string('rg')->unique();
-            $table->date('emission');
-            $table->string('emission_for');
-            $table->string('uf');
+            // $table->string('rg')->unique();
+            // $table->date('emission');
+            // $table->string('emission_for');
+            // $table->string('uf');
             $table->timestamps();
         });
     }

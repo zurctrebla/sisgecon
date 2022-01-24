@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Vehicle extends Model
+class Document extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['model', 'plate'];
+    protected $fillable = ['doc_no', 'emission', 'emission_for','uf'];
 
-    public function vehicleable()
+    public function documentable()
     {
         return $this->morphTo();
     }

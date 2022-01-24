@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Employee extends Model
+class Doc extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['birth', 'function', 'sector'];
+    protected $fillable = ['doc_no', 'emission', 'emission_for','uf'];
 
-    public function user()
+    public function docable()
     {
-        return $this->belongsTo(User::class);
+        return $this->morphTo();
     }
+
 }

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use PhpParser\Comment\Doc;
 
 class User extends Authenticatable
 {
@@ -67,15 +68,16 @@ class User extends Authenticatable
     public function vehicles()
     {
         //return $this->hasOne(Models\Vehicle::class);
-        return $this->hasMany(Vehicle::class);   /** um para muitos */
+        //return $this->hasMany(Vehicle::class);   /** um para muitos */
+        return $this->morphMany(Vehicle::class, 'vehicleable');
     }
 
     /**
-     * Get complement
+     * Get document
      */
-    public function complement()
+    public function documents()
     {
-        return $this->hasOne(Complement::class);
+        return $this->morphMany(Document::class, 'documentable');
     }
 
     /**

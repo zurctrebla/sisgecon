@@ -58,26 +58,44 @@
 <div class="row">
     <div class="col-sm-3">
       <div class="form-group">
-       <label>Identidade *</label>
-       <input type="text" name="rg" class="form-control" placeholder="RG:" value="{{ $user->name ?? old('name') }}" >
+       <label>Documento *</label>
+       <input type="text" name="doc_no" class="form-control" placeholder="RG, CHN, etc ..." value="{{ $user->docs->doc_no ?? old('doc_no') }}" >
       </div>
     </div>
     <div class="col-sm-3">
         <div class="form-group">
          <label>Data de emissão *</label>
-         <input type="date" name="emission" id="emission" class="form-control" max="<?php now(); ?>">
+         <input type="date" name="emission" class="form-control" max="<?php now(); ?>">
         </div>
     </div>
     <div class="col-sm-3">
         <div class="form-group">
          <label>Orgão Emissor *</label>
-         <input type="text" name="emission_for" class="form-control" placeholder="Orgão:" value="{{ $user->email ?? old('email') }}" >
+         <input type="text" name="emission_for" class="form-control" placeholder="Orgão Emissor:" value="{{ $user->docs->emission_for ?? old('emission_for') }}" >
         </div>
     </div>
     <div class="col-sm-3">
         <div class="form-group">
          <label>UF *</label>
-         <input type="text" name="uf" class="form-control" placeholder="UF:" value="{{ $user->email ?? old('email') }}" >
+         <input type="text" name="uf" class="form-control" placeholder="UF:" value="{{ $user->docs->uf ?? old('uf') }}" >
+        </div>
+    </div>
+</div>
+
+<h3>Cadastro do Veículo</h3>
+<hr>
+
+<div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label>* Modelo:</label>
+        <input type="text" name="model" class="form-control" placeholder="Preencha com o modelo do veículo:" value="{{ $guest->vehicles->model ?? old('model') }}">
+      </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+          <label>* Placa:</label>
+          <input type="text" name="plate" class="form-control" placeholder="Placa do veículo:" value="{{ $guest->vehicles->plate ?? old('plate') }}">
         </div>
     </div>
 </div>
