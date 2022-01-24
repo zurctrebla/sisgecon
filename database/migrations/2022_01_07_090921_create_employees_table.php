@@ -17,7 +17,7 @@ class CreateEmployeesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->date('birth');
-            $table->string('phone');
+            // $table->string('phone');
             $table->string('function');
             $table->string('sector');
             $table->string('rg')->unique();

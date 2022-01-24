@@ -28,7 +28,7 @@
     <div class="col-sm-2">
         <div class="form-group">
          <label>Telefone *</label>
-         <input type="text" name="phone" class="form-control" placeholder="Telefone" value="{{ $user->email ?? old('email') }}" >
+         <input type="text" name="number" class="form-control" placeholder="Telefone" value="{{ $user->phones->number ?? old('number') }}" >
         </div>
     </div>
 </div>

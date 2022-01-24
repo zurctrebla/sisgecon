@@ -17,6 +17,8 @@ class CreatePointsTable extends Migration
             $table->id();
             $table->morphs('pointable');
             $table->dateTime('register');
+            $table->string('reason')->nullable();
+            $table->enum('reason_status', ['Y', 'N'])->default('N');
             $table->timestamps();
         });
     }

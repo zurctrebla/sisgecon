@@ -59,9 +59,10 @@ class UserController extends Controller
         $users = $this->repository
                     ->with(['points' => function ($query) use ($filter) {
 
-                        $query->where('register', 'LIKE', "{$filter}%");  /* filtra points */
+                        $query->where('register', 'LIKE', "{$filter}%");    /* filtra points */
+                        $query->where('reason_status','N');                 /* filtra points sem motivos*/
 
-                    }])->where('role_id', '2')              /* filtra os usuários com função funcionário */
+                    }])->where('role_id', '2')                              /* filtra os usuários com função funcionário */
                     ->paginate();
 
         return view('admin.pages.users.employees', compact('users'));
@@ -125,6 +126,13 @@ class UserController extends Controller
 
         $user->employee()->create($data);
 
+        if ($request->number) {
+
+            $data['number'] = $request->number;
+
+            $user->phones()->create($data);
+        }
+
         return redirect()->route('users.employee')->with('message', 'Funcionário criado com sucesso');
     }
 
@@ -141,9 +149,16 @@ class UserController extends Controller
             return redirect()->back();
         }
 
-        $user->points()->create([
-            'register' => date('Y-m-d H:i:s'),
-        ]);
+        $data = $request->all();
+
+        if ($request->reason) {
+            $data['reason'] = $request->reason;
+            $data['reason_status'] = 'Y';
+        }
+
+        $data['register'] = date('Y-m-d H:i:s');
+
+        $user->points()->create($data);
 
         return redirect()->route('users.employee')->with('message', 'Ponto Registrado com sucesso');
     }

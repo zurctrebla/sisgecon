@@ -58,7 +58,7 @@ class User extends Authenticatable
      */
     public function phones()
     {
-        return $this->hasOne(Phone::class);
+        return $this->morphMany(Phone::class, 'phoneable');
     }
 
     /**
@@ -105,25 +105,11 @@ class User extends Authenticatable
     }
 
     /**
-     * Get sheets
+     * Get Points
      */
-    public function sheets()
-    {
-        //return $this->hasOne(Models\Vehicle::class);
-        return $this->hasMany(Sheet::class);   /** um para muitos */
-    }
-
-    /**
-     * Get sheets
-     */
-    public function latestSheet()
-    {
-        //return $this->hasOne(Models\Vehicle::class);
-        return $this->hasOne(Sheet::class)->latestOfMany();   /** um para um */
-    }
-
     public function points()
     {
         return $this->morphMany(Point::class, 'pointable');
     }
+
 }
