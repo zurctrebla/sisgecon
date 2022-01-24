@@ -9,7 +9,7 @@ use App\Models\{
     User,
     Role,
     Complement,
-    Destiny,
+    Sector,
     Phone,
     Relative,
     Vehicle
@@ -75,7 +75,7 @@ class UserController extends Controller
      */
     public function createEmployee()
     {
-        $sectors = Destiny::all();
+        $sectors = Sector::all();
         return view('admin.pages.users.createEmployee', compact('sectors'));
     }
 

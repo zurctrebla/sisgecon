@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUpdateDestiny extends FormRequest
+class StoreUpdateSector extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class StoreUpdateDestiny extends FormRequest
         $id = $this->segment(3);
 
         return [
-            'name' => "required|min:2|max:255|unique:destinies,name,{$id},id",
+            'name' => "required|min:2|max:255|unique:sectors,name,{$id},id",
         ];
     }
 }

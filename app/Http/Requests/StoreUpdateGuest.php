@@ -35,8 +35,8 @@ class StoreUpdateGuest extends FormRequest
             'document1' => ['required', 'string', 'min:3', 'max:255', "unique:guests,document1,{$id},id"],
             'document2' => ['nullable', 'string', 'min:3', 'max:255'], */
             'authorization' => ['unique', 'string', 'min:3', 'max:255'],
-            'photo' => ['nullable', 'image'],
-            'destiny' => ['required', 'string', 'min:2', 'max:255'],
+            'photo' => ['nullable', 'image'],/*
+            'destiny' => ['required', 'string', 'min:2', 'max:255'], */
             'status' => ['nullable', 'string', 'min:3', 'max:255'],
             'authorized_At' => ['nullable', 'string', 'min:3', 'max:255'],
             'person' => ['required', 'string', 'min:3', 'max:255'],

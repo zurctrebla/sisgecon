@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Events\CheckGuest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateGuest;
-use App\Models\Destiny;
+use App\Models\Sector;
 use App\Models\Guest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -76,9 +76,9 @@ class GuestController extends Controller
      */
     public function create()
     {
-        $destinies = Destiny::all();
+        $sectors = Sector::all();
 
-        return view('admin.pages.guests.create', compact('destinies'));
+        return view('admin.pages.guests.create', compact('sectors'));
     }
 
     /**
@@ -148,9 +148,9 @@ class GuestController extends Controller
         if(!$guest = $this->repository->find($id))
             return redirect()->back();
 
-        $destinies = Destiny::all();
+        $sectors = Sector::all();
 
-        return view('admin.pages.guests.edit', compact('guest', 'destinies'));
+        return view('admin.pages.guests.edit', compact('guest', 'sectors'));
     }
 
     /**

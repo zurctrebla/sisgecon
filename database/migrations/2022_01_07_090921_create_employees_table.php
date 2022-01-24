@@ -16,10 +16,11 @@ class CreateEmployeesTable extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('sector_id')->constrained('sectors')->onDelete('cascade');
             $table->date('birth');
             // $table->string('phone');
-            $table->string('function');
-            $table->string('sector');
+            $table->string('function');/*
+            $table->string('sector'); */
             // $table->string('rg')->unique();
             // $table->date('emission');
             // $table->string('emission_for');

@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\ACL\{
 };
 use App\Http\Controllers\Admin\{
     DashboardController,
-    DestinyController,
+    SectorController,
     GuestController,
     SettingController,
     UserController
@@ -106,16 +106,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/guests/history', [GuestController::class, 'history'])->name('guests.history');
 
     /**
-     * Destinies
+     * Sectors
      */
-    Route::any('/admin/destinies/search', [DestinyController::class, 'search'])->name('destinies.search');
-    Route::get('/admin/destinies/create', [DestinyController::class, 'create'])->name('destinies.create');
-    Route::put('/admin/destinies/{id}', [DestinyController::class, 'update'])->name('destinies.update');
-    Route::get('/admin/destinies/edit/{id}', [DestinyController::class, 'edit'])->name('destinies.edit');
-    Route::delete('/admin/destinies/{id}', [DestinyController::class, 'destroy'])->name('destinies.destroy');
-    Route::get('/admin/destinies/{id}', [DestinyController::class, 'show'])->name('destinies.show');
-    Route::post('/admin/destinies', [DestinyController::class, 'store'])->name('destinies.store');
-    Route::get('/admin/destinies', [DestinyController::class, 'index'])->name('destinies.index');
+    Route::any('/admin/sectors/search', [SectorController::class, 'search'])->name('sectors.search');
+    Route::get('/admin/sectors/create', [SectorController::class, 'create'])->name('sectors.create');
+    Route::put('/admin/sectors/{id}', [SectorController::class, 'update'])->name('sectors.update');
+    Route::get('/admin/sectors/edit/{id}', [SectorController::class, 'edit'])->name('sectors.edit');
+    Route::delete('/admin/sectors/{id}', [SectorController::class, 'destroy'])->name('sectors.destroy');
+    Route::get('/admin/sectors/{id}', [SectorController::class, 'show'])->name('sectors.show');
+    Route::post('/admin/sectors', [SectorController::class, 'store'])->name('sectors.store');
+    Route::get('/admin/sectors', [SectorController::class, 'index'])->name('sectors.index');
 
 
 });

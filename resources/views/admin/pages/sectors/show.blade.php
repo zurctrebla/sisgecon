@@ -11,12 +11,12 @@
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <span class="d-none d-md-block">
-                <a href="{{ route('destinies.index') }}" class="btn btn-outline-info btn-sm">Listar</a>
-                @can('destiny-edit')
-                    <a href="{{ route('destinies.edit', $destiny->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
+                <a href="{{ route('sectors.index') }}" class="btn btn-outline-info btn-sm">Listar</a>
+                @can('sector-edit')
+                    <a href="{{ route('sectors.edit', $sector->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
                 @endcan
-                @can('destiny-delete')
-                <form action="{{ route('destinies.destroy', $destiny->id) }}" style="display:inline" method="POST">
+                @can('sector-delete')
+                <form action="{{ route('sectors.destroy', $sector->id) }}" style="display:inline" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Deseja apagar o setor?')" >Apagar</button>
@@ -28,11 +28,11 @@
                     Ações
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
-                    <a href="{{ route('destinies.show', $destiny->id) }}" class="btn btn-outline-info btn-sm">Listar</a>
-                    @can('destiny-edit')
-                        <a href="{{ route('destinies.edit', $destiny->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
+                    <a href="{{ route('sectors.show', $sector->id) }}" class="btn btn-outline-info btn-sm">Listar</a>
+                    @can('sector-edit')
+                        <a href="{{ route('sectors.edit', $sector->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
                     @endcan
-                    @can('destiny-delete')
+                    @can('sector-delete')
                         <button class="dropdown-item" onclick="return confirm('Deseja apagar o setor?')">Apagar</button>
                     @endcan
                 </div>
@@ -56,7 +56,7 @@
                     <table>
                         <tr>
                             <th><?= __('Nome') ?></th>
-                            <td>{{ $destiny->name }}</td>
+                            <td>{{ $sector->name }}</td>
                         </tr>
                     </table>
                 </div>

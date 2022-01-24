@@ -15,14 +15,15 @@ class CreateGuestsTable extends Migration
     {
         Schema::create('guests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('sector_id')->constrained('sectors')->onDelete('cascade');
             $table->string('name');
             $table->string('authorization')->unique();
             $table->string('photo')->nullable();
-            $table->string('destiny');
-            $table->enum('status', ['Pendente', 'Autorizado', 'Expirado', 'Bloqueado']);     //  acrescentada
-            $table->string('authorized_at')->nullable();            //  acrescentada
+            // $table->string('destiny');
             // $table->integer('destiny_id');
+            $table->enum('status', ['Pendente', 'Autorizado', 'Expirado', 'Bloqueado']);     //  acrescentada
+            $table->string('authorized_at')->nullable();                                    //  acrescentada
             $table->string('person');
             $table->string('company')->nullable();
             $table->text('obs')->nullable();

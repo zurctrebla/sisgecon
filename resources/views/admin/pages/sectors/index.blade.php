@@ -12,7 +12,7 @@
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 @can('destinies-create')
-                    <a href="{{ route('destinies.create') }}" class="btn btn-outline-success btn-sm">Cadastrar</a>
+                    <a href="{{ route('sectors.create') }}" class="btn btn-outline-success btn-sm">Cadastrar</a>
                 @endcan
             </ol>
             </div>
@@ -25,14 +25,14 @@
             <div class="col-md-12">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <form action="{{ route('destinies.search') }}" method="POST" class="form form-inline">
+                        <form action="{{ route('sectors.search') }}" method="POST" class="form form-inline">
                             @csrf
                             <input type="text" name="filter" placeholder="Filtro" class="form-control" value="{{ $filters['filter'] ?? '' }}">
                             <button type="submit" class="btn btn-dark">Filtrar</button>
                         </form>
                     </div>
                         <div class="card-body">
-                            <table id="destinies" class="table table-bordered table-striped">
+                            <table id="sectors" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
@@ -40,19 +40,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($destinies as $destiny)
+                                    @foreach ($sectors as $sector)
                                         <tr>
-                                            <td>{{ $destiny->name }}</td>
+                                            <td>{{ $sector->name }}</td>
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">
-                                                    @can('destiny-list')
-                                                        <a href="{{ route('destinies.show', $destiny->id) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
+                                                    @can('sector-list')
+                                                        <a href="{{ route('sectors.show', $sector->id) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
                                                     @endcan
-                                                    @can('destiny-edit')
-                                                        <a href="{{ route('destinies.edit', $destiny->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
+                                                    @can('sector-edit')
+                                                        <a href="{{ route('sectors.edit', $sector->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
                                                     @endcan
-                                                    @can('destiny-delete')
-                                                        <form action="{{ route('destinies.destroy', $destiny->id) }}" style="display:inline" method="POST">
+                                                    @can('sector-delete')
+                                                        <form action="{{ route('sectors.destroy', $sector->id) }}" style="display:inline" method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Deseja apagar o setor?')" >Apagar</button>
@@ -64,11 +64,11 @@
                                                         Ações
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
-                                                        <a href="{{ route('destinies.show', $destiny->id) }}" class="dropdown-item">Visualizar</a>
-                                                        @can('destiny-edit')
-                                                            <a href="{{ route('destinies.edit', $destiny->id) }}" class="dropdown-item">Editar</a>
+                                                        <a href="{{ route('sectors.show', $sector->id) }}" class="dropdown-item">Visualizar</a>
+                                                        @can('sector-edit')
+                                                            <a href="{{ route('sectors.edit', $sector->id) }}" class="dropdown-item">Editar</a>
                                                         @endcan
-                                                        @can('destiny-delete')
+                                                        @can('sector-delete')
                                                             <button class="dropdown-item" onclick="return confirm('Deseja apagar o setor?')">Apagar</button>
                                                         @endcan
                                                     </div>
@@ -81,9 +81,9 @@
                         </div>
                         <div class="card-footer">
                             @if (isset($filters))
-                                {!! $destinies->appends($filters)->links() !!}
+                                {!! $sectors->appends($filters)->links() !!}
                             @else
-                                {!! $destinies->links() !!}
+                                {!! $sectors->links() !!}
                             @endif
                         </div>
                 </div>

@@ -261,9 +261,9 @@ return [
         ], */
         [
             'text' => 'Setores',
-            'url'  => 'admin/destinies',
+            'url'  => 'admin/sectors',
             'icon' => 'fas fa-map-signs',
-            'can'  => 'destinies',
+            'can'  => 'sectors',
         ],/*
         [
             'text' => 'Visitantes',

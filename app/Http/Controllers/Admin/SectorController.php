@@ -3,19 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUpdateDestiny;
-use App\Models\Destiny;
+use App\Http\Requests\StoreUpdateSector;
+use App\Models\Sector;
 use Illuminate\Http\Request;
 
-class DestinyController extends Controller
+class SectorController extends Controller
 {
     protected $repository;
 
-    public function __construct(Destiny $destiny)
+    public function __construct(Sector $sector)
     {
-        $this->repository = $destiny;
+        $this->repository = $sector;
 
-        // $this->middleware(['can:destinies']);
+        // $this->middleware(['can:sectors']);
     }
 
     /**
@@ -25,9 +25,9 @@ class DestinyController extends Controller
      */
     public function index()
     {
-        $destinies = $this->repository->paginate();
+        $sectors = $this->repository->paginate();
 
-        return view('admin.pages.destinies.index', compact('destinies'));
+        return view('admin.pages.sectors.index', compact('sectors'));
     }
 
     /**
@@ -37,20 +37,20 @@ class DestinyController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.destinies.create');
+        return view('admin.pages.sectors.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreUpdateDestiny  $request
+     * @param  \App\Http\Requests\StoreUpdateSector  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdateDestiny $request)
+    public function store(StoreUpdateSector $request)
     {
         $this->repository->create($request->all());
 
-        return redirect()->route('destinies.index')->with('message', 'Setor cadastrado com sucesso');
+        return redirect()->route('sectors.index')->with('message', 'Setor cadastrado com sucesso');
     }
 
     /**
@@ -61,11 +61,11 @@ class DestinyController extends Controller
      */
     public function show($id)
     {
-        if (!$destiny = $this->repository->find($id)) {
+        if (!$sector = $this->repository->find($id)) {
             return redirect()->back();
         }
 
-        return view('admin.pages.destinies.show', compact('destiny'));
+        return view('admin.pages.sectors.show', compact('sector'));
     }
 
     /**
@@ -76,11 +76,11 @@ class DestinyController extends Controller
      */
     public function edit($id)
     {
-        if (!$destiny = $this->repository->find($id)) {
+        if (!$sector = $this->repository->find($id)) {
             return redirect()->back();
         }
 
-        return view('admin.pages.destinies.edit', compact('destiny'));
+        return view('admin.pages.sectors.edit', compact('sector'));
     }
 
     /**
@@ -90,15 +90,15 @@ class DestinyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateDestiny $request, $id)
+    public function update(StoreUpdateSector $request, $id)
     {
-        if (!$destiny = $this->repository->find($id)) {
+        if (!$sector = $this->repository->find($id)) {
             return redirect()->back();
         }
 
-        $destiny->update($request->all());
+        $sector->update($request->all());
 
-        return redirect()->route('destinies.index')->with('message', 'Setor atualizado com sucesso');
+        return redirect()->route('sectors.index')->with('message', 'Setor atualizado com sucesso');
     }
 
     /**
@@ -109,13 +109,13 @@ class DestinyController extends Controller
      */
     public function destroy($id)
     {
-        if (!$destiny = $this->repository->find($id)) {
+        if (!$sector = $this->repository->find($id)) {
             return redirect()->back();
         }
 
-        $destiny->delete();
+        $sector->delete();
 
-        return redirect()->route('destinies.index')->with('message', 'Setor deletado com sucesso');
+        return redirect()->route('sectors.index')->with('message', 'Setor deletado com sucesso');
     }
 
     /**
@@ -128,7 +128,7 @@ class DestinyController extends Controller
     {
         $filters = $request->only('filter');
 
-        $destinies = $this->repository
+        $sectors = $this->repository
                             ->where(function($query) use ($request) {
                                 if ($request->filter) {
                                     $query->where('name', $request->filter);/*
@@ -137,6 +137,6 @@ class DestinyController extends Controller
                             })
                             ->paginate();
 
-        return view('admin.pages.destinies.index', compact('destinies', 'filters'));
+        return view('admin.pages.sectors.index', compact('sectors', 'filters'));
     }
 }

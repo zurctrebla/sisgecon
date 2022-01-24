@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDocsTable extends Migration
+class CreateSectorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateDocsTable extends Migration
      */
     public function up()
     {
-        Schema::create('docs', function (Blueprint $table) {
+        Schema::create('sectors', function (Blueprint $table) {
             $table->id();
-            $table->morphs('docable');
-            $table->string('doc_no');
-            $table->string('emission');
-            $table->string('emission_at');
-            $table->string('uf');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ class CreateDocsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('docs');
+        Schema::dropIfExists('sectors');
     }
 }

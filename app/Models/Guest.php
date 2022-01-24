@@ -9,11 +9,19 @@ class Guest extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'name', 'authorization', 'photo', 'destiny', 'status', 'authorized_at', 'person', 'company', 'obs', 'start_at', 'expires_at'];
+    protected $fillable = ['user_id', 'sector_id', 'name', 'authorization', 'photo', 'status', 'authorized_at', 'person', 'company', 'obs', 'start_at', 'expires_at'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get sector
+     */
+    public function sector()
+    {
+        return $this->belongsTo(Sector::class);
     }
 
     /**

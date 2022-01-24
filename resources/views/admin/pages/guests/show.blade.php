@@ -98,7 +98,7 @@
                         </tr>
                         <tr>
                             <th><?= __('Setor: ') ?></th>
-                            <td>{{ $guest->destiny }}</td>
+                            <td>{{ $guest->sector->name }}</td>
                         </tr>
                         <tr>
                             <th><?= __('Falar com quem: ') ?></th>

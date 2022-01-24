@@ -4,7 +4,7 @@
     <div class="col-sm-12">
       <div class="form-group">
        <label>Nome *</label>
-       <input type="text" name="name" class="form-control" placeholder="Nome:" value="{{ $destiny->name ?? old('name') }}" >
+       <input type="text" name="name" class="form-control" placeholder="Nome:" value="{{ $sector->name ?? old('name') }}" >
       </div>
     </div>
 </div>

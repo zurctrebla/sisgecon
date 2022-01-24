@@ -66,7 +66,7 @@
 
                                                 @endforeach
                                                 Autorização: {{ $guest->authorization }}<br>
-                                                Setor: {{ $guest->destiny }}
+                                                Setor: {{ $guest->sector->name }}
                                             </td>
 
                                             <td hidden><img src="{{url("storage/{$guest->photo}")}}" alt="{{$guest->name}}" style="max-width: 80px;"></td>

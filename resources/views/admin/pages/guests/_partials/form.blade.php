@@ -21,11 +21,11 @@
       <div class="form-group">
         <div class="class-form-group">
             <label>* Setor:</label>
-            <select name="destiny" id="destiny" class="form-control">
+            <select name="sector_id" class="form-control">
                 <option value="">Escolha</option>
                     <optgroup label="Selecione um setor">
-                        @foreach($destinies as $destiny)
-                            <option value="{{ $destiny->name }}" @if(isset($destiny->name)/*  && $destiny->name== $userRole */) selected @endif>{{ $destiny->name }}</option>
+                        @foreach($sectors as $sector)
+                            <option value="{{ $sector->id }}" @if(isset($sector->id)/*  && $sector->name== $userRole */) selected @endif>{{ $sector->name }}</option>
                         @endforeach
                     </optgroup>
             </select>
@@ -95,7 +95,7 @@
     <div class="col-sm-3">
         <div class="form-group">
          <label>Data de emissão *</label>
-         <input type="date" name="emission" class="form-control" max="<?php now(); ?>">
+         <input type="date" name="emission" class="form-control" max="<?php now(); ?>" value="{{ $user->docs->emission ?? old('emission') }}">
         </div>
     </div>
     <div class="col-sm-3">

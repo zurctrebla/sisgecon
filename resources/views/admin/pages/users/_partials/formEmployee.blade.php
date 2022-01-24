@@ -43,7 +43,7 @@
     <div class="col-sm-6">
         <div class="form-group">
          <label>Setor *</label>
-         <select name="sector" id="sector" class="form-control">
+         <select name="sector_id"class="form-control">
             <option value="">Escolha</option>
                 <optgroup label="Selecione um setor">
                     @foreach($sectors as $sector)
