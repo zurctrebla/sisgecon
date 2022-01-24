@@ -8,22 +8,16 @@
         <input type="text" name="name" class="form-control" placeholder="Nome:" value="{{ $guest->name ?? old('name') }}">
       </div>
     </div>
-    <div class="col-sm-3">
-      <div class="form-group">
-        <label>* Documento 1:</label>
-        <input type="text" name="document1" class="form-control" placeholder="Documento 1:" value="{{ $guest->document1 ?? old('document1') }}">
-      </div>
-    </div>
-    <div class="col-sm-3">
+    <div class="col-sm-6">
         <div class="form-group">
-          <label>* Documento 2:</label>
-          <input type="text" name="document2" class="form-control" placeholder="Documento 2:" value="{{ $guest->document2 ?? old('document2') }}">
+          <label>* Empresa:</label>
+          <input type="text" name="company" class="form-control" placeholder="Preencha apenas se for prestador de serviço:" value="{{ $guest->company ?? old('company') }}">
         </div>
-    </div>
+      </div>
 </div>
 
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <div class="form-group">
         <div class="class-form-group">
             <label>* Setor:</label>
@@ -38,22 +32,13 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <div class="form-group">
         <label>* Falar com quem:</label>
         <input type="text" name="person" class="form-control" placeholder="falar com quem:" value="{{ $guest->person ?? old('person') }}">
       </div>
     </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-6">
-      <div class="form-group">
-        <label>* Empresa:</label>
-        <input type="text" name="company" class="form-control" placeholder="Preencha apenas se for prestador de serviço:" value="{{ $guest->company ?? old('company') }}">
-      </div>
-    </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <div class="form-group">
           <label>* Observação:</label>
           <input type="textarea" name="obs" class="form-control" placeholder="Alguma observação:" value="{{ $guest->obs ?? old('obs') }}">
@@ -76,7 +61,7 @@
     </div>
 </div>
 
-<div hidden class="contentarea">
+{{-- <div hidden class="contentarea">
     <div class="camera">
         <video id="video">Video stream not available.</video>
         <button id="startbutton">Capturar</button>
@@ -86,18 +71,48 @@
     <div class="output">
         <img id="photo" alt="The screen capture will appear in this box.">
     </div>
-</div>
+</div> --}}
 
-<div hidden class="row">
+{{-- <div hidden class="row">
     <div class="col-sm-12">
       <div class="form-group">
         <label>* Foto:</label>
         <input type="file" name="photo" class="form-control" >
       </div>
     </div>
+</div> --}}
+
+<h3>Documento</h3>
+<hr>
+
+<div class="row">
+    <div class="col-sm-3">
+      <div class="form-group">
+       <label>Documento *</label>
+       <input type="text" name="doc_no" class="form-control" placeholder="RG, CHN, etc ..." value="{{ $user->docs->doc_no ?? old('doc_no') }}" rquired>
+      </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+         <label>Data de emissão *</label>
+         <input type="date" name="emission" class="form-control" max="<?php now(); ?>">
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+         <label>Orgão Emissor *</label>
+         <input type="text" name="emission_for" class="form-control" placeholder="Orgão Emissor:" value="{{ $user->docs->emission_for ?? old('emission_for') }}" required>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="form-group">
+         <label>UF *</label>
+         <input type="text" name="uf" class="form-control" placeholder="UF:" value="{{ $user->docs->uf ?? old('uf') }}" required>
+        </div>
+    </div>
 </div>
 
-<h3>Cadastro do Veículo</h3>
+<h3>Veículo</h3>
 <hr>
 
 <div class="row">

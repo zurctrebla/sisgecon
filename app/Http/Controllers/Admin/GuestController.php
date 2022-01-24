@@ -98,7 +98,26 @@ class GuestController extends Controller
             $data['photo'] = $request->photo->store('guests/photos');
         }
 
-        $this->repository->create($data);
+        $guest = $this->repository->create($data);
+
+        if ($request->model && $request->plate) {
+
+            $data['model'] = $request->model;
+            $data['plate'] = $request->plate;
+
+            $guest->vehicles()->create($data);
+        }
+
+        if ($request->doc_no) {
+
+            $data['doc_no'] = $request->doc_no;
+            $data['emission'] = $request->emission;
+            $data['emission_for'] = $request->emission_for;
+            $data['uf'] = $request->uf;
+
+            $guest->documents()->create($data);
+        }
+
         return redirect()->route('guests.index')->with('message', 'Visitante cadastrado com sucesso');
 
     }

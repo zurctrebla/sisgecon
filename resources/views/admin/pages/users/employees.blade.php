@@ -41,7 +41,8 @@
                                         <th>Saída</th>
                                         <th>Entrada</th>
                                         <th>Saída</th>
-                                        <th class="text-center">Ações</th>
+                                        <th class="text-center">Registros</th>
+                                        <th hidden class="text-center">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -116,6 +117,35 @@
                                                         @endcan
                                                         @can('user-delete')
                                                             <button class="dropdown-item" onclick="return confirm('Deseja apagar o usuário ?')">Apagar</button>
+                                                        @endcan
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td hidden class="text-center">
+                                                <span class="d-none d-md-block">
+                                                    <a href="{{ route('guests.show', $user->id) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
+                                                    @can('user-edit')
+                                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
+                                                    @endcan
+                                                    @can('user-delete')
+                                                        <form action="{{ route('users.destroy', $user->id) }}" style="display:inline" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Deseja apagar o visitante ?')" >Apagar</button>
+                                                        </form>
+                                                    @endcan
+                                                </span>
+                                                <div class="dropdown d-block d-md-none">
+                                                    <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Ações
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
+                                                        <a href="{{ route('users.show', $user->id) }}" class="dropdown-item">Visualizar</a>
+                                                        @can('user-edit')
+                                                            <a href="{{ route('users.edit', $user->id) }}" class="dropdown-item">Editar</a>
+                                                        @endcan
+                                                        @can('user-delete')
+                                                            <button class="dropdown-item" onclick="return confirm('Deseja apagar o visitante ?')">Apagar</button>
                                                         @endcan
                                                     </div>
                                                 </div>

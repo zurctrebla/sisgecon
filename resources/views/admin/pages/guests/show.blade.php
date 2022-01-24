@@ -64,11 +64,23 @@
                         </tr>
                         <tr>
                             <th><?= __('Veículo: ') ?></th>
-                            <td>{{ $guest->model }}</td>
+                            <td>
+                                @foreach ($guest->vehicles as $vehicle)
+
+                                    {{ $vehicle->model }}
+
+                                @endforeach
+                            </td>
                         </tr>
                         <tr>
                             <th><?= __('Placa do veíclo: ') ?></th>
-                            <td>{{ $guest->plate }}</td>
+                            <td>
+                                @foreach ($guest->vehicles as $vehicle)
+
+                                    {{ $vehicle->plate }}
+
+                                @endforeach
+                            </td>
                         </tr>
                         <tr>
                             <th><?= __('Autorização') ?></th>
@@ -76,7 +88,13 @@
                         </tr>
                         <tr>
                             <th><?= __('Documento: ') ?></th>
-                            <td>{{ $guest->document1 }}</td>
+                            <td>
+                                @foreach ($guest->documents as $document)
+
+                                    {{ $document->doc_no }}
+
+                                @endforeach
+                            </td>
                         </tr>
                         <tr>
                             <th><?= __('Setor: ') ?></th>

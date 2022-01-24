@@ -38,14 +38,15 @@
                             <table id="guests" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
                                         <th>Visitante</th>
-                                        <th>Cadastrado por: </th>
-                                        <th>Documento</th>
-                                        <th>Autorização</th>
-                                        <th>Imagem</th>
-                                        <th>Setor</th>
+                                        <th>Informações</th>
+                                        <th hidden>Imagem</th>
                                         <th>Acesso</th>
+                                        <th>Entrada</th>
+                                        <th>Saída</th>
+                                        <th>Entrada</th>
+                                        <th>Saída</th>
+                                        <th class="text-center">Registros</th>
                                         <th class="text-center">Ações</th>
                                     </tr>
                                 </thead>
@@ -53,13 +54,22 @@
                                     @foreach ($guests as $guest)
                                     {{-- {{ dd($guest) }} --}}
                                         <tr>
-                                            <td>{{ $guest->id }}</td>
-                                            <td>{{ $guest->name }}</td>
-                                            <td>{{ $guest->user->name }}</td>
-                                            <td>{{ $guest->document1 }}</td>
-                                            <td>{{ $guest->authorization }}</td>
-                                            <td><img src="{{url("storage/{$guest->photo}")}}" alt="{{$guest->name}}" style="max-width: 80px;"></td>
-                                            <td>{{ $guest->destiny }}</td>
+                                            <td>
+                                                Nome: {{ $guest->name }}<br>
+                                                Cadastrado por: {{ $guest->user->name }}
+                                            </td>
+
+                                            <td>
+                                                @foreach ($guest->documents as $document)
+
+                                                    Documento: {{ $document->doc_no }}<br>
+
+                                                @endforeach
+                                                Autorização: {{ $guest->authorization }}<br>
+                                                Setor: {{ $guest->destiny }}
+                                            </td>
+
+                                            <td hidden><img src="{{url("storage/{$guest->photo}")}}" alt="{{$guest->name}}" style="max-width: 80px;"></td>
                                             <td>
                                                 Entrada: {{ date('d/m/Y', strtotime($guest->start_at) )}} </br>
                                                 Saída: {{ date('d/m/Y', strtotime($guest->expires_at) )}} </br>
@@ -76,6 +86,18 @@
 
                                                 <a href="#" class="badge badge-<?= $v; ?>" data-toggle="modal" data-target="#exampleModalCenter<?= $guest->id;?>"><?= $u; ?></a>
 
+                                            </td>
+                                            <td>1</td>
+                                            <td>2</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td class="text-center">
+                                                <span class="d-none d-md-block">
+                                                    <a href="{{ route('guests.show', $guest->id) }}" class="btn btn-outline-primary btn-sm">Registrar</a>
+                                                    @can('guest-edit')
+                                                        <a href="{{ route('guests.edit', $guest->id) }}" class="btn btn-outline-warning btn-sm">Historico</a>
+                                                    @endcan
+                                                </span>
                                             </td>
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">

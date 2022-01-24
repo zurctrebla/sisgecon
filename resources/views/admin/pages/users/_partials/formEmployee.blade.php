@@ -82,7 +82,7 @@
     </div>
 </div>
 
-<h3>Cadastro do Veículo</h3>
+<h3>Veículo</h3>
 <hr>
 
 <div class="row">

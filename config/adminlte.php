@@ -253,12 +253,6 @@ return [
             'url'  => 'admin/permissions',
             'icon' => 'fas fa-lock',
             'can'  => 'permissions',
-        ],
-        [
-            'text' => 'Visitantes',
-            'url'  => 'admin/guests',
-            'icon' => 'fas fa-user-tie',
-            'can'  => 'guests',
         ],/*
         [
             'text' => 'Perfil',
@@ -270,12 +264,65 @@ return [
             'url'  => 'admin/destinies',
             'icon' => 'fas fa-map-signs',
             'can'  => 'destinies',
+        ],/*
+        [
+            'text' => 'Visitantes',
+            'url'  => 'admin/guests',
+            'icon' => 'fas fa-user-tie',
+            'can'  => 'guests',
         ],
         [
             'text' => 'Funcionários',
             'url'  => 'admin/users/employees',
             'icon' => 'fas fa-chalkboard-teacher',
-            /* 'can'  => 'users-employee', */
+            'can'  => 'users-employee',
+        ], */
+        [
+            'text'    => 'Acesso',
+            /* 'icon'    => 'fas fa-fw fa-share', */
+            'icon'    => 'fas fa-door-open',
+            'submenu' => [
+                [
+                    /* 'text' => 'level_one',
+                    'url'  => '#', */
+                    'text' => 'Visitantes',
+                    'url'  => 'admin/guests',
+                    'icon' => 'fas fa-user-tie',
+                    'can'  => 'guests',
+                ],/*
+                [
+                    'text'    => 'level_one',
+                    'url'     => '#',
+                    'submenu' => [
+                        [
+                            'text' => 'level_two',
+                            'url'  => '#',
+                        ],
+                        [
+                            'text'    => 'level_two',
+                            'url'     => '#',
+                            'submenu' => [
+                                [
+                                    'text' => 'level_three',
+                                    'url'  => '#',
+                                ],
+                                [
+                                    'text' => 'level_three',
+                                    'url'  => '#',
+                                ],
+                            ],
+                        ],
+                    ],
+                ], */
+                [
+                    /* 'text' => 'level_one',
+                    'url'  => '#', */
+                    'text' => 'Funcionários',
+                    'url'  => 'admin/users/employees',
+                    'icon' => 'fas fa-chalkboard-teacher',
+                    /* 'can'  => 'users-employee', */
+                ],
+            ],
         ],
         /*
         [

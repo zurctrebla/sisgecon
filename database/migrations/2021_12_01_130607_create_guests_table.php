@@ -17,8 +17,6 @@ class CreateGuestsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('name');
-            $table->string('document1')->nullable();
-            $table->string('document2')->nullable();
             $table->string('authorization')->unique();
             $table->string('photo')->nullable();
             $table->string('destiny');
@@ -28,8 +26,6 @@ class CreateGuestsTable extends Migration
             $table->string('person');
             $table->string('company')->nullable();
             $table->text('obs')->nullable();
-            $table->string('model')->nullable();
-            $table->string('plate')->nullable();
             $table->date('start_at');
             $table->date('expires_at');
             $table->timestamps();
