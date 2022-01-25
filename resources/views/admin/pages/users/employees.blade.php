@@ -93,13 +93,13 @@
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">
 
-                                                    @can('employees-register')
+                                                    {{-- @can('employees-register') --}}
                                                         <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-<?php if ($key % 2 == 0){ echo "dark"; }else{ echo "danger"; } ?> btn-sm" data-toggle="modal" data-target="#exampleModalCenter<?= $user->id;?>">Registrar</a>
-                                                    @endcan
+                                                    {{-- @endcan --}}
 
-                                                    @can('employees-history')
+                                                    {{-- @can('employees-history') --}}
                                                         <a href="{{ route('users.history', $user->id) }}" class="btn btn-outline-primary btn-sm">Ver Histórico</a>
-                                                    @endcan
+                                                    {{-- @endcan --}}
 
                                                     @can('user-edit')
                                                         <a hidden href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
