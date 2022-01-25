@@ -93,11 +93,11 @@
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">
 
-                                                    @can('user-list')
+                                                    @can('employees-register')
                                                         <a href="{{ route('users.register', $user->id) }}" class="btn btn-outline-<?php if ($key % 2 == 0){ echo "dark"; }else{ echo "danger"; } ?> btn-sm" data-toggle="modal" data-target="#exampleModalCenter<?= $user->id;?>">Registrar</a>
                                                     @endcan
 
-                                                    @can('user-list')
+                                                    @can('employees-history')
                                                         <a href="{{ route('users.history', $user->id) }}" class="btn btn-outline-primary btn-sm">Ver Histórico</a>
                                                     @endcan
 
