@@ -54,9 +54,15 @@
                                 <tr>
                                     <td>data</td>
 
-                                        @foreach ($chunk as $point)
+                                        @foreach ($chunk as $key => $point)
 
-                                            <td>{{ date('H:i:s', strtotime($point->register)) }}</td>
+                                            @if ($key == 0)
+
+                                            <td>{{ date('d/m/Y', strtotime($point->register)) }}</td>
+
+                                            @endif
+
+                                            <td>{{ date('H:i:s', strtotime($point->register)) }}{{$key}}</td>
 
                                         @endforeach
 
