@@ -195,6 +195,17 @@ class UserController extends Controller
             return redirect()->back();
         }
 
+        $filter = date('Y-m-d');
+
+        $user = $this->repository
+                    ->with(['points' => function ($query) use ($filter) {
+
+                        $query->where('register', 'LIKE', "{$filter}%");    /* filtra points */
+                        $query->where('reason_status','N');                 /* filtra points sem motivos*/
+
+                    }])->find($id)                              /* filtra os usuários com função funcionário */
+                    /* ->paginate() */;
+
         /* aqui possivelmente seja implementado uma função para agrupar os registros, dividindo-os em dia, mes e ano */
 
         return view('admin.pages.users.historySheet', compact('user'));

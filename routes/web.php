@@ -16,6 +16,9 @@ use App\Http\Controllers\Admin\{
 
 Route::middleware(['auth'])->group(function () {
 
+    /**
+     * Dasboard
+     */
     Route::get('/admin/home', [DashboardController::class, 'index'])->name('admin.index');
     Route::get('/admin/settings', [SettingController::class, 'index']);
 
@@ -23,22 +26,15 @@ Route::middleware(['auth'])->group(function () {
      * Users
      */
     Route::get('/admin/users/employees', [UserController::class, 'employee'])->name('users.employee');
-
     Route::get('/admin/users/createEmployee', [UserController::class, 'createEmployee'])->name('users.createEmployee');
-
     Route::post('/admin/users/storeEmployee', [UserController::class, 'storeEmployee'])->name('users.storeEmployee');
-
     Route::get('/admin/users/register/{id}', [UserController::class, 'register'])->name('users.register');
-
     Route::get('/admin/users/historySheet/{id}', [UserController::class, 'history'])->name('users.history');
-
 
     // Route::any('/admin/users/profile', [UserController::class, 'profile'])->name('users.profile');
 
     Route::any('/admin/users/search', [UserController::class, 'search'])->name('users.search');
-
     Route::any('/admin/users/profile', [UserController::class, 'profile'])->name('users.profile');
-
     Route::get('/admin/users/create', [UserController::class, 'create'])->name('users.create');
     Route::put('/admin/users/{id}', [UserController::class, 'update'])->name('users.update');
     Route::get('/admin/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
@@ -91,6 +87,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/guests/register/{id}', [GuestController::class, 'register'])->name('guests.register');
 
+    // Route::get('/admin/guests/history', [GuestController::class, 'history'])->name('guests.history');
+
     Route::get('/admin/guests/historySheet/{id}', [GuestController::class, 'history'])->name('guests.history');
 
     Route::any('/admin/guests/search', [GuestController::class, 'search'])->name('guests.search');
@@ -101,7 +99,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/guests/{id}', [GuestController::class, 'show'])->name('guests.show');
     Route::post('/admin/guests', [GuestController::class, 'store'])->name('guests.store');
     Route::get('/admin/guests', [GuestController::class, 'index'])->name('guests.index');
-    Route::get('/admin/guests/history', [GuestController::class, 'history'])->name('guests.history');
 
     /**
      * Sectors
@@ -118,14 +115,14 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-Route::get('test-acl', function () {
-    // dd(auth()->user()->permissions());
-        $today = date_create(date('Y-m-d'));
-        $yesterday = date_sub($today, date_interval_create_from_date_string("1 days"));
+// Route::get('test-acl', function () {
+//     // dd(auth()->user()->permissions());
+//         $today = date_create(date('Y-m-d'));
+//         $yesterday = date_sub($today, date_interval_create_from_date_string("1 days"));
 
-        echo var_dump($today);
-        echo var_dump($yesterday);
-});
+//         echo var_dump($today);
+//         echo var_dump($yesterday);
+// });
 
 Route::get('/', function () {
     return view('auth.login');

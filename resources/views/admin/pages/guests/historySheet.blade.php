@@ -11,14 +11,14 @@
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <span class="d-none d-md-block">
-                <a href="{{ route('guest.index') }}" class="btn btn-outline-info btn-sm">Voltar</a>
+                <a href="{{ route('guests.index') }}" class="btn btn-outline-info btn-sm">Voltar</a>
             </span>
             <div class="dropdown d-block d-md-none">
                 <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Ações
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
-                    <a href="{{ route('guest.show', $guest->id) }}" class="btn btn-outline-info btn-sm">Voltar</a>
+                    <a href="{{ route('guests.show', $guest->id) }}" class="btn btn-outline-info btn-sm">Voltar</a>
 
                 </div>
             </div>
@@ -46,7 +46,6 @@
                             <th scope="col">Saida</th>
                             <th scope="col">Entrada</th>
                             <th scope="col">Saida</th>
-                            <th scope="col">Horas</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -76,8 +75,6 @@
                                             <td></td>
 
                                         @endif
-
-                                    <td>horas</td>
                                 </tr>
                             @endforeach
                         </tbody>

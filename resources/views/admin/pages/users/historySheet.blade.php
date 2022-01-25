@@ -41,7 +41,7 @@
                     <table class="table table-bordered">
                         <thead>
                           <tr>
-                            <th scope="col">data</th>
+                            <th scope="col">Data</th>
                             <th scope="col">Entrada</th>
                             <th scope="col">Saida</th>
                             <th scope="col">Entrada</th>
@@ -52,17 +52,39 @@
                         <tbody>
                             @foreach ($user->points->chunk(4) as $chunk)
                                 <tr>
-                                    <td>data</td>
+                                    {{-- <td>data</td> --}}
 
                                         @foreach ($chunk as $key => $point)
 
                                             @if ($key == 0)
 
-                                            <td>{{ date('d/m/Y', strtotime($point->register)) }}</td>
+
+                                                <td><strong>{{ date('d/m/Y', strtotime($point->register)) }}</strong></td>
 
                                             @endif
 
-                                            <td>{{ date('H:i:s', strtotime($point->register)) }}{{$key}}</td>
+                                                <td>{{ date('H:i:s', strtotime($point->register)) }}</td>
+
+                                                @if ($key == 0)
+                                                    <?php
+                                                        $item1 = $point->register;
+                                                    ?>
+                                                @endif
+                                                @if ($key == 1)
+                                                    <?php
+                                                        $item2 = $point->register;
+                                                    ?>
+                                                @endif
+                                                @if ($key == 2)
+                                                    <?php
+                                                        $item3 = $point->register;
+                                                    ?>
+                                                @endif
+                                                @if ($key == 3)
+                                                    <?php
+                                                        $item4 = $point->register;
+                                                    ?>
+                                                @endif
 
                                         @endforeach
 
@@ -83,7 +105,29 @@
 
                                         @endif
 
-                                    <td>horas</td>
+                                    <td>
+                                        @if ($key == 3)
+
+                                            <?php
+
+                                                // Faz o cálculo das horas
+                                                $total = (strtotime($item2) - strtotime($item1)) + (strtotime($item4) - strtotime($item3));
+
+                                                $hours      = floor($total / 60 / 60);
+
+                                                // Encontra os minutos trabalhados
+                                                $minutes    = round(($total - ($hours * 60 * 60)) / 60);
+
+                                                // Formata a hora e minuto para ficar no formato de 2 números, exemplo 00
+                                                $hours = str_pad($hours, 2, "0", STR_PAD_LEFT);
+                                                $minutes = str_pad($minutes, 2, "0", STR_PAD_LEFT);
+
+                                                // Exibe no formato "hora:minuto"
+                                                echo $hours.':'.$minutes;
+                                            ?>
+
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
