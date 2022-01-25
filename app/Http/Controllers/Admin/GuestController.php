@@ -268,8 +268,6 @@ class GuestController extends Controller
                             ->where(function($query) use ($request) {
                                 if ($request->filter) {
                                     $query->orWhere('name', 'LIKE', "%{$request->filter}%");
-                                    $query->orWhere('document1', $request->filter);
-                                    $query->orWhere('document2', $request->filter);
                                     $query->orWhere('authorization', $request->filter);
                                 }
                             })
