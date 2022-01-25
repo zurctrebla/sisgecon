@@ -133,13 +133,13 @@ class UserController extends Controller
             $user->phones()->create($data);
         }
 
-        if ($request->model && $request->plate) {
+        // if ($request->model && $request->plate) {
 
-            $data['model'] = $request->model;
-            $data['plate'] = $request->plate;
+        //     $data['model'] = $request->model;
+        //     $data['plate'] = $request->plate;
 
-            $user->vehicles()->create($data);
-        }
+        //     $user->vehicles()->create($data);
+        // }
 
         if ($request->doc_no) {
 

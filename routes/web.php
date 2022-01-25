@@ -84,11 +84,7 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Guests
      */
-
     Route::get('/admin/guests/register/{id}', [GuestController::class, 'register'])->name('guests.register');
-
-    // Route::get('/admin/guests/history', [GuestController::class, 'history'])->name('guests.history');
-
     Route::get('/admin/guests/historySheet/{id}', [GuestController::class, 'history'])->name('guests.history');
 
     Route::any('/admin/guests/search', [GuestController::class, 'search'])->name('guests.search');
