@@ -17,19 +17,16 @@ use App\Http\Controllers\Admin\{
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/admin/home', [DashboardController::class, 'index'])->name('admin.index');
-
     Route::get('/admin/settings', [SettingController::class, 'index']);
 
     /**
      * Users
      */
-
     Route::get('/admin/users/employees', [UserController::class, 'employee'])->name('users.employee');
 
     Route::get('/admin/users/createEmployee', [UserController::class, 'createEmployee'])->name('users.createEmployee');
 
     Route::post('/admin/users/storeEmployee', [UserController::class, 'storeEmployee'])->name('users.storeEmployee');
-
 
     Route::get('/admin/users/register/{id}', [UserController::class, 'register'])->name('users.register');
 
@@ -49,10 +46,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/users/{id}', [UserController::class, 'show'])->name('users.show');
     Route::post('/admin/users', [UserController::class, 'store'])->name('users.store');
     Route::get('/admin/users', [UserController::class, 'index'])->name('users.index');
-
-
-
-
 
     /**
      * Permissions
@@ -95,6 +88,11 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Guests
      */
+
+    Route::get('/admin/guests/register/{id}', [GuestController::class, 'register'])->name('guests.register');
+
+    Route::get('/admin/guests/historySheet/{id}', [GuestController::class, 'history'])->name('guests.history');
+
     Route::any('/admin/guests/search', [GuestController::class, 'search'])->name('guests.search');
     Route::get('/admin/guests/create', [GuestController::class, 'create'])->name('guests.create');
     Route::put('/admin/guests/{id}', [GuestController::class, 'update'])->name('guests.update');

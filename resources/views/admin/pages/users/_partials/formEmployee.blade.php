@@ -47,7 +47,7 @@
             <option value="">Escolha</option>
                 <optgroup label="Selecione um setor">
                     @foreach($sectors as $sector)
-                        <option value="{{ $sector->name }}" @if(isset($sector->name)/*  && $sector->name== $userRole */) selected @endif>{{ $sector->name }}</option>
+                        <option value="{{ $sector->id }}" @if(isset($sector->id)/*  && $sector->name== $userRole */) selected @endif>{{ $sector->name }}</option>
                     @endforeach
                 </optgroup>
         </select>

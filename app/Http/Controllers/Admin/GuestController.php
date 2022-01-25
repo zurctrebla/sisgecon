@@ -57,17 +57,17 @@ class GuestController extends Controller
         return view('admin.pages.guests.index', compact('guests'));
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function history()
-    {
-        $guests = $this->repository->where('status', 'Expirado')->paginate();
+    // /**
+    //  * Display a listing of the resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function history()
+    // {
+    //     $guests = $this->repository->where('status', 'Expirado')->paginate();
 
-        return view('admin.pages.guests.history', compact('guests'));
-    }
+    //     return view('admin.pages.guests.history', compact('guests'));
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -120,6 +120,50 @@ class GuestController extends Controller
 
         return redirect()->route('guests.index')->with('message', 'Visitante cadastrado com sucesso');
 
+    }
+
+    /**
+     * Register the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\StoreUpdateGuest $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request, $id)
+    {
+        if (!$guest = $this->repository->find($id)) {
+            return redirect()->back();
+        }
+
+        $data = $request->all();
+
+        if ($request->reason) {
+            $data['reason'] = $request->reason;
+            $data['reason_status'] = 'Y';
+        }
+
+        $data['register'] = date('Y-m-d H:i:s');
+
+        $guest->points()->create($data);
+
+        return redirect()->route('guests.index')->with('message', 'Ponto Registrado com sucesso');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function history($id)
+    {
+        if (!$guest = $this->repository->find($id)) {
+            return redirect()->back();
+        }
+
+        /* aqui possivelmente seja implementado uma função para agrupar os registros, dividindo-os em dia, mes e ano */
+
+        return view('admin.pages.guests.historySheet', compact('guest'));
     }
 
     /**
