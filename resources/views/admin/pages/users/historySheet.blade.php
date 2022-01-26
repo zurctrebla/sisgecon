@@ -47,7 +47,7 @@
                             <th scope="col">Entrada</th>
                             <th scope="col">Saida</th>
 
-                            @can('user-list')
+                            @can('employee-create')
                                 <th scope="col">Horas</th>
                             @endcan
 
@@ -86,7 +86,7 @@
                                                 $item4 = $point->register;
                                             ?>
                                         @endif
-                                        @can('user-list')
+                                        @can('employee-create')
                                             @if ($loop->last)
 
                                             <td>
