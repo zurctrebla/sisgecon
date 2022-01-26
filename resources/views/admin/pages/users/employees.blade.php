@@ -11,7 +11,7 @@
             </div>
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                @can('users')
+                @can('employee-create')
                     <a href="{{ route('users.createEmployee') }}" class="btn btn-outline-success btn-sm">Cadastrar</a>
                 @endcan
             </ol>
