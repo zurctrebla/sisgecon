@@ -37,7 +37,17 @@ class GuestController extends Controller
      */
     public function index()
     {
-        $guests = $this->repository/* ->where('status', '<>', 'Expirado') */->paginate();
+        //$guests = $this->repository/* ->where('status', '<>', 'Expirado') */->paginate();
+
+        $filter = date('Y-m-d');
+
+        $guests = $this->repository
+                    ->with(['points' => function ($query) use ($filter) {
+
+                        $query->where('register', 'LIKE', "{$filter}%");    /* filtra points */
+                        $query->where('reason_status','N');                 /* filtra points sem motivos*/
+
+                    }])->orderBy('expires_at', 'DESC')->paginate();
 
         //dd($guests);
         // $guest = $this->repository->first();

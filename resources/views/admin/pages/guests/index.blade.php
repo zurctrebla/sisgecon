@@ -11,7 +11,7 @@
             </div>
             <div class="col-sm-6">
             <ol hidden class="breadcrumb float-sm-right">
-                <a href="{{ route('guests.history') }}" class="btn btn-outline-light btn-sm">Historico</a>
+                <a href="{{-- {{ route('guests.history') }} --}}" class="btn btn-outline-light btn-sm">Historico</a>
             </ol>
             <ol class="breadcrumb float-sm-right">
                 @can('guest-create')
@@ -131,11 +131,16 @@
                                                 <span class="d-none d-md-block">
 
                                                     @can('guest-list')
-                                                        <a href="{{ route('guests.register', $guest->id) }}" class="btn btn-outline-<?php if ($key % 2 == 0){ echo "dark"; }else{ echo "danger"; } ?> btn-sm" data-toggle="modal" data-target="#exampleModal2<?= $guest->id;?>">Registrar</a>
+                                                    <style>
+                                                        .disabled-link {
+                                                        pointer-events: none;
+                                                        }
+                                                    </style>
+                                                        <a href="{{ route('guests.register', $guest->id) }}" class="btn btn-outline-<?php if ($key % 2 == 0){ echo "dark"; }else{ echo "danger"; } ?> btn-sm" data-toggle="modal" data-target="<?php if ($v == "success") {echo "#exampleModal2";}?><?= $guest->id;?>" >Registrar</a>
                                                     @endcan
 
                                                     @can('guest-list')
-                                                        <a href="{{-- {{ route('guests.history', $guest->id) }} --}}" class="btn btn-outline-primary btn-sm">Ver Histórico</a>
+                                                        <a href="{{ route('guests.history', $guest->id) }}" class="btn btn-outline-primary btn-sm">Ver Histórico</a>
                                                     @endcan
 
                                                     @can('guest-edit')
@@ -256,7 +261,7 @@
 
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar <?= $guest->id; ?></button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                                                         <button type="submit" class="btn btn-primary">Salvar</button>
                                                     </div>
                                                         </form>

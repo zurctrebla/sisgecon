@@ -61,11 +61,11 @@
                         <tr>
                             <th><?= __('E-mail') ?></th>
                             <td>{{ $user->email }}</td>
-                        </tr>
+                        </tr>{{--
                         <tr>
-                            <th><?= __('Telefone') ?></th>
+                            <th><?php // __('Telefone') ?></th>
                             <td>{{ ($user->phones->number ?? '') }}</td>
-                        </tr>
+                        </tr> --}}
                         <tr>
                             <th><?= __('Nível de Acesso') ?></th>
                             <td>{{ $user->role->name }}</td>
