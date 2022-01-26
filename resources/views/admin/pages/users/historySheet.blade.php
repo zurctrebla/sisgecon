@@ -74,29 +74,29 @@
                                         <td>
                                             {{ date('H:i:s', strtotime($point->register)) }}
 
-                                            {{$loop->remaining}}
-                                            {{$loop->count}}
+                                            {{-- {{$loop->remaining}}
+                                            {{$loop->count}} --}}
 
                                         </td>
 
                                         @if ($loop->remaining  == 3)
 
-                                            <?php echo "item 1 : " . $item1 = $point->register . "<br>"; ?>
+                                            <?php $item1 = $point->register; ?>
 
                                         @endif
                                         @if ($loop->remaining  == 2)
 
-                                            <?php echo "item 2 : " . $item2 = $point->register . "<br>"; ?>
+                                            <?php $item2 = $point->register; ?>
 
                                         @endif
                                         @if ($loop->remaining == 1)
 
-                                            <?php echo "item 3 : " . $item3 = $point->register . "<br>"; ?>
+                                            <?php $item3 = $point->register; ?>
 
                                         @endif
                                         @if (($loop->remaining == 0))
 
-                                            <?php echo "item 4 : " . $item4 = $point->register . "<br>"; ?>
+                                            <?php $item4 = $point->register; ?>
 
                                         @endif
 
@@ -125,28 +125,40 @@
                                                 @endif
 
                                                 <td>
+                                                    {{-- {{ ($item4) ?? ''}}<br>
 
-                                                    {{-- {{ ($item4)  ? date_diff(new DateTime($item4), new DateTime($item3))->format('%H:%I:%S') : '' }} --}}
-                                                    {{-- {{ ($item4)  ? date_diff(new DateTime($item4), new DateTime($item1))->format('%H:%I:%S') : '' }} --}}
+                                                    {{ ($item3) ?? ''}}<br>
+
+                                                    {{ ($item2) ?? ''}}<br>
+
+                                                    {{ ($item1) ?? ''}}<br> --}}
+
+                                                    {{-- {{ ($item4 != 0)  ? date_diff(new DateTime($item3), new DateTime($item2))->format('%H:%I:%S') : '' }}<br> --}}
+
+                                                    {{-- {{ ($item1 != 0)  ? date_diff(new DateTime($item4), new DateTime($item1))->format('%H:%I:%S') : '' }} --}}
+
                                                     <?php
 
-                                                    // $item4 = preg_replace('/[\&\.\;\" "]+/', '', $item4);
+                                                        if ($item1 != 0) {
 
-                                                    // $item1 = preg_replace('/[\&\.\;\" "]+/', '', $item1);
+                                                        $datetime1 = new DateTime($item1);
+                                                        $datetime2 = new DateTime($item2);
+                                                        $datetime3 = new DateTime($item3);
+                                                        $datetime4 = new DateTime($item4);
 
-                                                    // $item1 = str_replace(array("&", ";"), '', $item1);
+                                                        //$interval1 = $datetime4->diff($datetime1);
+                                                        //$interval2 = $datetime3->diff($datetime2);
 
-                                                    // $item4 = str_replace(array("&", ";"), '', $item4);
+                                                        $interval = $datetime4->diff($datetime1);
 
-                                                    //$pregValue = str_replace(['.', ','], [',', '.'], preg_replace('#[^0-9\.,]#', '', $value));
-
-
-
-
-                                                        $datetime1 = new DateTime($item4);
-                                                        $datetime2 = new DateTime($item1);
-                                                        $interval = $datetime1->diff($datetime2);
                                                         echo $interval->format('%H:%I:%S');
+
+                                                        }
+
+                                                        // $datetime1 = new DateTime($item4);
+                                                        // $datetime2 = new DateTime($item3);
+                                                        // $interval = $datetime1->diff($datetime2);
+                                                        // echo $interval->format('%H:%I:%S');
 
                                                     ?>
 
