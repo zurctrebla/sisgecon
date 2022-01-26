@@ -56,7 +56,7 @@
                         <tbody>
                             @foreach ($user->points->chunk(4) as $chunk)
 
-                                <?php $item1 = $item2 = $item3 = $item4 = $total = $hours = $minutes = 0;?>
+                                <?php $item1 = $item2 = $item3 = $item4 = $total = $hours = $minutes = 0; ?>
 
                                 <tr>
                                     @foreach ($chunk as $key => $point)
@@ -125,40 +125,42 @@
                                                 @endif
 
                                                 <td>
-                                                    {{-- {{ ($item4) ?? ''}}<br>
-
-                                                    {{ ($item3) ?? ''}}<br>
-
-                                                    {{ ($item2) ?? ''}}<br>
-
-                                                    {{ ($item1) ?? ''}}<br> --}}
-
-                                                    {{-- {{ ($item4 != 0)  ? date_diff(new DateTime($item3), new DateTime($item2))->format('%H:%I:%S') : '' }}<br> --}}
-
-                                                    {{-- {{ ($item1 != 0)  ? date_diff(new DateTime($item4), new DateTime($item1))->format('%H:%I:%S') : '' }} --}}
 
                                                     <?php
 
-                                                        if ($item1 != 0) {
+                                                        // Faz o cálculo das horas
+                                                        // if (($item1 != 0) && ($item2 != 0) && ($item3 != 0) && ($item4 != 0)) {
+                                                        //     $total = (  (strtotime($item2) - strtotime($item1)) + (strtotime($item4) - strtotime($item3))   );
+                                                        // }
 
-                                                        $datetime1 = new DateTime($item1);
-                                                        $datetime2 = new DateTime($item2);
-                                                        $datetime3 = new DateTime($item3);
-                                                        $datetime4 = new DateTime($item4);
+                                                        // if (($item1 == 0) && ($item2 == 0) && ($item3 != 0) && ($item4 != 0)) {
+                                                        //     $total = (  (strtotime($item3) - strtotime($item2))   );
+                                                        // }
 
-                                                        //$interval1 = $datetime4->diff($datetime1);
-                                                        //$interval2 = $datetime3->diff($datetime2);
+                                                        // if (($item1 == 0) && ($item2 == 0) && ($item3 != 0) && ($item4 != 0)) {
+                                                        //     $total = (  (strtotime($item4) - strtotime($item3))   );
+                                                        // }
 
-                                                        $interval = $datetime4->diff($datetime1);
+                                                        // /* if ($hours && $minutes && $total) { */
+                                                        //     //$total = (  (strtotime($item2) - strtotime($item1))   );
+                                                        //     echo "1: " . $item1 . "<br>" . "2: " . $item2 . "<br>"  . "3: " . $item3 . "<br>" .  "4: " . $item4 . "<br>" ;
 
-                                                        echo $interval->format('%H:%I:%S');
+                                                        //     // $total = (  (strtotime($item3) - strtotime($item2))   );
 
-                                                        }
+                                                        //     // Encontra as horas trabalhadas
+                                                        //     $hours      = floor($total / 60 / 60);
 
-                                                        // $datetime1 = new DateTime($item4);
-                                                        // $datetime2 = new DateTime($item3);
-                                                        // $interval = $datetime1->diff($datetime2);
-                                                        // echo $interval->format('%H:%I:%S');
+                                                        //     // Encontra os minutos trabalhados
+                                                        //     $minutes    = round(($total - ($hours * 60 * 60)) / 60);
+
+                                                        //     // Formata a hora e minuto para ficar no formato de 2 números, exemplo 00
+                                                        //     $hours = str_pad($hours, 2, "0", STR_PAD_LEFT);
+                                                        //     $minutes = str_pad($minutes, 2, "0", STR_PAD_LEFT);
+
+                                                        //     // Exibe no formato "hora:minuto"
+                                                        //     echo $hours.':'.$minutes;
+
+                                                        // }
 
                                                     ?>
 
@@ -166,7 +168,6 @@
 
                                             @endif
                                         @endcan
-
 
                                     @endforeach
 
