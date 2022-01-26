@@ -33,7 +33,7 @@
       <div class="col-md-12">
         <div class="card card-secondary">
           <div class="card-header">
-            <h3 class="card-title">Histórico de Ponto <strong>{{$user->name}}</strong></h3>
+            <h3 class="card-title">Histórico de Acesso <strong>{{$user->name}}</strong></h3>
           </div>
           <div class="card-body">
             <div class="column-responsive column-80">
@@ -63,60 +63,94 @@
 
                                         @if ($loop->first)
 
-                                            <td>{{ date('d/m/Y', strtotime($point->register)) }}</td>
+                                            <td>
+                                                <strong>
+                                                    {{ date('d/m/Y', strtotime($point->register)) }}
+                                                </strong>
+                                            </td>
 
                                         @endif
 
-                                        <td>{{ date('H:i:s', strtotime($point->register)) }}</td>
+                                        <td>
+                                            {{ date('H:i:s', strtotime($point->register)) }}
 
-                                        @if (($loop->remaining  == 3))
+                                            {{$loop->remaining}}
+                                            {{$loop->count}}
 
-                                            <?php $item1 = $point->register; ?>
+                                        </td>
+
+                                        @if ($loop->remaining  == 3)
+
+                                            <?php echo "item 1 : " . $item1 = $point->register . "<br>"; ?>
 
                                         @endif
                                         @if ($loop->remaining  == 2)
 
-                                            <?php $item2 = $point->register; ?>
+                                            <?php echo "item 2 : " . $item2 = $point->register . "<br>"; ?>
 
                                         @endif
                                         @if ($loop->remaining == 1)
 
-                                            <?php $item3 = $point->register; ?>
+                                            <?php echo "item 3 : " . $item3 = $point->register . "<br>"; ?>
 
                                         @endif
                                         @if (($loop->remaining == 0))
 
-                                            <?php $item4 = $point->register; ?>
+                                            <?php echo "item 4 : " . $item4 = $point->register . "<br>"; ?>
 
                                         @endif
+
                                         @can('employee-create')
+
                                             @if ($loop->last)
 
-                                            <td>
-                                                <?php
+                                                @if ($loop->count == 1)
 
-                                                //echo $item1 ."<br>".$item2 ."<br>".$item3 ."<br>".$item4 ;
-                                                // Faz o cálculo das horas
-                                                if (    (   ($item1 != 0) && ($item2 != 0) && ($item3 != 0) && ($item4 != 0)    )  ) {
-                                                    // echo "if";
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
 
-                                                    $total = (strtotime($item2) - strtotime($item1)) + (strtotime($item4) - strtotime($item3));
+                                                @endif
 
-                                                    $hours      = floor($total / 60 / 60);
+                                                @if ($loop->count == 2)
 
-                                                    // Encontra os minutos trabalhados
-                                                    $minutes    = round(($total - ($hours * 60 * 60)) / 60);
+                                                    <td></td>
+                                                    <td></td>
 
-                                                    // Formata a hora e minuto para ficar no formato de 2 números, exemplo 00
-                                                    $hours = str_pad($hours, 2, "0", STR_PAD_LEFT);
-                                                    $minutes = str_pad($minutes, 2, "0", STR_PAD_LEFT);
-                                                    echo $hours.':'.$minutes;
-                                                }
+                                                @endif
+                                                @if ($loop->count == 3)
 
-                                                // Exibe no formato "hora:minuto"
+                                                    <td></td>
 
-                                            ?>
-                                            </td>
+                                                @endif
+
+                                                <td>
+
+                                                    {{-- {{ ($item4)  ? date_diff(new DateTime($item4), new DateTime($item3))->format('%H:%I:%S') : '' }} --}}
+                                                    {{-- {{ ($item4)  ? date_diff(new DateTime($item4), new DateTime($item1))->format('%H:%I:%S') : '' }} --}}
+                                                    <?php
+
+                                                    // $item4 = preg_replace('/[\&\.\;\" "]+/', '', $item4);
+
+                                                    // $item1 = preg_replace('/[\&\.\;\" "]+/', '', $item1);
+
+                                                    // $item1 = str_replace(array("&", ";"), '', $item1);
+
+                                                    // $item4 = str_replace(array("&", ";"), '', $item4);
+
+                                                    //$pregValue = str_replace(['.', ','], [',', '.'], preg_replace('#[^0-9\.,]#', '', $value));
+
+
+
+
+                                                        $datetime1 = new DateTime($item4);
+                                                        $datetime2 = new DateTime($item1);
+                                                        $interval = $datetime1->diff($datetime2);
+                                                        echo $interval->format('%H:%I:%S');
+
+                                                    ?>
+
+                                                </td>
 
                                             @endif
                                         @endcan
@@ -124,22 +158,6 @@
 
                                     @endforeach
 
-                                        @if ($user->points->count() == 3 )
-
-                                            <td></td>
-
-                                        @elseif ($user->points->count() == 2 )
-
-                                            <td></td>
-                                            <td></td>
-
-                                        @elseif ($user->points->count() == 1 )
-
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-
-                                        @endif
                                 </tr>
                             @endforeach
                         </tbody>
