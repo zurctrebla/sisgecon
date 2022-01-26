@@ -51,30 +51,32 @@
                         <tbody>
                             @foreach ($guest->points->chunk(4) as $chunk)
                                 <tr>
-                                    <td>data</td>
+                                    @foreach ($chunk as $point)
 
-                                        @foreach ($chunk as $point)
+                                    @if ($loop->first)
+                                        <td>{{ date('d/m/Y', strtotime($point->register)) }}</td>
+                                    @endif
 
-                                            <td>{{ date('H:i:s', strtotime($point->register)) }}</td>
+                                        <td>{{ date('H:i:s', strtotime($point->register)) }}</td>
 
-                                        @endforeach
+                                    @endforeach
 
-                                        @if ($guest->points->count() == 3 )
+                                    @if ($guest->points->count() == 3 )
 
-                                            <td></td>
+                                        <td></td>
 
-                                        @elseif ($guest->points->count() == 2 )
+                                    @elseif ($guest->points->count() == 2 )
 
-                                            <td></td>
-                                            <td></td>
+                                        <td></td>
+                                        <td></td>
 
-                                        @elseif ($guest->points->count() == 1 )
+                                    @elseif ($guest->points->count() == 1 )
 
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
 
-                                        @endif
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

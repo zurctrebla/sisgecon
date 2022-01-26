@@ -46,47 +46,74 @@
                             <th scope="col">Saida</th>
                             <th scope="col">Entrada</th>
                             <th scope="col">Saida</th>
-                            <th scope="col">Horas</th>
+
+                            @can('user-list')
+                                <th scope="col">Horas</th>
+                            @endcan
+
                           </tr>
                         </thead>
                         <tbody>
                             @foreach ($user->points->chunk(4) as $chunk)
                                 <tr>
-                                    {{-- <td>data</td> --}}
+                                    @foreach ($chunk as $key => $point)
 
-                                        @foreach ($chunk as $key => $point)
+                                        @if ($loop->first)
 
-                                            @if ($key == 0)
+                                            <td>{{ date('d/m/Y', strtotime($point->register)) }}</td>
 
+                                        @endif
 
-                                                <td><strong>{{ date('d/m/Y', strtotime($point->register)) }}</strong></td>
+                                        <td>{{ date('H:i:s', strtotime($point->register)) }}</td>
+
+                                        @if ($loop->remaining  == 3)
+                                            <?php
+                                                $item1 = $point->register;
+                                            ?>
+                                        @endif
+                                        @if ($loop->remaining  == 2)
+                                            <?php
+                                                $item2 = $point->register;
+                                            ?>
+                                        @endif
+                                        @if ($loop->remaining == 1)
+                                            <?php
+                                                $item3 = $point->register;
+                                            ?>
+                                        @endif
+                                        @if ($loop->remaining == 0)
+                                            <?php
+                                                $item4 = $point->register;
+                                            ?>
+                                        @endif
+                                        @can('user-list')
+                                            @if ($loop->last)
+
+                                            <td>
+                                                <?php
+
+                                                // Faz o cálculo das horas
+                                                $total = (strtotime($item2) - strtotime($item1)) + (strtotime($item4) - strtotime($item3));
+
+                                                $hours      = floor($total / 60 / 60);
+
+                                                // Encontra os minutos trabalhados
+                                                $minutes    = round(($total - ($hours * 60 * 60)) / 60);
+
+                                                // Formata a hora e minuto para ficar no formato de 2 números, exemplo 00
+                                                $hours = str_pad($hours, 2, "0", STR_PAD_LEFT);
+                                                $minutes = str_pad($minutes, 2, "0", STR_PAD_LEFT);
+
+                                                // Exibe no formato "hora:minuto"
+                                                echo $hours.':'.$minutes;
+                                            ?>
+                                            </td>
 
                                             @endif
+                                        @endcan
 
-                                                <td>{{ date('H:i:s', strtotime($point->register)) }}</td>
 
-                                                @if ($key == 0)
-                                                    <?php
-                                                        $item1 = $point->register;
-                                                    ?>
-                                                @endif
-                                                @if ($key == 1)
-                                                    <?php
-                                                        $item2 = $point->register;
-                                                    ?>
-                                                @endif
-                                                @if ($key == 2)
-                                                    <?php
-                                                        $item3 = $point->register;
-                                                    ?>
-                                                @endif
-                                                @if ($key == 3)
-                                                    <?php
-                                                        $item4 = $point->register;
-                                                    ?>
-                                                @endif
-
-                                        @endforeach
+                                    @endforeach
 
                                         @if ($user->points->count() == 3 )
 
@@ -104,30 +131,6 @@
                                             <td></td>
 
                                         @endif
-
-                                    <td>
-                                        @if ($key == 3)
-
-                                            <?php
-
-                                                // Faz o cálculo das horas
-                                                $total = (strtotime($item2) - strtotime($item1)) + (strtotime($item4) - strtotime($item3));
-
-                                                $hours      = floor($total / 60 / 60);
-
-                                                // Encontra os minutos trabalhados
-                                                $minutes    = round(($total - ($hours * 60 * 60)) / 60);
-
-                                                // Formata a hora e minuto para ficar no formato de 2 números, exemplo 00
-                                                $hours = str_pad($hours, 2, "0", STR_PAD_LEFT);
-                                                $minutes = str_pad($minutes, 2, "0", STR_PAD_LEFT);
-
-                                                // Exibe no formato "hora:minuto"
-                                                echo $hours.':'.$minutes;
-                                            ?>
-
-                                        @endif
-                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

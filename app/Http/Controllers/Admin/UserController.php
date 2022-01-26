@@ -195,7 +195,7 @@ class UserController extends Controller
             return redirect()->back();
         }
 
-        $filter = date('Y-m-d');
+        $filter = date('Y-m-');
 
         $user = $this->repository
                     ->with(['points' => function ($query) use ($filter) {
