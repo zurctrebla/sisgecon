@@ -129,38 +129,42 @@
                                                     <?php
 
                                                         // Faz o cálculo das horas
-                                                        // if (($item1 != 0) && ($item2 != 0) && ($item3 != 0) && ($item4 != 0)) {
-                                                        //     $total = (  (strtotime($item2) - strtotime($item1)) + (strtotime($item4) - strtotime($item3))   );
-                                                        // }
+                                                        if (($item1 != 0) && ($item2 != 0) && ($item3 != 0) && ($item4 != 0)) {
+                                                            $total = (  (strtotime($item2) - strtotime($item1)) + (strtotime($item4) - strtotime($item3))   );
+                                                        }
 
                                                         // if (($item1 == 0) && ($item2 == 0) && ($item3 != 0) && ($item4 != 0)) {
                                                         //     $total = (  (strtotime($item3) - strtotime($item2))   );
                                                         // }
 
-                                                        // if (($item1 == 0) && ($item2 == 0) && ($item3 != 0) && ($item4 != 0)) {
-                                                        //     $total = (  (strtotime($item4) - strtotime($item3))   );
-                                                        // }
+                                                        if (($item1 == 0) && ($item2 == 0) && ($item3 != 0) && ($item4 != 0)) {
+                                                            $total = (  (strtotime($item4) - strtotime($item3))   );
+                                                        }
 
-                                                        // /* if ($hours && $minutes && $total) { */
-                                                        //     //$total = (  (strtotime($item2) - strtotime($item1))   );
-                                                        //     echo "1: " . $item1 . "<br>" . "2: " . $item2 . "<br>"  . "3: " . $item3 . "<br>" .  "4: " . $item4 . "<br>" ;
+                                                        if (($item1 == 0) && ($item2 != 0) && ($item3 != 0) && ($item4 != 0)) {
+                                                            $total = (  (strtotime($item3) - strtotime($item2))   );
+                                                        }
 
-                                                        //     // $total = (  (strtotime($item3) - strtotime($item2))   );
+                                                        if ($total) {
+                                                            //$total = (  (strtotime($item2) - strtotime($item1))   );
+                                                            //echo "1: " . $item1 . "<br>" . "2: " . $item2 . "<br>"  . "3: " . $item3 . "<br>" .  "4: " . $item4 . "<br>" ;
 
-                                                        //     // Encontra as horas trabalhadas
-                                                        //     $hours      = floor($total / 60 / 60);
+                                                            // $total = (  (strtotime($item3) - strtotime($item2))   );
 
-                                                        //     // Encontra os minutos trabalhados
-                                                        //     $minutes    = round(($total - ($hours * 60 * 60)) / 60);
+                                                            // Encontra as horas trabalhadas
+                                                            $hours      = floor($total / 60 / 60);
 
-                                                        //     // Formata a hora e minuto para ficar no formato de 2 números, exemplo 00
-                                                        //     $hours = str_pad($hours, 2, "0", STR_PAD_LEFT);
-                                                        //     $minutes = str_pad($minutes, 2, "0", STR_PAD_LEFT);
+                                                            // Encontra os minutos trabalhados
+                                                            $minutes    = round(($total - ($hours * 60 * 60)) / 60);
 
-                                                        //     // Exibe no formato "hora:minuto"
-                                                        //     echo $hours.':'.$minutes;
+                                                            // Formata a hora e minuto para ficar no formato de 2 números, exemplo 00
+                                                            $hours = str_pad($hours, 2, "0", STR_PAD_LEFT);
+                                                            $minutes = str_pad($minutes, 2, "0", STR_PAD_LEFT);
 
-                                                        // }
+                                                            // Exibe no formato "hora:minuto"
+                                                            echo $hours.':'.$minutes;
+
+                                                        }
 
                                                     ?>
 
