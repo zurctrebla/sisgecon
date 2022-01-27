@@ -58,11 +58,11 @@ class GuestController extends Controller
 
         // dd($guest->points);
 
-        // foreach ($guests as $guest) {
+        foreach ($guests as $guest) {
 
-        //     CheckGuest::dispatch($guest);
+            CheckGuest::dispatch($guest);
 
-        // }
+        }
 
         return view('admin.pages.guests.index', compact('guests'));
     }

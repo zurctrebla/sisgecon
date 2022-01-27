@@ -50,13 +50,13 @@
     <div class="col-sm-6">
       <div class="form-group">
        <label>Data Inicial *</label>
-       <input type="date" name="start_at" id="start_at" class="form-control" min="<?php now(); ?>" value="{{ $guest->start_at ?? old('start_at') }}">
+       <input type="date" name="start_at" id="start_at" class="form-control" min="<?= date('Y-m-d'); ?>"  value="{{ $guest->start_at ?? old('start_at') }}">
       </div>
     </div>
     <div class="col-sm-6">
       <div class="form-group">
        <label>Data Final *</label>
-       <input type="date" name="expires_at" id="expires_at" class="form-control" value="{{ $guest->expires_at ?? old('expires_at') }}">
+       <input type="date" name="expires_at" id="expires_at" class="form-control" min="<?= date('Y-m-d'); ?>" value="{{ $guest->expires_at ?? old('expires_at') }}">
       </div>
     </div>
 </div>
@@ -95,7 +95,7 @@
     <div class="col-sm-3">
         <div class="form-group">
          <label>Data de emissão *</label>
-         <input type="date" name="emission" class="form-control" max="<?php now(); ?>" value="{{ $user->docs->emission ?? old('emission') }}">
+         <input type="date" name="emission" class="form-control" max="<?= date('Y-m-d'); ?>" value="{{ $user->docs->emission ?? old('emission') }}">
         </div>
     </div>
     <div class="col-sm-3">

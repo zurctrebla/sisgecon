@@ -37,9 +37,9 @@ class CheckGuests
 
         } else if (($event->guest->expires_at    >=   date('Y-m-d')) AND ($event->guest->status == "Expirado") ) { //   Pendente, Autorizado, Expirado, Bloqueado.
 
-            $event->guest->status = "Pendente";
+            // $event->guest->status = "Pendente";
 
-            $event->guest->update();
+            // $event->guest->update();
 
         }
 
