@@ -31,7 +31,7 @@
 <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <div class="card card-secondary">
+        <div class="card card-info">
           <div class="card-header">
             <h3 class="card-title">Histórico de Acesso Visitante <strong>{{$guest->name}}</strong></h3>
           </div>
@@ -92,7 +92,11 @@
                                     @foreach ($chunk as $point)
 
                                     @if ($loop->first)
-                                        <td>{{ date('d/m/Y', strtotime($point->register)) }}</td>
+                                        <td>
+                                            <strong>
+                                                {{ date('d/m/Y', strtotime($point->register)) }}
+                                            </strong>
+                                        </td>
                                     @endif
 
                                         <td>{{ date('H:i:s', strtotime($point->register)) }}</td>
