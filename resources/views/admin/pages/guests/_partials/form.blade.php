@@ -89,29 +89,25 @@
     <div class="col-sm-3">
       <div class="form-group">
        <label>Documento *</label>
-            @foreach ($guest->documents as $document)
-                <input type="text" name="doc_no" class="form-control" placeholder="RG, CHN, etc ..." value="{{ $document->doc_no ?? old('doc_no') }}">
-            @endforeach
+       <input type="text" name="doc_no" class="form-control" placeholder="RG, CHN, etc ..." value="{{ $user->docs->doc_no ?? old('doc_no') }}" rquired>
       </div>
     </div>
     <div class="col-sm-3">
         <div class="form-group">
          <label>Data de emissão *</label>
-            @foreach ($guest->documents as $document)
-                <input type="date" name="emission" class="form-control" max="<?= date('Y-m-d'); ?>" value="{{ $document->emission ?? old('emission') }}">
-            @endforeach
+         <input type="date" name="emission" class="form-control" max="<?= date('Y-m-d'); ?>" value="{{ $user->docs->emission ?? old('emission') }}">
         </div>
     </div>
     <div class="col-sm-3">
         <div class="form-group">
          <label>Orgão Emissor *</label>
-         <input type="text" name="emission_for" class="form-control" placeholder="Orgão Emissor:" value="{{ $user->docs->emission_for ?? old('emission_for') }}" >
+         <input type="text" name="emission_for" class="form-control" placeholder="Orgão Emissor:" value="{{ $user->docs->emission_for ?? old('emission_for') }}" required>
         </div>
     </div>
     <div class="col-sm-3">
         <div class="form-group">
          <label>UF *</label>
-         <input type="text" name="uf" class="form-control" placeholder="UF:" value="{{ $user->docs->uf ?? old('uf') }}" >
+         <input type="text" name="uf" class="form-control" placeholder="UF:" value="{{ $user->docs->uf ?? old('uf') }}" required>
         </div>
     </div>
 </div>
