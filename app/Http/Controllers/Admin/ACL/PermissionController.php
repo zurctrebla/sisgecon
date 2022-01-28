@@ -130,7 +130,7 @@ class PermissionController extends Controller
         $permissions = $this->repository
                             ->where(function($query) use ($request) {
                                 if ($request->filter) {
-                                    $query->where('name', $request->filter);/*
+                                    $query->where('name', 'LIKE', "%{$request->filter}%");/*
                                     $query->orWhere('description', 'LIKE', "%{$request->filter}%"); */
                                 }
                             })

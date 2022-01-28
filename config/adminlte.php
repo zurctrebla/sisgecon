@@ -336,6 +336,12 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ], */
+
+        /* [
+            'text' => 'Sair',
+            'url'  => 'logout',
+            'icon' => 'fa fa-fw fa-power-off text-red',
+        ], */
     ],
 
     /*
