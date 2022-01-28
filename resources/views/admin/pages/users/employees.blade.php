@@ -112,25 +112,31 @@
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
                                                         @can('user-edit')
+                                                        <div hidden>
                                                             <a hidden href="{{ route('users.show', $user->id) }}" class="dropdown-item">Visualizar</a>
+
+                                                        </div>
                                                         @endcan
                                                         @can('user-edit')
                                                             <a href="{{ route('users.editEmployee', $user->id) }}" class="dropdown-item">Editar</a>
                                                         @endcan
                                                         @can('user-delete')
+                                                        <div hidden >
                                                             <button hidden class="dropdown-item" onclick="return confirm('Deseja apagar o usuário ?')">Apagar</button>
+
+                                                        </div>
                                                         @endcan
                                                     </div>
                                                 </div>
                                             </td>
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">
-                                                    <a href="{{ route('guests.show', $user->id) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
+                                                    <a hidden href="{{ route('guests.show', $user->id) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
                                                     @can('user-edit')
                                                         <a href="{{ route('users.editEmployee', $user->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
                                                     @endcan
                                                     @can('user-delete')
-                                                        <form action="{{ route('users.destroy', $user->id) }}" style="display:inline" method="POST">
+                                                        <form hidden action="{{ route('users.destroy', $user->id) }}" style="display:inline" method="POST">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Deseja apagar o visitante ?')" >Apagar</button>
