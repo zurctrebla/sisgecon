@@ -27,6 +27,10 @@ Route::middleware(['auth'])->group(function () {
      */
     Route::get('/admin/users/employees', [UserController::class, 'employee'])->name('users.employee');
     Route::get('/admin/users/createEmployee', [UserController::class, 'createEmployee'])->name('users.createEmployee');
+
+    Route::put('/admin/users/updateEmployee/{id}', [UserController::class, 'updateEmployee'])->name('users.updateEmployee'); /** */
+
+    Route::get('/admin/users/editEmployee/{id}', [UserController::class, 'editEmployee'])->name('users.editEmployee');
     Route::post('/admin/users/storeEmployee', [UserController::class, 'storeEmployee'])->name('users.storeEmployee');
     Route::get('/admin/users/register/{id}', [UserController::class, 'register'])->name('users.register');
     Route::get('/admin/users/historySheet/{id}', [UserController::class, 'history'])->name('users.history');

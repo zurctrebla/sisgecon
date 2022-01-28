@@ -157,6 +157,47 @@ class UserController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function editEmployee($id)
+    {
+        if (!$user = $this->repository->find($id)) {
+            return redirect()->back();
+        }
+
+        return view('admin.pages.users.editEmployee', compact('user'));
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Request $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateEmployee(Request $request, $id)
+    {
+        if (!$user = $this->repository->find($id)) {
+            return redirect()->back();
+        }
+
+        $data = $request->only(['name']);
+
+        // if ($request->password) {
+
+        //     $data['password'] = bcrypt($request->password);
+        // }
+
+        $user->update($data);
+
+        return redirect()->route('users.employee')->with('message', 'Funcionário editado com sucesso');
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\StoreUpdateUser $request

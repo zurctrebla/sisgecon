@@ -42,7 +42,7 @@
                                         <th>Entrada</th>
                                         <th>Saída</th>
                                         <th class="text-center">Registros</th>
-                                        <th hidden class="text-center">Ações</th>
+                                        <th class="text-center">Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -111,21 +111,23 @@
                                                         Ações
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
-                                                        <a href="{{ route('users.show', $user->id) }}" class="dropdown-item">Visualizar</a>
                                                         @can('user-edit')
-                                                            <a href="{{ route('users.edit', $user->id) }}" class="dropdown-item">Editar</a>
+                                                            <a hidden href="{{ route('users.show', $user->id) }}" class="dropdown-item">Visualizar</a>
+                                                        @endcan
+                                                        @can('user-edit')
+                                                            <a href="{{ route('users.editEmployee', $user->id) }}" class="dropdown-item">Editar</a>
                                                         @endcan
                                                         @can('user-delete')
-                                                            <button class="dropdown-item" onclick="return confirm('Deseja apagar o usuário ?')">Apagar</button>
+                                                            <button hidden class="dropdown-item" onclick="return confirm('Deseja apagar o usuário ?')">Apagar</button>
                                                         @endcan
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td hidden class="text-center">
+                                            <td class="text-center">
                                                 <span class="d-none d-md-block">
                                                     <a href="{{ route('guests.show', $user->id) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
                                                     @can('user-edit')
-                                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
+                                                        <a href="{{ route('users.editEmployee', $user->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
                                                     @endcan
                                                     @can('user-delete')
                                                         <form action="{{ route('users.destroy', $user->id) }}" style="display:inline" method="POST">
