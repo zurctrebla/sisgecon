@@ -33,8 +33,46 @@
       <div class="col-md-12">
         <div class="card card-secondary">
           <div class="card-header">
-            <h3 class="card-title">Histórico de Acesso <strong>{{$guest->name}}</strong></h3>
+            <h3 class="card-title">Histórico de Acesso Visitante <strong>{{$guest->name}}</strong></h3>
           </div>
+          {{--  --}}
+          <div class="card-body">
+            <table id="guests" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Cadastrado por:</th>
+                        <th>Liberado por:</th>
+                        <th>Documento</th>
+                        <th>Autorização</th>
+                        <th>Setor</th>
+                        <th>Data Inicial</th>
+                        <th>Data Final</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>{{ $guest->user->name }}</td>
+                        <td>{{ $guest->authorized_at }}</td>
+                        <td>
+                            @foreach ($guest->documents as $document)
+
+                            {{ $document->doc_no }}<br>
+
+                            @endforeach
+                        </td>
+                        <td>{{ $guest->authorization }}</td>
+                        <td>{{ $guest->sector->name }}</td>
+                        <td>{{ date('d/m/Y', strtotime($guest->start_at) )}}</td>
+                        <td>{{ date('d/m/Y', strtotime($guest->expires_at) )}}</td>
+                        <td>{{ $guest->status }}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        {{--  --}}
           <div class="card-body">
             <div class="column-responsive column-80">
                 <div class="inputs view content">

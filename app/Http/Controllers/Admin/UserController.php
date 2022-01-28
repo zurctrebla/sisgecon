@@ -307,8 +307,10 @@ class UserController extends Controller
     }
 
     /**
+     * Update profile
      *
-     *
+     * @param  Request $request
+     * @return \Illuminate\Http\Response
      */
     public function updateProfile(Request $request)
     {
@@ -330,6 +332,7 @@ class UserController extends Controller
 
         return redirect()->route('admin.index')->with('message', 'Perfil editado com sucesso');
     }
+
     /**
      * Search results
      *
