@@ -278,6 +278,12 @@ return [
             'can'  => 'users-employee',
         ], */
         [
+            'text' => 'Ocorrências',
+            'url'  => 'admin/settings',
+            'icon' => 'far fa-address-book',
+            /* 'can'  => 'settings', */
+        ],
+        [
             'text'    => 'Acesso',
             /* 'icon'    => 'fas fa-fw fa-share', */
             'icon'    => 'fas fa-door-open',
