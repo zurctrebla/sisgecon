@@ -55,7 +55,7 @@
                                     {{-- {{ dd($guest) }} --}}
                                         <tr>
                                             <td>
-                                                Nome: {{ $guest->name }}<br>
+                                                Nome: <strong style="color: blue">{{ $guest->name }}</strong><br>
                                                 Cadastrado por: {{ $guest->user->name }}
                                             </td>
 
