@@ -25,7 +25,7 @@ services:
         restart: unless-stopped
         ports:
             - 80:80
-            - 443:443
+            # - 443:443
         volumes:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
@@ -38,6 +38,8 @@ services:
     mysql:
         image: mysql:5.7.22
         restart: unless-stopped
+        ports:
+            - 3306:3306
         environment:
             MYSQL_DATABASE: ${DB_DATABASE}
             MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
@@ -45,6 +47,19 @@ services:
             MYSQL_USER: ${DB_USERNAME}
         volumes:
             - ./.docker/mysql/dbdata:/var/lib/mysql
+        networks:
+            - rede
+
+    # phpmyadmin
+    phpmyadmin:
+        image: phpmyadmin
+        restart: always
+        links:
+            - mysql
+        ports:
+            - 8081:80
+        environment:
+            - PMA_ARBITRARY=1
         networks:
             - rede
 
@@ -70,6 +85,20 @@ services:
         image: redis:latest
         networks:
             - rede
+
+    # traefik
+    # traefik:
+    #     image: traefik
+    #     command: --web --docker --docker.domain=docker.localhost --loglevel=DEBUG
+    #     ports:
+    #         - 80:80
+    #         - 8080:8080
+    #         - 443:443
+    #     volumes:
+    #         - /var/run/docker.sock:/va/run/docker.sock
+    #         - /dev/null:/traefik.toml
+    #     networks:
+    #         - rede
 
 networks:
     rede:
