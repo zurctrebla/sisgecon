@@ -54,6 +54,15 @@
                           </tr>
                         </thead>
                         <tbody>
+
+                            {{-- @forelse ($collection as $item)
+
+                            @empty
+
+                                <td></td>
+
+                            @endforelse --}}
+
                             @foreach ($user->points->chunk(4) as $chunk)
 
                                 <?php $item1 = $item2 = $item3 = $item4 = $total = $hours = $minutes = 0; ?>

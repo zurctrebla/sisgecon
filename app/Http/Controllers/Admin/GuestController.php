@@ -283,6 +283,11 @@ class GuestController extends Controller
                                     $query->orWhere('authorization', $request->filter);
                                 }
                             })
+                            ->orWhereHas('documents', function($query) use ($request){
+                                if ($request->filter) {
+                                    $query->where('doc_no', $request->filter);
+                                }
+                            })
                             ->latest()/*
                             ->tenantUser() */
                             ->paginate();
