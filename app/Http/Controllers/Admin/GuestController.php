@@ -283,7 +283,7 @@ class GuestController extends Controller
                                     $query->orWhere('authorization', $request->filter);
                                 }
                             })
-                            ->orWhereHas('documents', function($query) use ($request){
+                            ->orWhereHas('documents', function($query) use ($request){  /** adciona pesquisa por documento do visitante */
                                 if ($request->filter) {
                                     $query->where('doc_no', $request->filter);
                                 }
