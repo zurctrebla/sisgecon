@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class GuestController extends Controller
 {
@@ -264,6 +265,29 @@ class GuestController extends Controller
 
         $guest->delete();
         return redirect()->route('guests.index')->with('message', 'Visitante deletado com sucesso');
+    }
+
+    /**
+     * PDF
+     */
+    public function pdf()
+    {
+        // $data = [
+        //     'title' => 'Welcome to ItSolutionStuff.com',
+        //     'date' => date('m/d/Y')
+        // ];
+
+        // $pdf = PDF::loadView('myPDF', $data);
+        // return $pdf->download('itsolutionstuff.pdf');
+
+        $guests = Guest::all();
+
+        // dd($products);
+        // return view('admin.pages.guests.index', compact('guests'));
+
+        return PDF::loadView('admin.pages.guests.index', compact('guests'))
+                    // Se quiser que fique no formato a4 retrato: ->setPaper('a4', 'landscape')
+                    ->stream()/* download('teste.pdf') */;
     }
 
     /**
