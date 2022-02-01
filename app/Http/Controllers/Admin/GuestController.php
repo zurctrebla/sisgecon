@@ -282,9 +282,6 @@ class GuestController extends Controller
 
         $guests = Guest::all();
 
-        // dd($products);
-        // return view('admin.pages.guests.index', compact('guests'));
-
         return PDF::loadView('admin.pages.guests.index', compact('guests'))
                     // Se quiser que fique no formato a4 retrato: ->setPaper('a4', 'landscape')
                     ->stream()/* download('teste.pdf') */;
@@ -312,8 +309,7 @@ class GuestController extends Controller
                                     $query->where('doc_no', $request->filter);
                                 }
                             })
-                            ->latest()/*
-                            ->tenantUser() */
+                            ->latest()
                             ->paginate();
 
         return view('admin.pages.guests.index', compact('guests', 'filters'));
