@@ -279,9 +279,9 @@
         </div>
         <div class="card-footer">
             @if (isset($filters))
-                {!! $users->appends($filters)->links() !!}
+                {!! $guests->appends($filters)->links() !!}
             @else
-                {!! $users->links() !!}
+                {!! $guests->links() !!}
             @endif
         </div>
     </div>
