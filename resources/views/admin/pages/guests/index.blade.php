@@ -277,5 +277,12 @@
                 </div>
             </div>
         </div>
+        <div class="card-footer">
+            @if (isset($filters))
+                {!! $users->appends($filters)->links() !!}
+            @else
+                {!! $users->links() !!}
+            @endif
+        </div>
     </div>
 @stop
