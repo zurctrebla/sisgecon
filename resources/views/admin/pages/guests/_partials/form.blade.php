@@ -90,7 +90,7 @@
       <div class="form-group">
        <label>Documento *</label>
             {{-- @foreach ($guest->documents as $document) --}}
-                <input type="text" name="doc_no" class="form-control" placeholder="RG, CHN, etc ..." value="{{-- {{ $document->doc_no ?? old('doc_no') }} --}}">
+                <input type="text" name="doc_no" class="form-control" placeholder="RG, CHN, etc ..." value="{{-- {{ $document->doc_no ?? old('doc_no') }} --}}"required>
             {{-- @endforeach --}}
       </div>
     </div>
