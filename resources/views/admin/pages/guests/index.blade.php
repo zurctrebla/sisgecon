@@ -277,12 +277,12 @@
                 </div>
             </div>
         </div>
-        <div class="card-footer">
+        {{-- <div class="card-footer">
             @if (isset($filters))
                 {!! $guests->appends($filters)->links() !!}
             @else
                 {!! $guests->links() !!}
             @endif
-        </div>
+        </div> --}}
     </div>
 @stop
