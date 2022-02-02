@@ -6,13 +6,13 @@
     <div class="col-sm-4">
       <div class="form-group">
        <label>Nome *</label>
-       <input type="text" name="name" class="form-control" placeholder="Nome:" value="{{ $user->name ?? old('name') }}" >
+       <input type="text" name="name" class="form-control" placeholder="Nome:" value="{{ $user->name ?? old('name') }}" required>
       </div>
     </div>
     <div class="col-sm-4">
         <div class="form-group">
          <label>Email *</label>
-         <input type="email" name="email" class="form-control" placeholder="E-mail:" value="{{ $user->email ?? old('email') }}" >
+         <input type="email" name="email" class="form-control" placeholder="E-mail:" value="{{ $user->email ?? old('email') }}" required>
 
          <input type="hidden" name="password" class="form-control" placeholder="E-mail:" value="12345678" >
 
@@ -21,14 +21,14 @@
     <div class="col-sm-2">
         <div class="form-group">
          <label>Data de Nascimento *</label>
-         <input type="date" name="birth" id="birth" class="form-control" max="<?php now(); ?>">
+         <input type="date" name="birth" id="birth" class="form-control" max="<?php now(); ?>" required>
         </div>
     </div>
 
     <div class="col-sm-2">
         <div class="form-group">
          <label>Telefone *</label>
-         <input type="text" name="number" class="form-control" placeholder="Telefone" value="{{ $user->phones->number ?? old('number') }}" >
+         <input type="text" name="number" class="form-control" placeholder="Telefone" value="{{ $user->phones->number ?? old('number') }}">
         </div>
     </div>
 </div>
@@ -37,7 +37,7 @@
     <div class="col-sm-6">
       <div class="form-group">
        <label>Função *</label>
-       <input type="text" name="function" class="form-control" placeholder="Função" value="{{ $user->name ?? old('name') }}" >
+       <input type="text" name="function" class="form-control" placeholder="Função" value="{{ $user->name ?? old('name') }}" required>
       </div>
     </div>
     <div class="col-sm-6">
@@ -59,7 +59,7 @@
     <div class="col-sm-3">
       <div class="form-group">
        <label>Documento *</label>
-       <input type="text" name="doc_no" class="form-control" placeholder="RG, CHN, etc ..." value="{{ $user->docs->doc_no ?? old('doc_no') }}" >
+       <input type="text" name="doc_no" class="form-control" placeholder="RG, CHN, etc ..." value="{{ $user->docs->doc_no ?? old('doc_no') }}" required>
       </div>
     </div>
     <div class="col-sm-3">
