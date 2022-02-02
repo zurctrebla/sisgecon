@@ -5,7 +5,7 @@
     <div class="col-sm-6">
       <div class="form-group">
         <label>* Nome:</label>
-        <input type="text" name="name" class="form-control" placeholder="Nome:" value="{{ $guest->name ?? old('name') }}">
+        <input type="text" name="name" class="form-control" placeholder="Nome:" value="{{ $guest->name ?? old('name') }}"required>
       </div>
     </div>
     <div class="col-sm-6">
@@ -35,7 +35,7 @@
     <div class="col-sm-4">
       <div class="form-group">
         <label>* Falar com quem:</label>
-        <input type="text" name="person" class="form-control" placeholder="falar com quem:" value="{{ $guest->person ?? old('person') }}">
+        <input type="text" name="person" class="form-control" placeholder="falar com quem:" value="{{ $guest->person ?? old('person') }}"required>
       </div>
     </div>
     <div class="col-sm-4">
@@ -50,13 +50,13 @@
     <div class="col-sm-6">
       <div class="form-group">
        <label>Data Inicial *</label>
-       <input type="date" name="start_at" id="start_at" class="form-control" min="<?= date('Y-m-d'); ?>"  value="{{ $guest->start_at ?? old('start_at') }}">
+       <input type="date" name="start_at" id="start_at" class="form-control" min="<?= date('Y-m-d'); ?>"  value="{{ $guest->start_at ?? old('start_at') }}" required>
       </div>
     </div>
     <div class="col-sm-6">
       <div class="form-group">
        <label>Data Final *</label>
-       <input type="date" name="expires_at" id="expires_at" class="form-control" min="<?= date('Y-m-d'); ?>" value="{{ $guest->expires_at ?? old('expires_at') }}">
+       <input type="date" name="expires_at" id="expires_at" class="form-control" min="<?= date('Y-m-d'); ?>" value="{{ $guest->expires_at ?? old('expires_at') }}" required>
       </div>
     </div>
 </div>
