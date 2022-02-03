@@ -88,9 +88,9 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Guests
      */
-    
-    Route::get('/admin/guests/pdf', [GuestController::class, 'pdf'])->name('guests.pdf'); 
-    
+
+    Route::get('/admin/guests/pdf/{id}', [GuestController::class, 'pdf'])->name('guests.pdf');
+
     Route::get('/admin/guests/register/{id}', [GuestController::class, 'register'])->name('guests.register');
     Route::get('/admin/guests/historySheet/{id}', [GuestController::class, 'history'])->name('guests.history');
 
@@ -103,8 +103,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/guests', [GuestController::class, 'store'])->name('guests.store');
     Route::get('/admin/guests', [GuestController::class, 'index'])->name('guests.index');
 
-    
-       
+
+
 
 
     // Route::get('/admin/guests', [GuestController::class, 'index'])->name('guests.index');

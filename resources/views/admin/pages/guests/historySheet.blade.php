@@ -9,8 +9,9 @@
         <h3>Visualizar</h3>
       </div>
       <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">
+        <ol class="breadcrumb float-sm-right">            
             <span class="d-none d-md-block">
+                <a href="{{ route('guests.pdf', $guest->id) }}" class="btn btn-outline-secondary btn-sm">PDF</a>
                 <a href="{{ route('guests.index') }}" class="btn btn-outline-info btn-sm">Voltar</a>
             </span>
             <div class="dropdown d-block d-md-none">
@@ -18,8 +19,9 @@
                     Ações
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
-                    <a href="{{ route('guests.show', $guest->id) }}" class="btn btn-outline-info btn-sm">Voltar</a>
 
+                    <a href="{{ route('guests.pdf', $guest->id) }}" class="dropdown-item">PDF</a>                    
+                    <a href="{{ route('guests.index') }}" class="dropdown-item">Voltar</a>
                 </div>
             </div>
         </ol>
@@ -87,19 +89,37 @@
                           </tr>
                         </thead>
                         <tbody>
+                            {{-- <tr>
+                                @forelse ($sheets as $item)
+                                    <td>
+                                        {{ date('d/m/Y', strtotime($item->register)) }}
+                                    </td>
+                                @empty
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                @endforelse
+                            </tr> --}}
+                            
+
                             @foreach ($guest->points->chunk(4) as $chunk)
+
                                 <tr>
-                                    @foreach ($chunk as $point)
 
-                                    @if ($loop->first)
-                                        <td>
-                                            <strong>
-                                                {{ date('d/m/Y', strtotime($point->register)) }}
-                                            </strong>
-                                        </td>
-                                    @endif
+                                    @foreach ($chunk ?? '' as $point)
 
-                                        <td>{{ date('H:i:s', strtotime($point->register)) }}</td>
+                                        @if ($loop->first)
+                                            <td>
+                                                <strong>
+                                                    {{ date('d/m/Y', strtotime($point->register)) }}
+                                                </strong>
+                                            </td>
+                                        @endif
+
+                                            <td>
+                                                {{ date('H:i:s', strtotime($point->register)) }}
+                                            </td>
 
                                     @endforeach
 
@@ -119,8 +139,11 @@
                                         <td></td>
 
                                     @endif
+
                                 </tr>
+
                             @endforeach
+
                         </tbody>
                     </table>
                 </div>

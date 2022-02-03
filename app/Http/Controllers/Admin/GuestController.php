@@ -52,22 +52,18 @@ class GuestController extends Controller
                     ->where('status', '<>', 'Expirado')
                     ->orderBy('expires_at', 'DESC')->paginate();
 
-        //dd($guests);
-        // $guest = $this->repository->first();
-
-        // $guest->points()->create([
-        //     'register' => date('y-m-d H:i:s'),
-        // ]);
-
-        // dd($guest->points);
+        $sheets = [];
 
         foreach ($guests as $guest) {
 
+            array_push($sheets, $guest->points);
             CheckGuest::dispatch($guest);
 
         }
 
-        return view('admin.pages.guests.index', compact('guests'));
+        // dd($sheets);
+
+        return view('admin.pages.guests.index', compact('guests', 'sheets'));
     }
 
     // /**
@@ -174,9 +170,17 @@ class GuestController extends Controller
             return redirect()->back();
         }
 
+        $sheets = [];
+
+        foreach ($guest->points as $value) {
+
+            array_push($sheets, $value);
+
+        }
+
         /* aqui possivelmente seja implementado uma função para agrupar os registros, dividindo-os em dia, mes e ano */
 
-        return view('admin.pages.guests.historySheet', compact('guest'));
+        return view('admin.pages.guests.historySheet', compact('guest', 'sheets'));
     }
 
     /**
@@ -270,19 +274,14 @@ class GuestController extends Controller
     /**
      * PDF
      */
-    public function pdf()
+    public function pdf($id)
     {
-        // $data = [
-        //     'title' => 'Welcome to ItSolutionStuff.com',
-        //     'date' => date('m/d/Y')
-        // ];
+        if(!$guest = $this->repository->find($id))
+            return redirect()->back();
 
-        // $pdf = PDF::loadView('myPDF', $data);
-        // return $pdf->download('itsolutionstuff.pdf');
+        // $guests = Guest::all();
 
-        $guests = Guest::all();
-
-        return PDF::loadView('admin.pages.guests.index', compact('guests'))
+        return PDF::loadView('admin.pages.guests.pdf', compact('guest'))
                     // Se quiser que fique no formato a4 retrato: ->setPaper('a4', 'landscape')
                     ->stream()/* download('teste.pdf') */;
     }
