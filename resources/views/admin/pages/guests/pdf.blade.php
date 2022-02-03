@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Visitante <strong>{{$guest->name}}</strong></title>
-    <link rel="stylesheet" href="{{ public('css/main.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/main.css') }}" />
+    {{-- <link rel="stylesheet" href="{{ public('css/main.css') }}"> --}}
 
 
 </head>
