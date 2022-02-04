@@ -11,7 +11,7 @@
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <span class="d-none d-md-block">
-                <a href="{{ route('guests.pdf', $guest->id) }}" class="btn btn-outline-secondary btn-sm">PDF</a>
+                <a hidden href="{{ route('guests.pdf', $guest->id) }}" class="btn btn-outline-secondary btn-sm">PDF</a>
                 <a href="{{ route('guests.index') }}" class="btn btn-outline-info btn-sm">Voltar</a>
             </span>
             <div class="dropdown d-block d-md-none">
@@ -20,7 +20,7 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
 
-                    <a href="{{ route('guests.pdf', $guest->id) }}" class="dropdown-item">PDF</a>
+                    <a hidden href="{{ route('guests.pdf', $guest->id) }}" class="dropdown-item">PDF</a>
                     <a href="{{ route('guests.index') }}" class="dropdown-item">Voltar</a>
                 </div>
             </div>
