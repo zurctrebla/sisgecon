@@ -16,10 +16,10 @@ class CreateDocumentsTable extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->morphs('documentable');
-            $table->string('doc_no');
-            $table->string('emission');
-            $table->string('emission_for');
-            $table->string('uf');
+            $table->string('doc_no')->nullable();
+            $table->string('emission')->nullable();
+            $table->string('emission_for')->nullable();
+            $table->string('uf')->nullable();
             $table->timestamps();
         });
     }

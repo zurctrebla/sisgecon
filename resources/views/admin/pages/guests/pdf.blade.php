@@ -45,6 +45,7 @@
         </tbody>
     </table>
     <h3>Histórico de Acesso Visitante <strong>{{$guest->name}}</strong></h3>
+    <hr>
     <table border="1">
         <thead>
           <tr>
