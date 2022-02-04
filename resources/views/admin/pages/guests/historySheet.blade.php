@@ -112,7 +112,7 @@
                                         @if ($loop->first)
                                             <td>
                                                 <strong>
-                                                    {{ date('d/m/Y', strtotime($point->register)) }} {{$point->id}}
+                                                    {{ date('d/m/Y', strtotime($point->register)) }}
                                                 </strong>
                                             </td>
                                         @endif
@@ -161,7 +161,7 @@
                                                         @csrf
                                                         @method('PUT')
 
-                                                        <input id="{{ $point->id }}" type="time" name="time" value="{{date('H:i:s')}}" required>
+                                                        <input id="{{ $point->id }}" type="datetime" name="register" value="{{ date('Y-d-m H:i:s') }}" required>
 
                                                 </div>
                                                 <div class="modal-footer">

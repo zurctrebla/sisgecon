@@ -81,7 +81,13 @@ class PointController extends Controller
             return redirect()->back();
         }
 
-        dd($request->all());
+        // dd($point['register']);
+
+        // $date = date($point['register']);
+
+        // $date = date('Y-m-s H:i:s');
+
+
 
         $point->update($request->all());
 

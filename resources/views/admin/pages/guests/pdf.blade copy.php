@@ -36,7 +36,7 @@
     }
 
     .esquerdo {
-        width: 50%;
+        width: 20%;
         /* height: 150px; */
         float: left;
     }
@@ -49,7 +49,7 @@
     }
 
     .direito {
-        width: 50%;
+        width: 80%;
         /* height: 150px; */
         float: left;
         margin-left: 20px;
@@ -58,11 +58,11 @@
         vertical-align: middle;
     }
 
-    /* .meio {
+    .meio {
         border-top: 1px solid rgb(241, 241, 241);
         background-color: rgb(248, 248, 248);
         height: 130px;
-    } */
+    }
 
     .paciente {
         margin-top: 20px;
@@ -116,64 +116,55 @@
         text-align: center;
     }
 
-    table, td, th {
-        border: 1px solid #ddd;
-        text-align: left;
-    }
-
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    th, td {
-        padding: 15px;
-    }
-
 </style>
-<body>
-    <div hidden class="header">
-        <div class="esquerdo">
-            <div class="linha">
-                <b>Visitante:</b> {{ $guest->name }}
-            </div>
-            <div class="linha">
-                <b>Cadastrado por:</b> {{ $guest->authorized_at }}
-            </div>
-            <div class="linha">
-                <b>Documento:</b>   @foreach ($guest->documents as $document)
-                                        {{ $document->doc_no }}
-                                    @endforeach
-            </div>
-            <div class="linha">
-                <b>Autorização:</b> {{ $guest->authorization }}
-            </div>
-        </div>
-        <div class="borda"></div>
-        <div class="direito">
 
-            <div class="linha">
-                <b>Setor:</b> {{ $guest->sector->name }}
-            </div>
-            <div class="linha">
-                <b>Entrada:</b> {{ date('d/m/Y', strtotime($guest->start_at) )}}
-            </div>
-            <div class="linha">
-                <b>Saída:</b> {{ date('d/m/Y', strtotime($guest->expires_at) )}}
-            </div>
-            <div class="linha">
-                <b>Status:</b> {{ $guest->status }}
-            </div>
-        </div>
-    </div>
+<body>
+    <h3>Histórico de Acesso Visitante <strong>{{$guest->name}}</strong></h3>
     <table>
-        <tr>
-          <th>Data</th>
-          <th>Entrada</th>
-          <th>Saída</th>
-          <th>Entrada</th>
-          <th>Saída</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Visitante</th>
+                <th>Liberado por</th>
+                <th>Documento</th>
+                <th>Autorização</th>
+                <th>Setor</th>
+                <th>Data de Entrada</th>
+                <th>Data de Saída</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ $guest->name }}</td>
+                <td>{{ $guest->authorized_at }}</td>
+                <td>
+                    @foreach ($guest->documents as $document)
+
+                        {{ $document->doc_no }}<br>
+
+                    @endforeach
+                </td>
+                <td>{{ $guest->authorization }}</td>
+                <td>{{ $guest->sector->name }}</td>
+                <td>{{ date('d/m/Y', strtotime($guest->start_at) )}}</td>
+                <td>{{ date('d/m/Y', strtotime($guest->expires_at) )}}</td>
+                <td>{{ $guest->status }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3>Histórico</h3>
+    <hr>
+    <table>
+        <thead>
+          <tr>
+            <th>data</th>
+            <th>Entrada</th>
+            <th>Saida</th>
+            <th>Entrada</th>
+            <th>Saida</th>
+          </tr>
+        </thead>
+        <tbody>
             @foreach ($guest->points->chunk(4) as $chunk)
                 <tr>
                     @foreach ($chunk as $point)
@@ -208,36 +199,10 @@
                     @endif
                 </tr>
             @endforeach
+        </tbody>
     </table>
-    <div hidden class="meio" style="clear:both;">
-        <div class="paciente">
-
-        </div>
-    </div>
-    <div class="texto" style="clear:both;">
-        <div class="titulo_texto" style="text-align: center">
-            <b>{{-- {{ $pedido->exame->nome }} --}}</b>
-        </div>
-        {{-- {!! $laudo->texto !!} --}}
-    </div>
-
-    {{-- <div class="assinatura" style="clear:both;">
-        @if (file_exists(public_path('/storage/usuarios/' . $laudo->user->uuid . '/' . $laudo->user->assinatura)))
-            <img src="data:image/png;base64, {{ base64_encode(file_get_contents(public_path('/storage/usuarios/' . $laudo->user->uuid . '/' . $laudo->user->assinatura))) }} "
-                style="width:120px;">
-        @else
-            <img src="data:image/png;base64, {{ base64_encode(file_get_contents(public_path('/storage/sem_imagem.png'))) }} "
-                style="width:120px;">
-        @endif
-        <br>
-        <b>DR(a) {{ $laudo->user->name }}</b> <br>
-        <font style="font-size: 8px;">
-            CRM: {{ $laudo->user->crm }}<br>
-            RQE: {{ $laudo->user->rqe }}
-        </font>
-    </div> --}}
-
-
 </body>
-
 </html>
+
+
+

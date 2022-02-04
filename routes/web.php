@@ -91,6 +91,13 @@ Route::middleware(['auth'])->group(function () {
      */
     Route::get('/admin/guests/pdf/{id}', [GuestController::class, 'pdf'])->name('guests.pdf');
 
+
+    Route::get('/admin/guests/test/{id}', [GuestController::class, 'test'])->name('guests.test');
+
+    // Route::put('/admin/points/test/{id}', [PointController::class, 'test'])->name('points.test');
+
+
+
     Route::get('/admin/guests/register/{id}', [GuestController::class, 'register'])->name('guests.register');
     Route::get('/admin/guests/historySheet/{id}', [GuestController::class, 'history'])->name('guests.history');
 

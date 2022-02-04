@@ -287,6 +287,16 @@ class GuestController extends Controller
     }
 
     /**
+     * PDF
+     */
+    public function test($id)
+    {
+        if(!$guest = $this->repository->find($id))
+            return redirect()->back();
+
+        return view('admin.pages.guests.pdf', compact('guest'));
+    }
+    /**
      * Search results
      *
      * @param  Request $request
