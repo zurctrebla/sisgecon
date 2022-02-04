@@ -11,7 +11,8 @@ use App\Http\Controllers\Admin\{
     SectorController,
     GuestController,
     SettingController,
-    UserController
+    UserController,
+    PointController
 };
 
 Route::middleware(['auth'])->group(function () {
@@ -103,6 +104,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/guests', [GuestController::class, 'store'])->name('guests.store');
     Route::get('/admin/guests', [GuestController::class, 'index'])->name('guests.index');
 
+    /**
+     * Points
+     */
+
+    Route::get('/admin/points/edit/{id}', [PointController::class, 'edit'])->name('points.edit');
 
 
 

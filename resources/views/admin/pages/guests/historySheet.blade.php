@@ -157,10 +157,10 @@
                                                 </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="" style="display:inline" method="GET">
+                                                    <form action="{{ route('points.edit', $point->id) }}" style="display:inline" method="GET">
                                                         @csrf
 
-                                                        <input id="appt-time" type="time" name="appt-time" value="{{date('H:i:s')}}" required>
+                                                        <input id="{{ $point->id }}" type="time" name="time" value="{{date('H:i:s')}}" required>
 
                                                 </div>
                                                 <div class="modal-footer">
