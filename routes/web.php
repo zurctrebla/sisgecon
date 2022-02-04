@@ -89,7 +89,6 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Guests
      */
-
     Route::get('/admin/guests/pdf/{id}', [GuestController::class, 'pdf'])->name('guests.pdf');
 
     Route::get('/admin/guests/register/{id}', [GuestController::class, 'register'])->name('guests.register');
@@ -107,13 +106,7 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Points
      */
-
-    Route::get('/admin/points/edit/{id}', [PointController::class, 'edit'])->name('points.edit');
-
-
-
-
-    // Route::get('/admin/guests', [GuestController::class, 'index'])->name('guests.index');
+    Route::put('/admin/points/{id}', [PointController::class, 'update'])->name('points.update');
 
     /**
      * Sectors

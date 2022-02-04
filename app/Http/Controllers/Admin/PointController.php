@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Point;
 
 class PointController extends Controller
-{   
+{
     protected $repository;
 
     public function __construct(Point $point)
@@ -80,9 +80,10 @@ class PointController extends Controller
         if (!$point = $this->repository->find($id)) {
             return redirect()->back();
         }
-        
+
+        dd($request->all());
+
         $point->update($request->all());
-        dd($point);
 
         return redirect()->route('guests.history', $id)->with('message', 'Hora Atualizada com Sucesso!');
     }
