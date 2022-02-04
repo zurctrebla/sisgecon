@@ -112,13 +112,16 @@
                                         @if ($loop->first)
                                             <td>
                                                 <strong>
-                                                    {{ date('d/m/Y', strtotime($point->register)) }}
-                                                </strong>
+                                                    {{ date('d/m/Y', strtotime($point->register)) }} {{$point->id}}
+                                                </strong>                                                
                                             </td>
                                         @endif
 
                                             <td>
-                                                {{ date('H:i:s', strtotime($point->register)) }}
+                                                {{ date('H:i:s', strtotime($point->register)) }} 
+                                                    
+                                                    <a href="" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-pencil-alt"></i></a>
+                                                
                                             </td>
 
                                     @endforeach
@@ -141,6 +144,35 @@
                                     @endif
 
                                 </tr>
+
+                                {{-- modal --}}
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalTitle">Editar Hora</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="" style="display:inline" method="GET">
+                                                        @csrf
+
+                                                        <input id="appt-time" type="time" name="appt-time" value="{{date('H:i:s')}}" required>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                    <button type="submit" class="btn btn-warning">Editar</button>
+                                                </div>
+                                                    </form>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    {{-- modal --}}
+
 
                             @endforeach
 
