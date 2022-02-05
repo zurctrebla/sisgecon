@@ -283,7 +283,7 @@ class GuestController extends Controller
 
         return PDF::loadView('admin.pages.guests.pdf', compact('guest'))
                     // Se quiser que fique no formato a4 retrato: ->setPaper('a4', 'landscape')
-                    ->/* stream() */download("relatorio_{{$guest->name}}.pdf");
+                    ->stream()/* download("relatorio_{{$guest->name}}.pdf") */;
     }
 
     /**
