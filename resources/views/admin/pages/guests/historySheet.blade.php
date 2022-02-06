@@ -123,10 +123,37 @@
                                             <td>
                                                 {{ date('H:i:s', strtotime($point->register)) }}
 
-                                                    <a href="" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-pencil-alt"></i></a>
+                                                    <a href="" data-toggle="modal" data-target="#exampleModal{{ $point->id }}"><i class="fas fa-pencil-alt"></i></a>
 
                                             </td>
+                                            {{-- modal --}}
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal{{ $point->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalTitle">Editar Hora</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form action="{{ route('points.update', $point->id) }}" style="display:inline" method="POST">
+                                                            @csrf
+                                                            @method('PUT')
 
+                                                            <input type="datetime" name="register" id="{{ $point->id }}" value="{{ $point->register ?? old('register') }}" required>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                        <button type="submit" class="btn btn-warning">Editar</button>
+                                                    </div>
+                                                        </form>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        {{-- modal --}}
                                     @endforeach
 
                                     @if ($guest->points->count() == 3 )
@@ -148,34 +175,7 @@
 
                                 </tr>
 
-                                {{-- modal --}}
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalTitle">Editar Hora</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form action="{{ route('points.update', $point->id) }}" style="display:inline" method="POST">
-                                                        @csrf
-                                                        @method('PUT')
 
-                                                        <input type="datetime" name="register" id="{{ $point->id }}" value="{{ $point->register ?? old('register') }}" required>
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                                    <button type="submit" class="btn btn-warning">Editar</button>
-                                                </div>
-                                                    </form>
-                                            </div>
-                                            </div>
-                                        </div>
-                                    {{-- modal --}}
 
 
                             @endforeach
