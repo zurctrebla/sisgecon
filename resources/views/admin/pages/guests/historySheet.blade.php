@@ -30,7 +30,9 @@
 @stop
 
 @section('content')
+
 @include('admin.includes.alerts')
+
 <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
