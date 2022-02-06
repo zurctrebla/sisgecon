@@ -296,6 +296,7 @@ class GuestController extends Controller
 
         return view('admin.pages.guests.pdf', compact('guest'));
     }
+
     /**
      * Search results
      *

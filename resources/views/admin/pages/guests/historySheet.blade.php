@@ -30,6 +30,7 @@
 @stop
 
 @section('content')
+@include('admin.includes.alerts')
 <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
@@ -161,7 +162,7 @@
                                                         @csrf
                                                         @method('PUT')
 
-                                                        <input id="{{ $point->id }}" type="datetime" name="register" value="{{ date('Y-d-m H:i:s') }}" required>
+                                                        <input type="datetime" name="register" id="{{ $point->id }}" value="{{ $point->register ?? old('register') }}" required>
 
                                                 </div>
                                                 <div class="modal-footer">
