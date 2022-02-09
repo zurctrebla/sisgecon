@@ -25,7 +25,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = $this->repository->paginate();
+        $roles = $this->repository->where('id', '<>', 2)->paginate();
 
         return view('admin.pages.roles.index', compact('roles'));
     }

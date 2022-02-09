@@ -83,7 +83,7 @@ class EmployeeController extends Controller
         if ($request->number) {
 
             $data['number'] = $request->number;
-            $employee->phones()->create($data);
+            $employee->phone()->create($data);
         }
 
         // if ($request->model && $request->plate) {
@@ -101,7 +101,7 @@ class EmployeeController extends Controller
             $data['emission_for'] = $request->emission_for;
             $data['uf'] = $request->uf;
 
-            $employee->documents()->create($data);
+            $employee->document()->create($data);
         }
 
         return redirect()->route('employees.index')->with('message', 'Funcionário criado com sucesso');
@@ -119,7 +119,8 @@ class EmployeeController extends Controller
             return redirect()->back();
         }
 
-        return view('admin.pages.employees.edit', compact('employee'));
+        $sectors = Sector::all();
+        return view('admin.pages.employees.edit', compact('employee', 'sectors'));
     }
 
     /**
@@ -135,16 +136,22 @@ class EmployeeController extends Controller
             return redirect()->back();
         }
 
-        $data = $request->only(['name']);
+        $data = $request->all();
         $employee->update($data);
 
-        $employee->complement()->create($request->all());                        //  desta forma ok
+        // Phone::find($data['user_id'])->update($data);
+        // $employee->employee()->update($data);
 
+        // if ($request->number) {
+        //     $data['number'] = $request->number;
+        //     $employee->phone()->update($data);
+        // }
 
-        // $user->phones()->create($request->all());                            //  desta forma ok
-        // $user->vehicles()->create($request->only('type', 'plate', 'color')); //  desta forma ok
+        // $employee->complement()->create($request->all());                        //  desta forma ok
+        // $employee->phone()->create($request->all());                             //  desta forma ok
+        // $user->vehicles()->create($request->only('type', 'plate', 'color'));     //  desta forma ok
 
-        return redirect()->route('employees.employee')->with('message', 'Funcionário editado com sucesso');
+        return redirect()->route('employees.index')->with('message', 'Funcionário editado com sucesso');
     }
 
     /**
@@ -197,10 +204,11 @@ class EmployeeController extends Controller
                     }])->find($id)                              /* filtra os usuários com função funcionário */
                     /* ->paginate() */;
 
+
+
+
         /* aqui possivelmente seja implementado uma função para agrupar os registros, dividindo-os em dia, mes e ano */
-
         // $value = $employee->with('points')->groupBy('register');
-
         // dd($value);
 
         return view('admin.pages.employees.historySheet', compact('employee'));

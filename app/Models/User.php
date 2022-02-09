@@ -57,9 +57,9 @@ class User extends Authenticatable
     /**
      * Get phones
      */
-    public function phones()
+    public function phone()
     {
-        return $this->morphMany(Phone::class, 'phoneable');
+        return $this->morphOne(Phone::class, 'phoneable');
     }
 
     /**
@@ -72,12 +72,20 @@ class User extends Authenticatable
         return $this->morphMany(Vehicle::class, 'vehicleable');
     }
 
+    // /**
+    //  * Get document
+    //  */
+    // public function documents()
+    // {
+    //     return $this->morphMany(Document::class, 'documentable');
+    // }
+
     /**
      * Get document
      */
-    public function documents()
+    public function document()
     {
-        return $this->morphMany(Document::class, 'documentable');
+        return $this->morphOne(Document::class, 'documentable');
     }
 
     /**
