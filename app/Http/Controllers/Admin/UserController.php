@@ -24,13 +24,6 @@ class UserController extends Controller
     public function __construct(User $user)
     {
         $this->repository = $user;
-
-        // $this->middleware(['can:users', 'can:users-edit', 'can:users-employee', 'can:users-profile']);
-        // $this->middleware('permission:users-list|users-create|users-edit|users-delete', ['only' => ['index','show']]);
-        // $this->middleware('permission:users-create', ['only' => ['create','store']]);
-        // $this->middleware('permission:users-edit', ['only' => ['edit','update']]);
-        // $this->middleware('permission:users-delete', ['only' => ['destroy']]);
-
     }
 
     /**
@@ -248,6 +241,10 @@ class UserController extends Controller
                     /* ->paginate() */;
 
         /* aqui possivelmente seja implementado uma função para agrupar os registros, dividindo-os em dia, mes e ano */
+
+        // $value = $user->with('points')->groupBy('register');
+
+        // dd($value);
 
         return view('admin.pages.users.historySheet', compact('user'));
     }
