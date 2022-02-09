@@ -1,3 +1,12 @@
+
+@if (4 == $employee->points->count() >=2 )
+
+    {{$employee->points->count()}}
+
+@else
+
+@endif
+
 @foreach ($employee->points->chunk(4) as $chunk)
     @php
         $item1 = $item2 = $item3 = $item4 = $total = $hours = $minutes = 0;
@@ -13,8 +22,8 @@
         @endif
         <td>
             {{ date('H:i:s', strtotime($point->register)) }}
-            {{-- {{$loop->remaining}} #
-            {{$loop->count}} --}}
+            {{$loop->remaining}} #
+            {{$loop->count}}
         </td>
         @if ($loop->remaining  == 3)
             @php

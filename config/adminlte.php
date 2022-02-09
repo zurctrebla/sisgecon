@@ -279,7 +279,7 @@ return [
         ], */
         [
             'text' => 'Ocorrências',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/occurrences',
             'icon' => 'far fa-address-book',
             /* 'can'  => 'settings', */
         ],

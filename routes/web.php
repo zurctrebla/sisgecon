@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\{
     EmployeeController,
     SectorController,
     GuestController,
+    OccurrenceController,
     SettingController,
     UserController,
     PointController
@@ -23,6 +24,7 @@ Route::middleware(['auth'])->group(function () {
      */
     Route::get('/admin/home', [DashboardController::class, 'index'])->name('admin.index');
     Route::get('/admin/settings', [SettingController::class, 'index']);
+    Route::get('/admin/occurrences', [OccurrenceController::class, 'index']);
 
     /**
      * Users

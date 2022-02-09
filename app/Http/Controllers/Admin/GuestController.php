@@ -57,6 +57,7 @@ class GuestController extends Controller
         foreach ($guests as $guest) {
 
             array_push($sheets, $guest->points);
+
             CheckGuest::dispatch($guest);
 
         }
@@ -124,7 +125,7 @@ class GuestController extends Controller
             $data['emission_for'] = $request->emission_for;
             $data['uf'] = $request->uf;
 
-            $guest->documents()->create($data);
+            $guest->document()->create($data);
         }
 
         return redirect()->route('guests.index')->with('message', 'Visitante cadastrado com sucesso');
@@ -154,6 +155,10 @@ class GuestController extends Controller
         $data['register'] = date('Y-m-d H:i:s');
 
         $guest->points()->create($data);
+
+        $count = 
+
+
 
         return redirect()->route('guests.index')->with('message', 'Ponto Registrado com sucesso');
     }

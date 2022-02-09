@@ -20,24 +20,24 @@ class EmployeeController extends Controller
         $this->repository = $employee;
     }
 
+    // /**
+    //  * Display a listing of the resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function index()
+    // {
+    //     $employees = $this->repository->where('role_id', '2')->paginate();
+
+    //     return view('admin.pages.employees.index', compact('employees'));
+    // }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $employees = $this->repository->where('role_id', '2')->paginate();
-
-        return view('admin.pages.employees.index', compact('employees'));
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function employee()
     {
         $filter = date('Y-m-d');
 
@@ -50,7 +50,7 @@ class EmployeeController extends Controller
                     }])->where('role_id', '2')                              /* filtra os usuários com função funcionário */
                     ->paginate();
 
-        return view('admin.pages.employees.employees', compact('employees'));
+        return view('admin.pages.employees.index', compact('employees'));
     }
 
     /**
@@ -204,7 +204,13 @@ class EmployeeController extends Controller
                     }])->find($id)                              /* filtra os usuários com função funcionário */
                     /* ->paginate() */;
 
+        // $employees = DB::table('users')
+        //             ->join('contacts', 'users.id', '=', 'contacts.user_id')
+        //             ->join('orders', 'users.id', '=', 'orders.user_id')
+        //             ->select('users.*', 'contacts.phone', 'orders.price')
+        //             ->get();
 
+        //             dd($employees);
 
 
         /* aqui possivelmente seja implementado uma função para agrupar os registros, dividindo-os em dia, mes e ano */

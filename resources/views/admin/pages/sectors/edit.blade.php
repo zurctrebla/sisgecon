@@ -52,7 +52,7 @@
                 <h3 class="card-title">Editar Setor</h3>
             </div>
             <div class="card-body">
-                <form action="{{ route('sectors.update', $destiny->id) }}" class="form" method="POST">
+                <form action="{{ route('sectors.update', $sector->id) }}" class="form" method="POST">
                     @csrf
                     @method('PUT')
                     @include('admin.pages.sectors._partials.form')

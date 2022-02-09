@@ -14,7 +14,7 @@ class OccurrenceController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pages.occurrences.index');
     }
 
     /**
