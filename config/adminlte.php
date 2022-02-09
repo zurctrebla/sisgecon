@@ -324,7 +324,7 @@ return [
                     /* 'text' => 'level_one',
                     'url'  => '#', */
                     'text' => 'Funcionários',
-                    'url'  => 'admin/users/employees',
+                    'url'  => 'admin/employees',
                     'icon' => 'fas fa-chalkboard-teacher',
                     /* 'can'  => 'users-employee', */
                 ],

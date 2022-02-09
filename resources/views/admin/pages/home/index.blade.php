@@ -50,7 +50,7 @@
                     </span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text"><a href="{{ route('users.employee') }}">Funcionários</a></span>
+                    <span class="info-box-text"><a href="{{ route('employees.index') }}">Funcionários</a></span>
                     <span class="info-box-number">{{ $totalEmployees }}</span>
                 </div>
                 <!-- /.info-box-content -->

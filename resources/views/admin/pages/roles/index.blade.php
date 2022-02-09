@@ -60,7 +60,7 @@
                                                     <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="acoesListar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         Ações
                                                     </button>
-                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
+                                                    <div class="dropdown-menu" aria-labelledby="acoesListar">
                                                         <a href="{{ route('roles.show', $role->id) }}" class="dropdown-item">Visualizar</a>
                                                         @can('role-edit')
                                                             <a href="{{ route('roles.edit', $role->id) }}" class="dropdown-item">Editar</a>

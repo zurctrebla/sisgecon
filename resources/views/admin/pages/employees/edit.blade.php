@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Editar Permissão')
+@section('title', 'Editar Funcionário')
 
 @section('content_header')
     <div class="container-fluid">
@@ -11,15 +11,15 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <span class="d-none d-md-block">
-                    <a href="{{ route('permissions.index') }}" class="btn btn-outline-info btn-sm">Listar</a>
-                    @can('permission-show')
-                        <a href="{{ route('permissions.show', $permission->id) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
+                    <a href="{{ route('employees.index') }}" class="btn btn-outline-info btn-sm">Listar</a>
+                    @can('employee-show')
+                        <a href="{{ route('employees.show', $employee->id) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
                     @endcan
-                    @can('permission-delete')
-                        <form action="{{ route('permissions.destroy', $permission->id) }}" style="display:inline" method="POST">
+                    @can('employee-delete')
+                        <form action="{{ route('employees.destroy', $employee->id) }}" style="display:inline" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Deseja apagar a permissão ?')" >Apagar</button>
+                            <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Deseja apagar o funcionário ?')" >Apagar</button>
                         </form>
                     @endcan
                 </span>
@@ -28,12 +28,12 @@
                         Ações
                     </button>
                     <div class="dropdown-menu" aria-labelledby="acoesListar">
-                        <a href="{{ route('permissions.show', $permission->id) }}" class="dropdown-item">Listar</a>
-                        @can('permission-edit')
-                            <a href="{{ route('permissions.edit', $permission->id) }}" class="dropdown-item">Editar</a>
+                        <a href="{{ route('employees.show', $employee->id) }}" class="dropdown-item">Listar</a>
+                        @can('employee-edit')
+                            <a href="{{ route('employees.edit', $employee->id) }}" class="dropdown-item">Editar</a>
                         @endcan
-                        @can('permission-delete')
-                            <button class="dropdown-item" onclick="return confirm('Deseja apagar a permissão ?')">Apagar</button>
+                        @can('employee-delete')
+                            <button class="dropdown-item" onclick="return confirm('Deseja apagar o funcionário ?')">Apagar</button>
                         @endcan
                     </div>
                 </div>
@@ -49,12 +49,13 @@
         <div class="col-md-12">
             <div class="card card-secondary">
             <div class="card-header">
-                <h3 class="card-title">Editar Permissão</h3>
+                <h3 class="card-title">Editar Funcionário</h3>
             </div>
             <div class="card-body">
-                <form action="{{ route('permissions.update', $permission->id) }}" class="form" method="POST">
+                <form action="{{ route('employees.update', $employee->id) }}" class="form" method="POST">
+                    @csrf
                     @method('PUT')
-                    @include('admin.pages.permissions._partials.form')
+                    @include('admin.pages.employees._partials.formEmployee')
                 </form>
             </div>
             </div>
