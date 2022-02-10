@@ -72,7 +72,7 @@
 
                                                             <td>
                                                                 <strong>
-                                                                    <p style="color:<?php if ($key % 2 == 0){ echo "green"; }else{ echo "red"; } ?>">{{-- aqui inserir operador ternário --}}
+                                                                    <p style="color:<?php if ($key % 2 == 0){ echo "green"; }else{ echo "red"; } ?>">
                                                                         {{ ($point->register) ? date('H:i:s', strtotime($point->register)) : '' }}
                                                                     </p>
                                                                 </strong>
@@ -89,6 +89,8 @@
                                                     @endfor
 
                                                 @endforeach
+
+
 
                                             <td class="text-center">
                                                 <span class="d-none d-md-block">

@@ -122,4 +122,11 @@ class User extends Authenticatable
         return $this->morphMany(Point::class, 'pointable');
     }
 
+    /**
+     * Get Sheets
+     */
+    public function sheets()
+    {
+        return $this->morphMany(Point::class, 'sheetable');
+    }
 }

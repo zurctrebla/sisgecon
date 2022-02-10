@@ -33,6 +33,14 @@ class Guest extends Model
     }
 
     /**
+     * Get Sheets
+     */
+    public function sheets()
+    {
+        return $this->morphMany(Point::class, 'sheetable');
+    }
+
+    /**
      * Get vehicles
      */
     public function vehicles()

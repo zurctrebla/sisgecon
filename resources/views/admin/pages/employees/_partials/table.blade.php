@@ -22,8 +22,8 @@
         @endif
         <td>
             {{ date('H:i:s', strtotime($point->register)) }}
-            {{$loop->remaining}} #
-            {{$loop->count}}
+            {{-- {{$loop->remaining}} #
+            {{$loop->count}} --}}
         </td>
         @if ($loop->remaining  == 3)
             @php

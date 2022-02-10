@@ -20,18 +20,6 @@ class EmployeeController extends Controller
         $this->repository = $employee;
     }
 
-    // /**
-    //  * Display a listing of the resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function index()
-    // {
-    //     $employees = $this->repository->where('role_id', '2')->paginate();
-
-    //     return view('admin.pages.employees.index', compact('employees'));
-    // }
-
     /**
      * Display a listing of the resource.
      *
@@ -61,8 +49,8 @@ class EmployeeController extends Controller
     public function create()
     {
         $sectors = Sector::all();
-        $roles = Role::all();
-        return view('admin.pages.employees.create', compact('sectors', 'roles'));
+
+        return view('admin.pages.employees.create', compact('sectors'));
     }
 
     /**
@@ -210,7 +198,7 @@ class EmployeeController extends Controller
         //             ->select('users.*', 'contacts.phone', 'orders.price')
         //             ->get();
 
-        //             dd($employees);
+        // dd($employee);
 
 
         /* aqui possivelmente seja implementado uma função para agrupar os registros, dividindo-os em dia, mes e ano */

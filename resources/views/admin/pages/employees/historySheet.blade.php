@@ -46,6 +46,7 @@
                             <th scope="col">Saida</th>
                             <th scope="col">Entrada</th>
                             <th scope="col">Saida</th>
+                            <th scope="col">Horas</th>
                           </tr>
                         </thead>
                         <tbody>

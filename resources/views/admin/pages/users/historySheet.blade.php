@@ -50,7 +50,7 @@
                         </thead>
                         <tbody>
 
-                            @include('admin.pages.users._partials.table2')
+                            @include('admin.pages.users._partials.table')
 
                         </tbody>
                     </table>
