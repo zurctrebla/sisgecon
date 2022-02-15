@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateUser;
 use App\Models\{
-    Role,
+    Point,
     Sector,
     User
 };
@@ -186,26 +186,22 @@ class EmployeeController extends Controller
         $employee = $this->repository
                     ->with(['points' => function ($query) use ($filter) {
 
-                        $query->where('register', 'LIKE', "{$filter}%")->orderBy('register', 'DESC');    /* filtra points */
-                        $query->where('reason_status','N');                 /* filtra points sem motivos*/
+                        $query->where('register', 'LIKE', "{$filter}%")->orderBy('register', 'DESC');
+                        $query->where('reason_status','N');
 
-                    }])->find($id)                             /* filtra os usuários com função funcionário */
-                    /* ->paginate() */;
+                    }])->find($id);
 
-        // $employees = DB::table('users')
-        //             ->join('contacts', 'users.id', '=', 'contacts.user_id')
-        //             ->join('orders', 'users.id', '=', 'orders.user_id')
-        //             ->select('users.*', 'contacts.phone', 'orders.price')
-        //             ->get();
+        $value = [];
 
-        // dd($employee);
+        foreach ($employee->points ?? '' as $key => $point) {
 
+            array_push($value, $point->register);
 
-        /* aqui possivelmente seja implementado uma função para agrupar os registros, dividindo-os em dia, mes e ano */
-        // $value = $employee->with('points')->groupBy('register');
-        // dd($value);
+        }
 
-        return view('admin.pages.employees.historySheet', compact('employee'));
+        dd($value);
+
+        return view('admin.pages.employees.historySheet', compact('employee', 'value'));
     }
 
     /**

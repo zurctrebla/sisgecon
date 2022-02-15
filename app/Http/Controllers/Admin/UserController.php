@@ -33,43 +33,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->repository/* ->with('sheets') */->where('role_id', '<>', '2')->paginate();
+        $users = $this->repository->where('role_id', '<>', '2')->paginate();
 
         return view('admin.pages.users.index', compact('users'));
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function employee()
-    {
-        // $this->middleware(['can:users-employee']);
-
-        $filter = date('Y-m-d');
-
-        $users = $this->repository
-                    ->with(['points' => function ($query) use ($filter) {
-
-                        $query->where('register', 'LIKE', "{$filter}%");    /* filtra points */
-                        $query->where('reason_status','N');                 /* filtra points sem motivos*/
-
-                    }])->where('role_id', '2')                              /* filtra os usuários com função funcionário */
-                    ->paginate();
-
-        return view('admin.pages.users.employees', compact('users'));
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function createEmployee()
-    {
-        $sectors = Sector::all();
-        return view('admin.pages.users.createEmployee', compact('sectors'));
     }
 
     /**
@@ -99,154 +65,6 @@ class UserController extends Controller
         $this->repository->create($data);
 
         return redirect()->route('users.index')->with('message', 'Usuário criado com sucesso');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreUpdateUser $request
-     * @return \Illuminate\Http\Response
-     */
-    public function storeEmployee(Request $request)
-    {
-        // $this->repository->create($request->all());
-
-        $data = $request->all();
-
-        $data['password'] = bcrypt($data['password']);
-        $data['role_id'] = 2;
-        $user = $this->repository->create($data);
-
-        $user->employee()->create($data);
-
-        if ($request->number) {
-
-            $data['number'] = $request->number;
-
-            $user->phones()->create($data);
-        }
-
-        // if ($request->model && $request->plate) {
-
-        //     $data['model'] = $request->model;
-        //     $data['plate'] = $request->plate;
-
-        //     $user->vehicles()->create($data);
-        // }
-
-        if ($request->doc_no) {
-
-            $data['doc_no'] = $request->doc_no;
-            $data['emission'] = $request->emission;
-            $data['emission_for'] = $request->emission_for;
-            $data['uf'] = $request->uf;
-
-            $user->documents()->create($data);
-        }
-
-        // $user->docs()->create($data);
-
-        return redirect()->route('users.employee')->with('message', 'Funcionário criado com sucesso');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function editEmployee($id)
-    {
-        if (!$user = $this->repository->find($id)) {
-            return redirect()->back();
-        }
-
-        return view('admin.pages.users.editEmployee', compact('user'));
-    }
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Request $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function updateEmployee(Request $request, $id)
-    {
-        if (!$user = $this->repository->find($id)) {
-            return redirect()->back();
-        }
-
-        $data = $request->only(['name']);
-
-        // if ($request->password) {
-
-        //     $data['password'] = bcrypt($request->password);
-        // }
-
-        $user->update($data);
-
-        return redirect()->route('users.employee')->with('message', 'Funcionário editado com sucesso');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreUpdateUser $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function register(Request $request, $id)
-    {
-        if (!$user = $this->repository->find($id)) {
-            return redirect()->back();
-        }
-
-        $data = $request->all();
-
-        if ($request->reason) {
-            $data['reason'] = $request->reason;
-            $data['reason_status'] = 'Y';
-        }
-
-        $data['register'] = date('Y-m-d H:i:s');
-
-        $user->points()->create($data);
-
-        return redirect()->route('users.employee')->with('message', 'Ponto Registrado com sucesso');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function history($id)
-    {
-        if (!$user = $this->repository->find($id)) {
-            return redirect()->back();
-        }
-
-        $filter = date('Y-m-');
-
-        $user = $this->repository
-                    ->with(['points' => function ($query) use ($filter) {
-
-                        $query->where('register', 'LIKE', "{$filter}%");    /* filtra points */
-                        $query->where('reason_status','N');                 /* filtra points sem motivos*/
-
-                    }])->find($id)                              /* filtra os usuários com função funcionário */
-                    /* ->paginate() */;
-
-        /* aqui possivelmente seja implementado uma função para agrupar os registros, dividindo-os em dia, mes e ano */
-
-        // $value = $user->with('points')->groupBy('register');
-
-        // dd($value);
-
-        return view('admin.pages.users.historySheet', compact('user'));
     }
 
     /**
@@ -303,10 +121,6 @@ class UserController extends Controller
 
         $user->update($data);
 
-        // $user->phones()->create($request->all());                            //  desta forma ok
-        // $user->vehicles()->create($request->only('type', 'plate', 'color')); //  desta forma ok
-        // $user->complement()->create($request->all());                        //  desta forma ok
-
         return redirect()->route('users.index')->with('message', 'Usuário editado com sucesso');
     }
 
@@ -328,7 +142,7 @@ class UserController extends Controller
     }
 
     /**
-     *
+     * 
      *
      */
     public function profile()

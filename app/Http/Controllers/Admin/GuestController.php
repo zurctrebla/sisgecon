@@ -156,10 +156,6 @@ class GuestController extends Controller
 
         $guest->points()->create($data);
 
-        $count = 
-
-
-
         return redirect()->route('guests.index')->with('message', 'Ponto Registrado com sucesso');
     }
 
@@ -173,14 +169,6 @@ class GuestController extends Controller
     {
         if (!$guest = $this->repository->find($id)) {
             return redirect()->back();
-        }
-
-        $sheets = [];
-
-        foreach ($guest->points as $value) {
-
-            array_push($sheets, $value);
-
         }
 
         /* aqui possivelmente seja implementado uma função para agrupar os registros, dividindo-os em dia, mes e ano */

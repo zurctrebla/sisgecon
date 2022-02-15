@@ -15,31 +15,11 @@ class PointFactory extends Factory
      */
     public function definition()
     {
-        /* $user = factory(\User::class)->create();
-        $user->userable()->save(factory(\Staff::class)->create([
-            'user_id' => $user->id
-        ])); */
-
         return [
             'pointable_type' => 'App\Models\User',
             'pointable_id' => '2',
             'register' => $this->faker->dateTime(),
         ];
-
-        // return $this->afterMaking(function (Point $point) {
-        //     //
-        // })->afterCreating(function (Point $point) {
-        //     //
-        // });
-
-        // return [
-        //     'role_id' => Role::factory(),
-        //     'name' => $this->faker->name(),
-        //     'email' => $this->faker->unique()->safeEmail(),
-        //     'email_verified_at' => now(),
-        //     'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        //     'remember_token' => Str::random(10),
-        // ];
 
     }
 }

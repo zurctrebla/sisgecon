@@ -51,7 +51,7 @@
                         </thead>
                         <tbody>
 
-                            @include('admin.pages.employees._partials.table')
+                            @include('admin.pages.employees._partials.table4')
 
                         </tbody>
                     </table>
