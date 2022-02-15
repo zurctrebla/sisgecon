@@ -193,10 +193,19 @@ class EmployeeController extends Controller
 
         $value = [];
 
-        foreach ($employee->points ?? '' as $key => $point) {
+        // foreach ($employee->points ?? '' as $key => $point) {
 
-            array_push($value, $point->register);
+        //     array_push($value, $point->register);
 
+        // }
+
+        foreach ($employee->points->chunk(4) as $chunk) {
+
+            foreach ($chunk as $key => $point) {
+
+                array_push($value, $point->register);
+
+            }
         }
 
         dd($value);
