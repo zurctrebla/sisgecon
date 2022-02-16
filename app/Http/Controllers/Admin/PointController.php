@@ -81,7 +81,7 @@ class PointController extends Controller
             return redirect()->back();
         }
 
-        $point->update($request->only('register'));
+        $point->update($request->only('hora_ocorrencia'));
 
         return redirect()->route('guests.history', $id)->with('message', 'Hora Atualizada com Sucesso!');
     }

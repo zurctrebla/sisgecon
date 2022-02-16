@@ -73,7 +73,7 @@
                                                             <td>
                                                                 <strong>
                                                                     <p style="color:<?php if ($key % 2 == 0){ echo "green"; }else{ echo "red"; } ?>">
-                                                                        {{ ($point->register) ? date('H:i:s', strtotime($point->register)) : '' }}
+                                                                        {{ ($point->hora_ocorrencia) ? date('H:i:s', strtotime($point->hora_ocorrencia)) : '' }}
                                                                     </p>
                                                                 </strong>
                                                             </td>

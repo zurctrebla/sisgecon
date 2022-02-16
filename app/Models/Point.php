@@ -9,7 +9,7 @@ class Point extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['register', 'reason', 'reason_status'];
+    protected $fillable = ['register', 'reason', 'reason_status', 'data_ocorrencia', 'hora_ocorrencia'];
 
     public function pointable()
     {

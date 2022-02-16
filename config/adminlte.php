@@ -337,11 +337,12 @@ return [
             'icon' => 'fas fa-fw fa-lock',
         ], */
 
-        /* [
+        [
             'text' => 'Sair',
-            'url'  => 'logout',
-            'icon' => 'fa fa-fw fa-power-off text-red',
-        ], */
+            'url'  => '/logout',
+            /* 'icon' => 'fa fa-fw fa-power-off text-red', */
+            'icon' => 'fas fa-sign-out-alt',
+        ],
     ],
 
     /*

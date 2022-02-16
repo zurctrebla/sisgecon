@@ -41,10 +41,12 @@
                     <table class="table table-bordered">
                         <thead>
                           <tr>
-                            <th style="width:120px;">Data</th>
-                            <th style="width:120px; text-align:center;">Horário</th>
-                            <th style="width:120px; text-align:center;">Status</th>
-                            <th scope="col">Motivo</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Entrada</th>
+                            <th scope="col">Saida</th>
+                            <th scope="col">Entrada</th>
+                            <th scope="col">Saida</th>
+                            <th scope="col">Horas</th>
                           </tr>
                         </thead>
                         <tbody>

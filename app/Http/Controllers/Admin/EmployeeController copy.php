@@ -10,24 +10,14 @@ use App\Models\{
     User
 };
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use PhpParser\Node\Stmt\Foreach_;
 
 class EmployeeController extends Controller
 {
-    protected $employee;
-    protected $sector;
-    protected $point;
+    protected $repository;
 
-    public function __construct(
-        User $employee,
-        Sector $sector,
-        Point $point
-        )
+    public function __construct(User $employee)
     {
-        $this->employee = $employee;
-        $this->sector = $sector;
-        $this->point = $point;
+        $this->repository = $employee;
     }
 
     /**
@@ -39,19 +29,16 @@ class EmployeeController extends Controller
     {
         $filter = date('Y-m-d');
 
-        $employees = $this->employee
+        $employees = $this->repository
                     ->with(['points' => function ($query) use ($filter) {
 
-                        $query->where('data_ocorrencia', 'LIKE', "{$filter}%");    /* filtra points */
+                        $query->where('register', 'LIKE', "{$filter}%");    /* filtra points */
                         $query->where('reason_status','N');                 /* filtra points sem motivos*/
 
                     }])->where('role_id', '2')                              /* filtra os usuários com função funcionário */
                     ->paginate();
 
-        // return view('admin.pages.employees.index', compact('employees'));
-        return view('admin.pages.employees.index', [
-            'employees' => $employees,
-        ]);
+        return view('admin.pages.employees.index', compact('employees'));
     }
 
     /**
@@ -61,12 +48,9 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $sectors = $this->sector->get();
+        $sectors = Sector::all();
 
-        // return view('admin.pages.employees.create', compact('sectors'));
-        return view('admin.pages.employees.create', [
-            'sectors' => $sectors
-        ]);
+        return view('admin.pages.employees.create', compact('sectors'));
     }
 
     /**
@@ -80,7 +64,7 @@ class EmployeeController extends Controller
         $data = $request->all();
         $data['password'] = bcrypt($data['password']);
         $data['role_id'] = 2;
-        $employee = $this->employee->create($data);
+        $employee = $this->repository->create($data);
 
         $employee->employee()->create($data);
 
@@ -119,15 +103,12 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        if (!$employee = $this->employee->find($id)) {
+        if (!$employee = $this->repository->find($id)) {
             return redirect()->back();
         }
 
-        $sectors = $this->sector->get();
-        return view('admin.pages.employees.edit', [
-            'employee' => $employee,
-            'sectors' => $sectors
-        ]);
+        $sectors = Sector::all();
+        return view('admin.pages.employees.edit', compact('employee', 'sectors'));
     }
 
     /**
@@ -139,7 +120,7 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (!$employee = $this->employee->find($id)) {
+        if (!$employee = $this->repository->find($id)) {
             return redirect()->back();
         }
 
@@ -170,7 +151,7 @@ class EmployeeController extends Controller
      */
     public function register(Request $request, $id)
     {
-        if (!$employee = $this->employee->find($id)) {
+        if (!$employee = $this->repository->find($id)) {
             return redirect()->back();
         }
 
@@ -182,8 +163,6 @@ class EmployeeController extends Controller
         }
 
         $data['register'] = date('Y-m-d H:i:s');
-        $data['data_ocorrencia'] = date('Y-m-d');
-        $data['hora_ocorrencia'] = date('H:i:s', strtotime(now()));
 
         $employee->points()->create($data);
 
@@ -198,35 +177,40 @@ class EmployeeController extends Controller
      */
     public function history($id)
     {
-        if (!$employee = $this->employee->find($id)) {
+        if (!$employee = $this->repository->find($id)) {
             return redirect()->back();
         }
 
-        $dados = $this->point
-                    ->where('pointable_id', $id)
-                    ->where('pointable_type', 'App\Models\User')
-                    ->orderBy('data_ocorrencia', 'desc')
-                    ->get()
-                    ->groupBy('data_ocorrencia');
+        $filter = date('');
 
-        // return $dados;
+        $employee = $this->repository
+                    ->with(['points' => function ($query) use ($filter) {
 
-        // $dados = $this->point
-        //             ->select(   DB::raw('GROUP_CONCAT(register) as registro'),
-        //                         DB::raw('GROUP_CONCAT(reason_status) as status'),
-        //                         DB::raw('GROUP_CONCAT(reason) as motivo'),
-        //                         DB::raw('DATE(register) as data_registro'))
-        //             ->groupBy(DB::raw('data_registro'))
-        //             ->orderBy('data_registro', 'desc')
-        //             ->where('pointable_id', $id)
-        //             ->get();
+                        $query->where('register', 'LIKE', "{$filter}%")->orderBy('register', 'DESC');
+                        $query->where('reason_status','N');
 
-        // dd($dados);
+                    }])->find($id);
 
-        return view('admin.pages.employees.historySheet', [
-            'employee' => $employee,
-            'dados' => $dados
-        ]);
+        $value = [];
+
+        // foreach ($employee->points ?? '' as $key => $point) {
+
+        //     array_push($value, $point->register);
+
+        // }
+
+        foreach ($employee->points->chunk(4) as $chunk) {
+
+            foreach ($chunk as $key => $point) {
+
+                array_push($value, $point->register);
+
+            }
+        }
+
+        dd($value);
+
+        return view('admin.pages.employees.historySheet', compact('employee', 'value'));
     }
 
     /**
@@ -237,13 +221,11 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        if (!$employee = $this->employee->find($id)) {
+        if (!$employee = $this->repository->find($id)) {
             return redirect()->back();
         }
 
-        return view('admin.pages.employees.show', [
-            'employee' => $employee
-        ]);
+        return view('admin.pages.employees.show', compact('employee'));
     }
 
     /**
@@ -254,7 +236,7 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        if (!$employee = $this->employee->find($id)) {
+        if (!$employee = $this->repository->find($id)) {
             return redirect()->back();
         }
 
@@ -273,8 +255,7 @@ class EmployeeController extends Controller
     {
         $filters = $request->only('filter');
 
-        $employees = $this->employee
-                            ->where ('role_id', 2)
+        $employees = $this->repository
                             ->where(function($query) use ($request) {
                                 if ($request->filter) {
                                     $query->orWhere('name', 'LIKE', "%{$request->filter}%");
@@ -284,9 +265,6 @@ class EmployeeController extends Controller
                             ->latest()
                             ->paginate();
 
-        return view('admin.pages.employees.index', [
-            'employees' => $employees,
-            'filters' => $filters
-        ]);
+        return view('admin.pages.employees.index', compact('employees', 'filters'));
     }
 }
