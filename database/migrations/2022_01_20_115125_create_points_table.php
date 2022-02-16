@@ -18,8 +18,8 @@ class CreatePointsTable extends Migration
             $table->morphs('pointable');
             $table->dateTime('register');
 
-            $table->date('data_ocorrencia')->nullable();
-            $table->time('hora_ocorrencia')->nullable();
+            $table->date('date');
+            $table->time('hour');
 
             $table->string('reason')->nullable();
             $table->enum('reason_status', ['Y', 'N'])->default('N');

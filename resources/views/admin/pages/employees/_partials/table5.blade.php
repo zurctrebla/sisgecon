@@ -7,7 +7,7 @@
                     <td></td>
                     <td>
                         <a href="" data-toggle="modal" data-target="#exampleModal{{ $dado[$i]->id }}">
-                            {{ $dado[$i]->hora_ocorrencia ?? '' }}
+                            {{ $dado[$i]->hour ?? '' }}
                         </a>
                     </td>
                     @if ($i == 0)

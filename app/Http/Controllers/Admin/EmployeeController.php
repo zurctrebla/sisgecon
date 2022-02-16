@@ -42,7 +42,7 @@ class EmployeeController extends Controller
         $employees = $this->employee
                     ->with(['points' => function ($query) use ($filter) {
 
-                        $query->where('data_ocorrencia', 'LIKE', "{$filter}%");    /* filtra points */
+                        $query->where('date', 'LIKE', "{$filter}%");    /* filtra points */
                         $query->where('reason_status','N');                 /* filtra points sem motivos*/
 
                     }])->where('role_id', '2')                              /* filtra os usuários com função funcionário */
@@ -182,8 +182,8 @@ class EmployeeController extends Controller
         }
 
         $data['register'] = date('Y-m-d H:i:s');
-        $data['data_ocorrencia'] = date('Y-m-d');
-        $data['hora_ocorrencia'] = date('H:i:s', strtotime(now()));
+        $data['date'] = date('Y-m-d');
+        $data['hour'] = date('H:i:s');
 
         $employee->points()->create($data);
 
@@ -205,9 +205,9 @@ class EmployeeController extends Controller
         $dados = $this->point
                     ->where('pointable_id', $id)
                     ->where('pointable_type', 'App\Models\User')
-                    ->orderBy('data_ocorrencia', 'desc')
+                    ->orderBy('date', 'desc')
                     ->get()
-                    ->groupBy('data_ocorrencia');
+                    ->groupBy('date');
 
         // return $dados;
 
