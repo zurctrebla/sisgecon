@@ -9,7 +9,7 @@
         </button>
         </div>
         <div class="modal-body">
-            <form action="{{ route('points.updateEmployee', $dado[$i]->id) }}" style="display:inline" method="POST">
+            <form action="{{ route('points.update', $dado[$i]->id) }}" style="display:inline" method="POST">
                 @csrf
                 @method('PUT')
                 <input type="time" name="hour" id="{{ $dado[$i]->id }}" value="{{ $dado[$i]->hour ?? old('hour') }}" required>

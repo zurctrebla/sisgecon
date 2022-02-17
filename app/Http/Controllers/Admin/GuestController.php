@@ -164,6 +164,7 @@ class GuestController extends Controller
         $dados = $this->point
                     ->where('pointable_id', $id)
                     ->where('pointable_type', 'App\Models\Guest')
+                    ->where('reason_status', 'N')
                     ->orderBy('date', 'desc')
                     ->get()
                     ->groupBy('date');
@@ -261,7 +262,7 @@ class GuestController extends Controller
     }
 
     /**
-     * PDF
+     * Generate PDF page
      */
     public function pdf($id)
     {
@@ -271,6 +272,7 @@ class GuestController extends Controller
         $dados = $this->point
             ->where('pointable_id', $id)
             ->where('pointable_type', 'App\Models\Guest')
+            ->where('reason_status', 'N')
             ->orderBy('date', 'desc')
             ->get()
             ->groupBy('date');

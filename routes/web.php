@@ -110,9 +110,7 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Points
      */
-    Route::put('/admin/points/{id}', [PointController::class, 'updateGuest'])->name('points.updateGuest');
-
-    Route::put('/admin/points/{id}', [PointController::class, 'updateEmployee'])->name('points.updateEmployee');
+    Route::put('/admin/points/{id}', [PointController::class, 'update'])->name('points.update');
 
     /**
      * Sectors

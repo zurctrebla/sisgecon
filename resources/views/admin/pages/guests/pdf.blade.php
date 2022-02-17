@@ -172,40 +172,18 @@
           <th>Entrada</th>
           <th>Saída</th>
         </tr>
-            @foreach ($guest->points->chunk(4) as $chunk)
-                <tr>
-                    @foreach ($chunk as $point)
-
-                    @if ($loop->first)
-                        <td>
-                            <strong>
-                                {{ date('d/m/Y', strtotime($point->register)) }}
-                            </strong>
-                        </td>
-                    @endif
-
-                        <td>{{ date('H:i:s', strtotime($point->register)) }}</td>
-
-                    @endforeach
-
-                    @if ($guest->points->count() == 3 )
-
-                        <td></td>
-
-                    @elseif ($guest->points->count() == 2 )
-
-                        <td></td>
-                        <td></td>
-
-                    @elseif ($guest->points->count() == 1 )
-
-                        <td></td>
-                        <td></td>
-                        <td></td>
-
-                    @endif
-                </tr>
-            @endforeach
+        @foreach ($dados as $key => $dado)            
+            <tr>
+                <td>
+                    {{ date('d/m/Y', strtotime($key)) }}
+                </td>
+                @for ($i = 0; $i < $dado->count(); $i++)                    
+                    <td>
+                        {{ date('H:i:s', strtotime($dado[$i]->hour)) }}
+                    </td>                    
+                @endfor 
+            </tr>               
+        @endforeach
     </table>
     <div hidden class="meio" style="clear:both;">
         <div class="paciente">
@@ -214,26 +192,9 @@
     </div>
     <div class="texto" style="clear:both;">
         <div class="titulo_texto" style="text-align: center">
-            <b>{{-- {{ $pedido->exame->nome }} --}}</b>
+            <b> </b>
         </div>
-        {{-- {!! $laudo->texto !!} --}}
     </div>
-
-    {{-- <div class="assinatura" style="clear:both;">
-        @if (file_exists(public_path('/storage/usuarios/' . $laudo->user->uuid . '/' . $laudo->user->assinatura)))
-            <img src="data:image/png;base64, {{ base64_encode(file_get_contents(public_path('/storage/usuarios/' . $laudo->user->uuid . '/' . $laudo->user->assinatura))) }} "
-                style="width:120px;">
-        @else
-            <img src="data:image/png;base64, {{ base64_encode(file_get_contents(public_path('/storage/sem_imagem.png'))) }} "
-                style="width:120px;">
-        @endif
-        <br>
-        <b>DR(a) {{ $laudo->user->name }}</b> <br>
-        <font style="font-size: 8px;">
-            CRM: {{ $laudo->user->crm }}<br>
-            RQE: {{ $laudo->user->rqe }}
-        </font>
-    </div> --}}
 
 
 </body>

@@ -75,7 +75,7 @@ class PointController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateGuest(Request $request, $id)
+    public function update(Request $request, $id)
     {
         if (!$point = $this->repository->find($id)) {
             return redirect()->back();
@@ -83,25 +83,7 @@ class PointController extends Controller
 
         $point->update($request->only('hour'));
 
-        return redirect()->route('guests.history', $id)->with('message', 'Hora Atualizada com Sucesso!');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function updateEmployee(Request $request, $id)
-    {
-        if (!$point = $this->repository->find($id)) {
-            return redirect()->back();
-        }
-
-        $point->update($request->only('hour'));
-
-        return redirect()->route('employees.history', $id)->with('message', 'Hora Atualizada com Sucesso!');
+        return redirect()->back()->with('message', 'Hora atualizada com Sucesso!');
     }
 
     /**

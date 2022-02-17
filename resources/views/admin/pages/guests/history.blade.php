@@ -30,6 +30,7 @@
 @stop
 
 @section('content')
+
 @include('admin.includes.alerts')
 
 <div class="container-fluid">
@@ -55,7 +56,6 @@
                     </tr>
                 </thead>
                 <tbody>
-
                     <tr>
                         <td>{{ $guest->user->name ?? ''}}</td>
                         <td>{{ $guest->authorized_at ?? ''}}</td>
@@ -66,7 +66,6 @@
                         <td>{{ date('d/m/Y', strtotime($guest->expires_at)) ?? ''}}</td>
                         <td>{{ $guest->status ?? ''}}</td>
                     </tr>
-
                 </tbody>
             </table>
         </div>
@@ -76,21 +75,21 @@
                     <table class="table table-bordered">
                         <thead>
                           <tr>
-                            <th hidden scope="col">data</th>
-                            <th hidden scope="col">Entrada</th>
-                            <th hidden scope="col">Saida</th>
-                            <th hidden scope="col">Entrada</th>
-                            <th hidden scope="col">Saida</th>
+                            <th  scope="col">Data</th>
+                            <th  scope="col">Entrada</th>
+                            <th  scope="col">Saida</th>
+                            <th  scope="col">Entrada</th>
+                            <th  scope="col">Saida</th>
 
-                            <th style="width:120px;">Data</th>
-                            <th style="width:120px; text-align:center;">Horário</th>
-                            <th style="width:120px; text-align:center;">Status</th>
-                            <th scope="col">Motivo</th>
+                            <th hidden style="width:120px;">Data</th>
+                            <th hidden style="width:120px; text-align:center;">Horário</th>
+                            <th hidden style="width:120px; text-align:center;">Status</th>
+                            <th hidden scope="col">Motivo</th>
                           </tr>
                         </thead>
                         <tbody>
 
-                            @include('admin.pages.guests._partials.table')
+                            @include('admin.pages.guests._partials.table2')
                             
                         </tbody>
                     </table>
