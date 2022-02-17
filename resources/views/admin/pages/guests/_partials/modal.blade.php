@@ -1,4 +1,3 @@
-
 <div class="modal fade" id="exampleModal{{ $dado[$i]->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -9,7 +8,7 @@
         </button>
         </div>
         <div class="modal-body">
-            <form action="{{ route('points.updateEmployee', $dado[$i]->id) }}" style="display:inline" method="POST">
+            <form action="{{ route('points.updateGuest', $dado[$i]->id) }}" style="display:inline" method="POST">
                 @csrf
                 @method('PUT')
                 <input type="time" name="hour" id="{{ $dado[$i]->id }}" value="{{ $dado[$i]->hour ?? old('hour') }}" required>

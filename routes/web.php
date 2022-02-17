@@ -50,7 +50,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/employees/{id}', [EmployessController::class, 'show'])->name('employees.show');
     Route::post('/admin/employees/store', [EmployeeController::class, 'store'])->name('employees.store');
     Route::get('/admin/employees/register/{id}', [EmployeeController::class, 'register'])->name('employees.register');
-    Route::get('/admin/employees/historySheet/{id}', [EmployeeController::class, 'history'])->name('employees.history');
+    Route::get('/admin/employees/history/{id}', [EmployeeController::class, 'history'])->name('employees.history');
     Route::get('/admin/employees', [EmployeeController::class, 'index'])->name('employees.index');
 
     /**
@@ -95,17 +95,9 @@ Route::middleware(['auth'])->group(function () {
      * Guests
      */
     Route::get('/admin/guests/pdf/{id}', [GuestController::class, 'pdf'])->name('guests.pdf');
-
-
     Route::get('/admin/guests/test/{id}', [GuestController::class, 'test'])->name('guests.test');
-
-    // Route::put('/admin/points/test/{id}', [PointController::class, 'test'])->name('points.test');
-
-
-
     Route::get('/admin/guests/register/{id}', [GuestController::class, 'register'])->name('guests.register');
-    Route::get('/admin/guests/historySheet/{id}', [GuestController::class, 'history'])->name('guests.history');
-
+    Route::get('/admin/guests/history/{id}', [GuestController::class, 'history'])->name('guests.history');
     Route::any('/admin/guests/search', [GuestController::class, 'search'])->name('guests.search');
     Route::get('/admin/guests/create', [GuestController::class, 'create'])->name('guests.create');
     Route::put('/admin/guests/{id}', [GuestController::class, 'update'])->name('guests.update');
@@ -118,7 +110,9 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Points
      */
-    Route::put('/admin/points/{id}', [PointController::class, 'update'])->name('points.update');
+    Route::put('/admin/points/{id}', [PointController::class, 'updateGuest'])->name('points.updateGuest');
+
+    Route::put('/admin/points/{id}', [PointController::class, 'updateEmployee'])->name('points.updateEmployee');
 
     /**
      * Sectors

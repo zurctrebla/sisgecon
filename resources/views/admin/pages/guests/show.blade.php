@@ -56,11 +56,11 @@
                     <table>
                         <tr>
                             <th><?= __('Cadastrado por: ') ?></th>
-                            <td>{{ $guest->user->name }}</td>
+                            <td>{{ $guest->user->name ?? ''}}</td>
                         </tr>
                         <tr>
                             <th><?= __('Nome do visitante: ') ?></th>
-                            <td>{{ $guest->name }}</td>
+                            <td>{{ $guest->name ?? ''}}</td>
                         </tr>
                         <tr>
                             <th><?= __('Veículo: ') ?></th>
@@ -84,25 +84,20 @@
                         </tr>
                         <tr>
                             <th><?= __('Autorização') ?></th>
-                            <td>{{ $guest->authorization }}</td>
+                            <td>{{ $guest->authorization ?? ''}}</td>
                         </tr>
                         <tr>
                             <th><?= __('Documento: ') ?></th>
-                            <td>
-                                @foreach ($guest->documents as $document)
-
-                                    {{ $document->doc_no }}
-
-                                @endforeach
+                            <td>{{ $guest->document->doc_no ?? ''}}
                             </td>
                         </tr>
                         <tr>
                             <th><?= __('Setor: ') ?></th>
-                            <td>{{ $guest->sector->name }}</td>
+                            <td>{{ $guest->sector->name ?? ''}}</td>
                         </tr>
                         <tr>
                             <th><?= __('Falar com quem: ') ?></th>
-                            <td>{{ $guest->person }}</td>
+                            <td>{{ $guest->person ?? ''}}</td>
                         </tr>
                         <tr>
                             <th><?= __('Empresa: ') ?></th>
@@ -110,12 +105,12 @@
                         </tr>
                         <tr>
                             <th><?= __('Observação: ') ?></th>
-                            <td>{{ $guest->obs }}</td>
+                            <td>{{ $guest->obs ?? ''}}</td>
                         </tr>
 
                         <tr>
                             <th><?= __('Data Inicial: ') ?></th>
-                            <td>{{ date('d/m/Y', strtotime($guest->start_at)) }}</td>
+                            <td>{{ date('d/m/Y', strtotime($guest->start_at)) }} </td>
                         </tr>
                         <tr>
                             <th><?= __('Data Final: ') ?></th>

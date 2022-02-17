@@ -223,7 +223,7 @@ class EmployeeController extends Controller
 
         // dd($dados);
 
-        return view('admin.pages.employees.historySheet', [
+        return view('admin.pages.employees.history', [
             'employee' => $employee,
             'dados' => $dados
         ]);

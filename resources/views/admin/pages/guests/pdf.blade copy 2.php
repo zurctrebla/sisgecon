@@ -141,7 +141,7 @@
                 <b>Cadastrado por:</b> {{ $guest->authorized_at ?? ''}}
             </div>
             <div class="linha">
-                <b>Documento:</b> {{ $document->doc_no ?? ''}}
+                <b>Documento:</b>{{ $guest->document->doc_no ?? ''}} 
             </div>
             <div class="linha">
                 <b>Autorização:</b> {{ $guest->authorization ?? ''}}

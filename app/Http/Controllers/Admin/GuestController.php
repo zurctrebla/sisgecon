@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Events\CheckGuest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateGuest;
-use App\Models\Sector;
-use App\Models\Guest;
-use App\Models\User;
+use App\Models\{
+    Guest,
+    Point,
+    Sector,
+    User
+
+};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -15,20 +19,19 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class GuestController extends Controller
 {
-    protected $repository;
-    protected $user;
+    protected $employee;
+    protected $sector;
+    protected $point;
+    protected $guest;
 
-    public function __construct(Guest $guest, User $user)
+    public function __construct(User $employee, Sector $sector, Point $point, Guest $guest)
     {
-        $this->repository = $guest;
-        $this->user = $user;
+        $this->employee = $employee;
+        $this->sector   = $sector;
+        $this->point    = $point;
+        $this->guest    = $guest;
 
         $this->middleware(['can:guests']);
-
-        // $this->middleware('permission:guest-list|guest-create|guest-edit|guest-delete', ['only' => ['index','show']]);
-        // $this->middleware('permission:guest-create', ['only' => ['create','store']]);
-        // $this->middleware('permission:guest-edit', ['only' => ['edit','update']]);
-        // $this->middleware('permission:guest-delete', ['only' => ['destroy']]);
     }
 
     /**
@@ -38,11 +41,10 @@ class GuestController extends Controller
      */
     public function index()
     {
-        //$guests = $this->repository/* ->where('status', '<>', 'Expirado') */->paginate();
 
         $filter = date('Y-m-d');
 
-        $guests = $this->repository
+        $guests = $this->guest
                     ->with(['points' => function ($query) use ($filter) {
 
                         $query->where('register', 'LIKE', "{$filter}%");    /* filtra points */
@@ -62,22 +64,8 @@ class GuestController extends Controller
 
         }
 
-        // dd($sheets);
-
         return view('admin.pages.guests.index', compact('guests', 'sheets'));
     }
-
-    // /**
-    //  * Display a listing of the resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function history()
-    // {
-    //     $guests = $this->repository->where('status', 'Expirado')->paginate();
-
-    //     return view('admin.pages.guests.history', compact('guests'));
-    // }
 
     /**
      * Show the form for creating a new resource.
@@ -86,7 +74,7 @@ class GuestController extends Controller
      */
     public function create()
     {
-        $sectors = Sector::all();
+        $sectors = $this->sector->all();
 
         return view('admin.pages.guests.create', compact('sectors'));
     }
@@ -108,7 +96,7 @@ class GuestController extends Controller
             $data['photo'] = $request->photo->store('guests/photos');
         }
 
-        $guest = $this->repository->create($data);
+        $guest = $this->guest->create($data);
 
         if ($request->model && $request->plate) {
 
@@ -141,7 +129,7 @@ class GuestController extends Controller
      */
     public function register(Request $request, $id)
     {
-        if (!$guest = $this->repository->find($id)) {
+        if (!$guest = $this->guest->find($id)) {
             return redirect()->back();
         }
 
@@ -153,6 +141,8 @@ class GuestController extends Controller
         }
 
         $data['register'] = date('Y-m-d H:i:s');
+        $data['date'] = date('Y-m-d');
+        $data['hour'] = date('H:i:s');
 
         $guest->points()->create($data);
 
@@ -167,13 +157,19 @@ class GuestController extends Controller
      */
     public function history($id)
     {
-        if (!$guest = $this->repository->find($id)) {
+        if (!$guest = $this->guest->find($id)) {
             return redirect()->back();
         }
 
+        $dados = $this->point
+                    ->where('pointable_id', $id)
+                    ->where('pointable_type', 'App\Models\Guest')
+                    ->orderBy('date', 'desc')
+                    ->get()
+                    ->groupBy('date');
         /* aqui possivelmente seja implementado uma função para agrupar os registros, dividindo-os em dia, mes e ano */
 
-        return view('admin.pages.guests.historySheet', compact('guest', 'sheets'));
+        return view('admin.pages.guests.history', compact('guest', 'dados'));
     }
 
     /**
@@ -184,7 +180,7 @@ class GuestController extends Controller
      */
     public function show($id)
     {
-        if(!$guest = $this->repository->find($id)){
+        if(!$guest = $this->guest->find($id)){
             return redirect()->back();
         }
 
@@ -199,7 +195,7 @@ class GuestController extends Controller
      */
     public function edit($id)
     {
-        if(!$guest = $this->repository->find($id))
+        if(!$guest = $this->guest->find($id))
             return redirect()->back();
 
         $sectors = Sector::all();
@@ -216,7 +212,7 @@ class GuestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(!$guest = $this->repository->find($id))
+        if(!$guest = $this->guest->find($id))
             return redirect()->back();
 
         $data = $request->all();
@@ -253,7 +249,7 @@ class GuestController extends Controller
      */
     public function destroy($id)
     {
-        if(!$guest = $this->repository->find($id))
+        if(!$guest = $this->guest->find($id))
             return redirect()->back();
 
         if (Storage::exists($guest->photo)) {
@@ -269,14 +265,20 @@ class GuestController extends Controller
      */
     public function pdf($id)
     {
-        if(!$guest = $this->repository->find($id))
+        if(!$guest = $this->guest->find($id))
             return redirect()->back();
 
+        $dados = $this->point
+            ->where('pointable_id', $id)
+            ->where('pointable_type', 'App\Models\Guest')
+            ->orderBy('date', 'desc')
+            ->get()
+            ->groupBy('date');
         // $guests = Guest::all();
 
-        return PDF::loadView('admin.pages.guests.pdf', compact('guest'))
+        return PDF::loadView('admin.pages.guests.pdf', compact('guest', 'dados'))
                     // Se quiser que fique no formato a4 retrato: ->setPaper('a4', 'landscape')
-                    ->/* stream() */download("relatorio_{{$guest->name}}.pdf");
+                    ->stream()/* download("relatorio_{{$guest->name}}.pdf") */;
     }
 
     /**
@@ -284,7 +286,7 @@ class GuestController extends Controller
      */
     public function test($id)
     {
-        if(!$guest = $this->repository->find($id))
+        if(!$guest = $this->guest->find($id))
             return redirect()->back();
 
         return view('admin.pages.guests.pdf', compact('guest'));
@@ -300,7 +302,7 @@ class GuestController extends Controller
     {
         $filters = $request->only('filter');
 
-        $guests = $this->repository
+        $guests = $this->guest
                             ->where(function($query) use ($request) {
                                 if ($request->filter) {
                                     $query->orWhere('name', 'LIKE', "%{$request->filter}%");

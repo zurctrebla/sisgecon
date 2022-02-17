@@ -53,8 +53,8 @@ class Guest extends Model
     /**
      * Get document
      */
-    public function documents()
+    public function document()
     {
-        return $this->morphMany(Document::class, 'documentable');
+        return $this->morphOne(Document::class, 'documentable');
     }
 }
