@@ -13,7 +13,7 @@
                 <form action="{{ route('points.update', $dado[$i]->id) }}" style="display:inline" method="POST">
                     @csrf
                     @method('PUT')
-                    <input type="time" name="hora_ocorrencia" id="{{ $dado[$i]->id }}" value="{{ $dado[$i]->hora_ocorrencia ?? old('hora_ocorrencia') }}" required>
+                    <input type="time" name="hour" id="{{ $dado[$i]->id }}" value="{{ $dado[$i]->hour ?? old('hour') }}" required>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
