@@ -72,9 +72,16 @@
 
                                                             <td>
                                                                 <strong>
-                                                                    <p style="color:<?php if ($key % 2 == 0){ echo "green"; }else{ echo "red"; } ?>">
-                                                                        {{ ($point->hour) ? date('H:i:s', strtotime($point->hour)) : '' }}
-                                                                    </p>
+                                                                    @if ($key % 2 == 0)
+                                                                        <p style="color:rgb(0, 167, 0)">
+                                                                            {{ ($point->hour) ? date('H:i:s', strtotime($point->hour)) : '' }}
+                                                                        </p>
+                                                                    @else
+                                                                        <p style="color:#f00">
+                                                                            {{ ($point->hour) ? date('H:i:s', strtotime($point->hour)) : '' }}
+                                                                        </p>
+                                                                    @endif
+
                                                                 </strong>
                                                             </td>
 

@@ -10,22 +10,21 @@
                             {{ $dado[$i]->hour ?? '' }}
                         </a>
                     </td>
-                    @if ($i == 0)
+                        @if ($i == 0)
+                            <td style="color:rgb(0, 167, 0);">ENTRADA</td>
+                        @endif
+                        @if ($i == 1)
+                            <td style="color:#f00;">SAÍDA</td>
+                        @endif
+                        @if ($i == 2)
                         <td style="color:rgb(0, 167, 0);">ENTRADA</td>
-                    @endif
-                    @if ($i == 1)
-                        <td style="color:#f00;">SAÍDA</td>
-                    @endif
-                    @if ($i == 2)
-                    <td style="color:rgb(0, 167, 0);">ENTRADA</td>
-                    @endif
-                    @if ($i == 3)
-                        <td style="color:#f00;">SAÍDA</td>
-                    @endif
-                    @if ($i > 3)
-                        <td></td>
-                    @endif
-
+                        @endif
+                        @if ($i == 3)
+                            <td style="color:#f00;">SAÍDA</td>
+                        @endif
+                        @if ($i > 3)
+                            <td></td>
+                        @endif
                     <td>
                         {{ $dado[$i]->reason ?? '' }}
                     </td>
