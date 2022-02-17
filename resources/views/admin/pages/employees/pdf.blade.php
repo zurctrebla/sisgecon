@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Visitante <strong>{{$guest->name ?? ''}}</strong></title>
+    <title>Funcionário <strong>{{$employee->name ?? ''}}</strong></title>
 </head>
 <style>
     @page {
@@ -32,7 +32,7 @@
 
     .header {
         width: 100%;
-        height: 140px;
+        height: 100px;
     }
 
     .esquerdo {
@@ -135,32 +135,19 @@
     <div hidden class="header">
         <div class="esquerdo">
             <div class="linha">
-                <b>Visitante:</b> {{ $guest->name ?? ''}}
+                <b>Funcionário:</b> {{ $employee->name ?? ''}}
             </div>
             <div class="linha">
-                <b>Cadastrado por:</b> {{ $guest->authorized_at ?? ''}}
-            </div>
-            <div class="linha">
-                <b>Documento:</b> {{ $document->doc_no ?? ''}}
-            </div>
-            <div class="linha">
-                <b>Autorização:</b> {{ $guest->authorization ?? ''}}
+                <b>Documento:</b> {{ $employee->document->doc_no ?? ''}}
             </div>
         </div>
         <div class="borda"></div>
         <div class="direito">
-
             <div class="linha">
-                <b>Setor:</b> {{ $guest->sector->name ?? ''}}
+                <b>Setor:</b> {{ $employee->employee->sector->name ?? ''}}
             </div>
             <div class="linha">
-                <b>Entrada:</b> {{ date('d/m/Y', strtotime($guest->start_at) )}}
-            </div>
-            <div class="linha">
-                <b>Saída:</b> {{ date('d/m/Y', strtotime($guest->expires_at) )}}
-            </div>
-            <div class="linha">
-                <b>Status:</b> {{ $guest->status ?? ''}}
+                <b>Função:</b> {{ $employee->employee->function ?? ''}}
             </div>
         </div>
     </div>

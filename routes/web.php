@@ -42,12 +42,14 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Employees
      */
+
+    Route::get('/admin/employees/pdf/{id}', [EmployeeController::class, 'pdf'])->name('employees.pdf');
     Route::any('/admin/employees/search', [EmployeeController::class, 'search'])->name('employees.search');
     Route::get('/admin/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
     Route::put('/admin/employees/update/{id}', [EmployeeController::class, 'update'])->name('employees.update');
     Route::get('/admin/employees/edit/{id}', [EmployeeController::class, 'edit'])->name('employees.edit');
-    Route::delete('/admin/employees/{id}', [EmployeesController::class, 'destroy'])->name('employees.destroy');
-    Route::get('/admin/employees/{id}', [EmployessController::class, 'show'])->name('employees.show');
+    Route::delete('/admin/employees/{id}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
+    Route::get('/admin/employees/{id}', [EmployeeController::class, 'show'])->name('employees.show');
     Route::post('/admin/employees/store', [EmployeeController::class, 'store'])->name('employees.store');
     Route::get('/admin/employees/register/{id}', [EmployeeController::class, 'register'])->name('employees.register');
     Route::get('/admin/employees/history/{id}', [EmployeeController::class, 'history'])->name('employees.history');

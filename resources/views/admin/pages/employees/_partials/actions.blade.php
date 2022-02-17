@@ -1,10 +1,31 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <span class="d-none d-md-block">
-    <a hidden href="{{ route('guests.show', $employee->id) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
+    <a href="{{ route('employees.show', $employee->id) }}" class="btn btn-outline-primary btn-sm">Visualizar</a>
     @can('employee-edit')
         <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
     @endcan
     @can('employee-delete')
-        <form hidden action="{{ route('employees.destroy', $employee->id) }}" style="display:inline" method="POST">
+        <form action="{{ route('employees.destroy', $employee->id) }}" style="display:inline" method="POST">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Deseja apagar o visitante ?')" >Apagar</button>

@@ -12,6 +12,8 @@ use App\Models\{
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\Foreach_;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class EmployeeController extends Controller
 {
@@ -261,6 +263,28 @@ class EmployeeController extends Controller
         $employee->delete();
 
         return redirect()->route('employees.index')->with('message', 'Funcionário deletado com sucesso');
+    }
+
+    /**
+     * Generate PDF page
+     */
+    public function pdf($id)
+    {
+        if(!$employee = $this->employee->find($id))
+            return redirect()->back();
+
+        $dados = $this->point
+            ->where('pointable_id', $id)
+            ->where('pointable_type', 'App\Models\User')
+            ->where('reason_status', 'N')
+            ->orderBy('date', 'desc')
+            ->get()
+            ->groupBy('date');
+        // $guests = Guest::all();
+
+        return PDF::loadView('admin.pages.employees.pdf', compact('employee', 'dados'))
+                    // Se quiser que fique no formato a4 retrato: ->setPaper('a4', 'landscape')
+                    ->stream()/* download("relatorio_{{$guest->name}}.pdf") */;
     }
 
     /**

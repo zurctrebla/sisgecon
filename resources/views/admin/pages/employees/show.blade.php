@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuário')
+@section('title', 'Funcionário')
 
 @section('content_header')
 <div class="container-fluid">
@@ -11,15 +11,15 @@
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <span class="d-none d-md-block">
-                <a href="{{ route('users.index') }}" class="btn btn-outline-info btn-sm">Listar</a>
-                @can('user-edit')
-                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
+                <a href="{{ route('employees.index') }}" class="btn btn-outline-info btn-sm">Listar</a>
+                @can('employee-edit')
+                    <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
                 @endcan
-                @can('user-delete')
-                    <form action="{{ route('users.destroy', $user->id) }}" style="display:inline" method="POST">
+                @can('employee-delete')
+                    <form action="{{ route('employees.destroy', $employee->id) }}" style="display:inline" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Deseja apagar o usuário ?')" >Apagar</button>
+                        <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Deseja apagar o Funcionário ?')" >Apagar</button>
                     </form>
                 @endcan
             </span>
@@ -28,12 +28,12 @@
                     Ações
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="acoesListar">
-                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-outline-info btn-sm">Listar</a>
-                    @can('user-edit')
-                        <a href="{{ route('users.edit', $user->id) }}" class="dropdown-item">Editar</a>
+                    <a href="{{ route('employees.show', $employee->id) }}" class="dropdown-item">Listar</a>
+                    @can('employee-edit')
+                        <a href="{{ route('employees.edit', $employee->id) }}" class="dropdown-item">Editar</a>
                     @endcan
-                    @can('user-delete')
-                        <button class="dropdown-item" onclick="return confirm('Deseja apagar o usuário ?')">Apagar</button>
+                    @can('employee-delete')
+                        <button class="dropdown-item" onclick="return confirm('Deseja apagar o Funcionário ?')">Apagar</button>
                     @endcan
                 </div>
             </div>
@@ -56,51 +56,31 @@
                     <table>
                         <tr>
                             <th><?= __('Nome') ?></th>
-                            <td>{{ $user->name }}</td>
+                            <td>{{ $employee->name }}</td>
                         </tr>
                         <tr>
                             <th><?= __('E-mail') ?></th>
-                            <td>{{ $user->email }}</td>
-                        </tr>{{--
-                        <tr>
-                            <th><?php // __('Telefone') ?></th>
-                            <td>{{ ($user->phones->number ?? '') }}</td>
-                        </tr> --}}
-                        <tr>
-                            <th><?= __('Nível de Acesso') ?></th>
-                            <td>{{ $user->role->name }}</td>
+                            <td>{{ $employee->email }}</td>
                         </tr>
                         <tr>
-                            <th><?= __('Nacionalidade') ?></th>
-                            <td>{{ ($user->complement->nacionality) ?? ''}}</td>
-                        </tr>
-                        <tr>
-                            <th><?= __('Estado') ?></th>
-                            <td>{{ ($user->complement->state) ?? ''}}</td>
+                            <th><?= __('Telefone') ?></th>
+                            <td>{{ ($employee->phone->number ?? '') }}</td>
                         </tr>
                         <tr>
                             <th><?= __('Nascimento') ?></th>
-                            <td>{{ ($user->complement->birth) ?? ''/* date('d/m/Y', strtotime($user->complement->birth))  */}}</td>
+                            <td>{{ ($employee->employee->birth) ? : date('d/m/Y', strtotime($employee->employee->birth)) }}</td>
                         </tr>
                         <tr>
-                            <th><?= __('CPF') ?></th>
-                            <td>{{ ($user->complement->cpf ?? '') }}</td>
+                            <th><?= __('Setor') ?></th>
+                            <td>{{ ($employee->employee->sector->name) ?? '' }}</td>
                         </tr>
                         <tr>
-                            <th><?= __('RG') ?></th>
-                            <td>{{ ($user->complement->rg) ?? ''}}</td>
+                            <th><?= __('Documento') ?></th>
+                            <td>{{ ($employee->document->doc_no) ?? '' }}</td>
                         </tr>
                         <tr>
-                            <th><?= __('Bloco') ?></th>
-                            <td>{{ ($user->complement->block) ?? ''}}</td>
-                        </tr>
-                        <tr>
-                            <th><?= __('Lote') ?></th>
-                            <td>{{ ($user->complement->lot) ?? ''}}</td>
-                        </tr>
-                        <tr>
-                            <th><?= __('Casa') ?></th>
-                            <td>{{ ($user->complement->house) ?? ''}}</td>
+                            <th><?= __('Função') ?></th>
+                            <td>{{ ($employee->employee->function) ?? '' }}</td>
                         </tr>
                     </table>
                 </div>
