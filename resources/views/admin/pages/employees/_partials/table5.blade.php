@@ -28,6 +28,9 @@
                     <td>
                         {{ $dado[$i]->reason ?? '' }}
                     </td>
+                    <td>
+                        {{ date_diff(date_create($dado[0]->hour), date_create($dado[1]->hour))->format("%H:%I:%S") ;}}
+                    </td>
                 </tr>
                 @include('admin.pages.employees._partials.modal')
             @endfor

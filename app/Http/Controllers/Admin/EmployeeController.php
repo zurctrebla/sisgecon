@@ -210,6 +210,7 @@ class EmployeeController extends Controller
                     ->orderBy('date', 'desc')
                     ->get()
                     ->groupBy('date');
+        // dd($dados);
 
         // return $dados;
 
