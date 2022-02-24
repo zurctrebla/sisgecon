@@ -11,7 +11,7 @@
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <span class="d-none d-md-block">
-              <a href="{{ route('employees.pdf', $employee->id) }}" class="btn btn-outline-secondary btn-sm">PDF</a>
+                <a href="{{ route('employees.pdf', $employee->id) }}" class="btn btn-outline-secondary btn-sm">PDF</a>
                 <a href="{{ route('employees.index') }}" class="btn btn-outline-info btn-sm">Voltar</a>
             </span>
             <div class="dropdown d-block d-md-none">

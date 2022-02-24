@@ -42,7 +42,6 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Employees
      */
-
     Route::get('/admin/employees/pdf/{id}', [EmployeeController::class, 'pdf'])->name('employees.pdf');
     Route::any('/admin/employees/search', [EmployeeController::class, 'search'])->name('employees.search');
     Route::get('/admin/employees/create', [EmployeeController::class, 'create'])->name('employees.create');

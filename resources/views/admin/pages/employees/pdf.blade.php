@@ -159,18 +159,19 @@
           <th>Entrada</th>
           <th>Saída</th>
         </tr>
-        @foreach ($dados as $key => $dado)            
+        @foreach ($dados as $key => $dado)
             <tr>
                 <td>
                     {{ date('d/m/Y', strtotime($key)) }}
                 </td>
-                @for ($i = 0; $i < $dado->count(); $i++)                    
+                @for ($i = 0; $i < $dado->count(); $i++)
                     <td>
                         {{ date('H:i:s', strtotime($dado[$i]->hour)) }}
-                    </td>                    
-                @endfor 
-            </tr>               
+                    </td>
+                @endfor
+            </tr>
         @endforeach
+
     </table>
     <div hidden class="meio" style="clear:both;">
         <div class="paciente">

@@ -28,11 +28,43 @@
                     <td>
                         {{ $dado[$i]->reason ?? '' }}
                     </td>
-                    <td>
-                        {{ date_diff(date_create($dado[0]->hour), date_create($dado[1]->hour))->format("%H:%I:%S") ;}}
-                    </td>
                 </tr>
                 @include('admin.pages.employees._partials.modal')
             @endfor
+
+                @if ( ($dado[2] ?? '') && ($dado[3] ?? ''))
+                    @php
+                        $date_1t = date_diff(date_create($dado[0]->hour), date_create($dado[1]->hour))->format("%H:%I:%S") ;
+                        $date_2t = date_diff(date_create($dado[2]->hour), date_create($dado[3]->hour))->format("%H:%I:%S") ;
+
+                        $h =  strtotime($date_1t);
+                        $h2 = strtotime($date_2t);
+
+                        $minutos = date("i", $h2);
+                        $segundos = date("s", $h2);
+                        $hora = date("H", $h2);
+
+                        $temp = strtotime("+$minutos minutes", $h);
+                        $temp = strtotime("+$segundos seconds", $temp);
+                        $temp = strtotime("+$hora hours", $temp);
+
+                    @endphp
+
+                    <td></td>
+                    <td>
+                        {{ date('H:i:s', $temp) }}
+                    </td>
+                    <td style="color:rgb(0,0,255);">HORAS</td>
+
+                @elseif ( ($dado[0] ?? '') && ($dado[1] ?? ''))
+
+                    <td></td>
+                    <td>
+                        {{ date_diff(date_create($dado[0]->hour), date_create($dado[1]->hour))->format("%H:%I:%S")  }}
+                    </td>
+                    <td style="color:rgb(0,0,255);">HORAS</td>
+
+                @endif
+
         </tr>
 @endforeach
