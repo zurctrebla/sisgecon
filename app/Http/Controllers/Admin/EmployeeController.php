@@ -277,7 +277,7 @@ class EmployeeController extends Controller
         $dados = $this->point
             ->where('pointable_id', $id)
             ->where('pointable_type', 'App\Models\User')
-            ->where('reason_status', 'N')
+            // ->where('reason_status', 'N')
             ->orderBy('date', 'desc')
             ->get()
             ->groupBy('date');

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Funcionário <strong>{{$employee->name ?? ''}}</strong></title>
+    <title>Funcionário <strong>{{ $employee->name ?? '' }}</strong></title>
 </head>
 <style>
     @page {
@@ -116,7 +117,9 @@
         text-align: center;
     }
 
-    table, td, th {
+    table,
+    td,
+    th {
         border: 1px solid #ddd;
         text-align: left;
     }
@@ -126,28 +129,30 @@
         width: 100%;
     }
 
-    th, td {
+    th,
+    td {
         padding: 15px;
     }
 
 </style>
+
 <body>
     <div hidden class="header">
         <div class="esquerdo">
             <div class="linha">
-                <b>Funcionário:</b> {{ $employee->name ?? ''}}
+                <b>Funcionário:</b> {{ $employee->name ?? '' }}
             </div>
             <div class="linha">
-                <b>Documento:</b> {{ $employee->document->doc_no ?? ''}}
+                <b>Documento:</b> {{ $employee->document->doc_no ?? '' }}
             </div>
         </div>
         <div class="borda"></div>
         <div class="direito">
             <div class="linha">
-                <b>Setor:</b> {{ $employee->employee->sector->name ?? ''}}
+                <b>Setor:</b> {{ $employee->employee->sector->name ?? '' }}
             </div>
             <div class="linha">
-                <b>Função:</b> {{ $employee->employee->function ?? ''}}
+                <b>Função:</b> {{ $employee->employee->function ?? '' }}
             </div>
         </div>
     </div>
@@ -159,15 +164,16 @@
             <th scope="col">Motivo</th>
         </tr>
 
-@foreach ($dados as $key => $dado){{--
-<th colspan="4" style="color:rgb(0, 110, 255);">{{ date('d/m/Y',strtotime($key)) }}</th> --}}
-    <tr>
-        @for ($i = 0; $i < $dado->count(); $i++)
+        @foreach ($dados as $key => $dado)
             <tr>
-                <td></td>
-                <td>
-                    {{ $dado[$i]->hour ?? '' }}
-                </td>
+                <th colspan="4" style="color:rgb(0, 110, 255);">{{ date('d/m/Y', strtotime($key)) }}</th>
+            </tr>
+            @for ($i = 0; $i < $dado->count(); $i++)
+                <tr>
+                    <td></td>
+                    <td>
+                        {{ $dado[$i]->hour ?? '' }}
+                    </td>
                     @if ($i == 0)
                         <td style="color:rgb(0, 167, 0);">ENTRADA</td>
                     @endif
@@ -175,7 +181,7 @@
                         <td style="color:#f00;">SAÍDA</td>
                     @endif
                     @if ($i == 2)
-                    <td style="color:rgb(0, 167, 0);">ENTRADA</td>
+                        <td style="color:rgb(0, 167, 0);">ENTRADA</td>
                     @endif
                     @if ($i == 3)
                         <td style="color:#f00;">SAÍDA</td>
@@ -183,13 +189,13 @@
                     @if ($i > 3)
                         <td></td>
                     @endif
-                <td>
-                    {{ $dado[$i]->reason ?? '' }}
-                </td>
-            </tr>
-        @endfor
+                    <td>
+                        {{ $dado[$i]->reason ?? '' }}
+                    </td>
+                </tr>
+            @endfor
 
-            {{-- @if ( ($dado[2] ?? '') && ($dado[3] ?? ''))
+            {{-- @if (($dado[2] ?? '') && ($dado[3] ?? ''))
                 @php
                     $date_1t = date_diff(date_create($dado[0]->hour), date_create($dado[1]->hour))->format("%H:%I:%S") ;
                     $date_2t = date_diff(date_create($dado[2]->hour), date_create($dado[3]->hour))->format("%H:%I:%S") ;
@@ -223,8 +229,8 @@
 
             @endif --}}
 
-    </tr>
-@endforeach
+            </tr>
+        @endforeach
 
 
     </table>
