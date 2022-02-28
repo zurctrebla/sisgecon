@@ -138,10 +138,10 @@
                 <b>Visitante:</b> {{ $guest->name ?? ''}}
             </div>
             <div class="linha">
-                <b>Cadastrado por:</b> {{ $guest->authorized_at ?? ''}}
+                <b>Cadastrado por:</b> {{ $guest->user->name ?? ''}}
             </div>
             <div class="linha">
-                <b>Documento:</b> {{ $document->doc_no ?? ''}}
+                <b>Documento:</b> {{ $guest->document->doc_no ?? ''}}
             </div>
             <div class="linha">
                 <b>Autorização:</b> {{ $guest->authorization ?? ''}}
@@ -166,24 +166,44 @@
     </div>
     <table>
         <tr>
-          <th>Data</th>
-          <th>Entrada</th>
-          <th>Saída</th>
-          <th>Entrada</th>
-          <th>Saída</th>
+            <th style="width:120px;">Data</th>
+            <th style="width:120px; text-align:center;">Horário</th>
+            <th style="width:120px; text-align:center;">Status</th>
+            <th scope="col">Motivo</th>
         </tr>
-        @foreach ($dados as $key => $dado)            
+        @foreach ($dados as $key => $dado)
+        <tr>
+            <th colspan="4" style="color:rgb(0, 110, 255);">{{ date('d/m/Y', strtotime($key)) }}</th>
+        </tr>
+        @for ($i = 0; $i < $dado->count(); $i++)
             <tr>
+                <td></td>
                 <td>
-                    {{ date('d/m/Y', strtotime($key)) }}
+                    {{ $dado[$i]->hour ?? '' }}
                 </td>
-                @for ($i = 0; $i < $dado->count(); $i++)                    
-                    <td>
-                        {{ date('H:i:s', strtotime($dado[$i]->hour)) }}
-                    </td>                    
-                @endfor 
-            </tr>               
-        @endforeach
+                @if ($i == 0)
+                    <td style="color:rgb(0, 167, 0);">ENTRADA</td>
+                @endif
+                @if ($i == 1)
+                    <td style="color:#f00;">SAÍDA</td>
+                @endif
+                @if ($i == 2)
+                    <td style="color:rgb(0, 167, 0);">ENTRADA</td>
+                @endif
+                @if ($i == 3)
+                    <td style="color:#f00;">SAÍDA</td>
+                @endif
+                @if ($i > 3)
+                    <td></td>
+                @endif
+                <td>
+                    {{ $dado[$i]->reason ?? '' }}
+                </td>
+            </tr>
+        @endfor
+
+        </tr>
+    @endforeach
     </table>
     <div hidden class="meio" style="clear:both;">
         <div class="paciente">
