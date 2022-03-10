@@ -81,9 +81,21 @@ class PointController extends Controller
             return redirect()->back();
         }
 
-        $point->update($request->only('hour'));
+        $value = date_diff(date_create(date('h:i:s')), date_create($point->hour))->format("%H") ;
 
-        return redirect()->back()->with('message', 'Hora atualizada com Sucesso!');
+        if (($point->date >= date('Y-m-d') && ( ($value) <= 1 ) )) {                        //verifica se o dia de hj é o mesmo do registro e atualiza.
+
+            $point->update($request->only('hour'));
+
+            return redirect()->back()->with('message', 'Hora atualizada com Sucesso!');
+
+        }else{
+
+            return redirect()->back()->with('error', 'Hora não foi atualizada!');
+        }
+
+        // $point->update($request->only('hour'));
+        // return redirect()->back()->with('message', 'Hora atualizada com Sucesso!');
     }
 
     /**
