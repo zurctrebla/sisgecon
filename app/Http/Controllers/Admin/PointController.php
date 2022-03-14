@@ -89,10 +89,10 @@ class PointController extends Controller
                             ->get()
                             ->groupBy('date');
 
-        $points = $this->repository
+        /* $points = $this->repository
                             ->where()
                             ->orderBy()
-                            ->get();
+                            ->get(); */
 
         dd($points);
 
