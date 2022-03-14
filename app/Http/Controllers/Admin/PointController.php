@@ -81,9 +81,24 @@ class PointController extends Controller
             return redirect()->back();
         }
 
+        $points = $this->repository
+                            ->where('pointable_id', $point->pointable_id)
+                            ->where('date', date('Y-m-d'))
+                            ->orderBy('id', 'desc')/*
+                            ->take(2) */
+                            ->get()
+                            ->groupBy('date');
+
+        $points = $this->repository
+                            ->where()
+                            ->orderBy()
+                            ->get();
+
+        dd($points);
+
         $value = date_diff(date_create(date('h:i:s')), date_create($point->hour))->format("%H") ;
 
-        if (($point->date >= date('Y-m-d') && ( ($value) <= 1 ) )) {                        //verifica se o dia de hj é o mesmo do registro e atualiza.
+        if (($point->date >= date('Y-m-d') && ( ($value) <= 16 ) )) {                        //verifica se o dia de hj é o mesmo do registro e atualiza.
 
             $point->update($request->only('hour'));
 
