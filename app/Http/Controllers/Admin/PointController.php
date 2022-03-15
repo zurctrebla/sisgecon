@@ -81,36 +81,53 @@ class PointController extends Controller
             return redirect()->back();
         }
 
-        $points = $this->repository
-                            ->where('pointable_id', $point->pointable_id)
-                            ->where('date', date('Y-m-d'))
-                            ->orderBy('id', 'desc')/*
-                            ->take(2) */
-                            ->get()
-                            ->groupBy('date');
+        if (auth()->user()->id == 1) {       // Usuário comum
 
-        /* $points = $this->repository
-                            ->where()
-                            ->orderBy()
-                            ->get(); */
+            $values = $this->repository
+                                ->where('pointable_id', $point->pointable_id)
+                                ->where('date', date('Y-m-d'))
+                                ->orderBy('hour', 'asc')
+                                ->get()
+                                ->groupBy('date');
 
-        dd($points);
+            unset($hours);
 
-        $value = date_diff(date_create(date('h:i:s')), date_create($point->hour))->format("%H") ;
+            $hours = [];
 
-        if (($point->date >= date('Y-m-d') && ( ($value) <= 16 ) )) {                        //verifica se o dia de hj é o mesmo do registro e atualiza.
+            foreach ($values as $value) {
+                for ($i=0; $i < $value->count(); $i++) {
+                    if ($request['hour'] < $value[$i]->hour) {
+                        // if (empty($hours)) {
+                        //     // dd($i);
+                        //     array_push($hours, $value[$i]->hour);
+                        // }
+                        array_push($hours, $value[$i]->hour);
+                    }
+                }
+            }
+
+    dd($hours);
+
+            if (!empty($hours)) {
+                return redirect()->back()->with('error', 'Hora do registro anterior menor que a hora atual!');
+            }
+
+            if ($point->date < date('Y-m-d')) {
+                return redirect()->back()->with('error', 'Data ultrapassada!');
+            }
+
+            if ($request['hour'] > date('H:i:s')) {
+                return redirect()->back()->with('error', 'Hora do registro maior que a hora atual!');
+            }
 
             $point->update($request->only('hour'));
-
             return redirect()->back()->with('message', 'Hora atualizada com Sucesso!');
 
-        }else{
-
-            return redirect()->back()->with('error', 'Hora não foi atualizada!');
+        }else{  // Super Usuário
+            $point->update($request->only('hour'));
+            return redirect()->back()->with('message', 'Hora atualizada com Sucesso!');
         }
 
-        // $point->update($request->only('hour'));
-        // return redirect()->back()->with('message', 'Hora atualizada com Sucesso!');
     }
 
     /**
