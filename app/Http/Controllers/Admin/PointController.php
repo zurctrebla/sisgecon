@@ -96,17 +96,13 @@ class PointController extends Controller
 
             foreach ($values as $value) {
                 for ($i=0; $i < $value->count(); $i++) {
-                    if ($request['hour'] < $value[$i]->hour) {
-                        // if (empty($hours)) {
-                        //     // dd($i);
-                        //     array_push($hours, $value[$i]->hour);
-                        // }
+                    if (($request['hour'] < $value[$i]->hour) && ($request['id'] > $value[$i]->id) && (empty($hours))) {
                         array_push($hours, $value[$i]->hour);
                     }
                 }
             }
 
-    dd($hours);
+    // dd($hours);
 
             if (!empty($hours)) {
                 return redirect()->back()->with('error', 'Hora do registro anterior menor que a hora atual!');
