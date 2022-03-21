@@ -81,7 +81,7 @@ class PointController extends Controller
             return redirect()->back();
         }
 
-        if (auth()->user()->id == 1) {       // Usuário comum
+        if (auth()->user()->role == "Portaria") {       // Usuário comum
 
             $values = $this->repository
                                 ->where('pointable_id', $point->pointable_id)
@@ -102,7 +102,7 @@ class PointController extends Controller
                 }
             }
 
-    // dd($hours);
+    // dd(auth()->user()->role == "Admin");
 
             if (!empty($hours)) {
                 return redirect()->back()->with('error', 'Hora do registro anterior menor que a hora atual!');
