@@ -81,7 +81,7 @@ class PointController extends Controller
             return redirect()->back();
         }
 
-        if (auth()->user()->role == "Portaria") {       // Usuário comum
+        if (auth()->user()->role->name == "Portaria") {       // Usuário comum
 
             $values = $this->repository
                                 ->where('pointable_id', $point->pointable_id)
@@ -119,7 +119,7 @@ class PointController extends Controller
             $point->update($request->only('hour'));
             return redirect()->back()->with('message', 'Hora atualizada com Sucesso!');
 
-        }else{  // Super Usuário
+        }elseif(auth()->user()->role->name == "Admin"){  // Super Usuário
             $point->update($request->only('hour'));
             return redirect()->back()->with('message', 'Hora atualizada com Sucesso!');
         }
