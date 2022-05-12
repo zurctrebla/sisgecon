@@ -50,6 +50,7 @@ services:
         networks:
             - rede
 
+
     # phpmyadmin
     phpmyadmin:
         image: phpmyadmin
