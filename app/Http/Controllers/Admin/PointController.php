@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\PointsExport;
 use App\Http\Controllers\Controller;
+use App\Imports\PointsImport;
 use Illuminate\Http\Request;
 use App\Models\Point;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PointController extends Controller
 {
@@ -16,13 +19,49 @@ class PointController extends Controller
     }
 
     /**
+     * Export
+     */
+    public function export()
+    {
+        return Excel::download(new PointsExport, 'points.csv');
+    }
+
+    /**
+     * Import
+     */
+    public function import(Request $request)
+    {
+        // dd($request);
+
+        if ($request->hasFile('file') && $request->file->isValid()) {
+
+            // $name = $request->file->getClientOriginalName();
+            // $data['file'] = $request->file->storeAs('files', $name); //upload file
+
+            // $products =  Excel::import(new ProductsImport, $request->file('file'));
+            // dd($products);
+            // return redirect()->route('products.opssa')->with('message', 'Lançamento de planilha realizado com sucesso');
+
+            /* $points =  */Excel::import(new PointsImport, request()->file('file'));
+            // dd($points);
+            // return redirect('/')->with('sucess', 'Importado com sucesso!');
+            return redirect()->route('points.index')->with('message', 'Importado com sucesso!');
+
+        }
+
+        return redirect('/')->with('error', 'Operação não realizada!');
+
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        // dd('ok');
+        return view('admin.pages.points.index');
     }
 
     /**
@@ -81,7 +120,7 @@ class PointController extends Controller
             return redirect()->back();
         }
 
-        if (auth()->user()->role == "Portaria") {       // Usuário comum
+        if (auth()->user()->role->name == "Portaria") {       // Usuário comum
 
             $values = $this->repository
                                 ->where('pointable_id', $point->pointable_id)
@@ -119,7 +158,7 @@ class PointController extends Controller
             $point->update($request->only('hour'));
             return redirect()->back()->with('message', 'Hora atualizada com Sucesso!');
 
-        }else{  // Super Usuário
+        }elseif(auth()->user()->role->name == "Admin"){  // Super Usuário
             $point->update($request->only('hour'));
             return redirect()->back()->with('message', 'Hora atualizada com Sucesso!');
         }

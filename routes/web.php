@@ -111,7 +111,10 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Points
      */
+    Route::get('/admin/points', [PointController::class, 'index'])->name('points.index');
     Route::put('/admin/points/{id}', [PointController::class, 'update'])->name('points.update');
+    Route::post('/admin/points', [PointController::class, 'import'])->name('points.import');
+    Route::get('/admin/points/export', [PointController::class, 'export'])->name('points.export');
 
     /**
      * Sectors
@@ -124,7 +127,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/sectors/{id}', [SectorController::class, 'show'])->name('sectors.show');
     Route::post('/admin/sectors', [SectorController::class, 'store'])->name('sectors.store');
     Route::get('/admin/sectors', [SectorController::class, 'index'])->name('sectors.index');
-
 
 });
 
